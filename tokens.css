@@ -1,0 +1,359 @@
+/* ============================================================
+   GENDER REVEAL VOTING APP — DESIGN TOKENS v2
+   Fixes applied vs. original stylesheet:
+   1. Real dark theme (arcade-at-night) instead of generic shadcn gray
+   2. Accessible "-strong" color variants for text-on-fill contexts
+      (buttons/badges), keeping original vivid colors for decorative use
+   3. Radius tokens no longer resolve to negative values
+   4. 3-tier type system: display / subheading / body (see fonts below)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Nunito:wght@400;600;700;800&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ---- Typography ---- */
+  --font-size: 14px;
+  --font-family-display: 'Press Start 2P', cursive;      /* hero, H1, big CTAs only */
+  --font-family-subheading: 'VT323', monospace;            /* H2–H4, buttons, labels */
+  --font-family-body: 'Nunito', sans-serif;                 /* paragraphs, inputs, long text */
+  --font-family: var(--font-family-body);                   /* default fallback */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 700;   /* Nunito supports real weights, unlike Press Start 2P */
+  --font-weight-bold: 800;
+
+  /* ---- Color: decorative / large-surface use (unchanged from original) ---- */
+  --background: #e8b4d9;
+  --foreground: #6b2d8f;
+  --card: #ffffff;
+  --card-foreground: #6b2d8f;
+  --popover: #ffffff;
+  --popover-foreground: #6b2d8f;
+  --primary: #fc5c94;
+  --secondary: #5c94fc;
+  --accent: #ffd700;
+  --destructive: #ff0044;
+
+  /* ---- Color: accessible "-strong" variants — use wherever text/icons
+     sit ON TOP of these fills (buttons, badges, filled inputs) ---- */
+  --primary-strong: #c93870;       /* was #fc5c94 — white text now 4.9:1 (AA pass) */
+  --secondary-strong: #2f6fe0;     /* was #5c94fc — white text now 4.7:1 (AA pass) */
+  --destructive-strong: #db1548;   /* was #ff0044 — white text now 5.0:1 (AA pass) */
+  --accent-strong: #ffd700;        /* unchanged — already 6.2:1 with purple text */
+
+  --primary-foreground: #ffffff;
+  --secondary-foreground: #ffffff;
+  --accent-foreground: #6b2d8f;
+  --destructive-foreground: #ffffff;
+
+  --muted: #f5f5f5;
+  --muted-foreground: #4d4d4d;   /* was #6b6b6b — 3.0:1 on pink bg (fail); now 4.8:1 (AA pass) */
+  --border: #000000;
+  --input: #6b2d8f;
+  --input-background: #ffffff;
+  --switch-background: #787878;  /* was #e0e0e0 — 1.3:1 vs white card (fail 1.4.11); now 4.4:1 */
+  --ring: #6b2d8f;
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --tap-target-min: 44px;        /* WCAG 2.2 SC 2.5.8 requires ≥24px; 44px is the comfortable/AAA-ish practical minimum */
+
+  --chart-1: #fc5c94;
+  --chart-2: #5c94fc;
+  --chart-3: #ffd700;
+  --chart-4: #00ff00;
+  --chart-5: #c9b4e8;
+
+  /* ---- Radius: pixel-art = sharp corners, no negative values ---- */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #6b2d8f;
+  --sidebar-primary: #fc5c94;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #6b2d8f;
+  --sidebar-border: #000000;
+  --sidebar-ring: #6b2d8f;
+}
+
+/* ============================================================
+   DARK THEME — "Arcade at night": deep purple/navy CRT glow,
+   NOT the generic shadcn grayscale from the original file.
+   ============================================================ */
+.dark {
+  --background: #1a0b2e;              /* deep purple-navy, like a powered-off arcade cabinet */
+  --foreground: #f5d1ea;               /* soft pink-white, contrast 13.4:1 vs background */
+  --card: #2d1b4e;
+  --card-foreground: #f5d1ea;
+  --popover: #2d1b4e;
+  --popover-foreground: #f5d1ea;
+
+  --primary: #ff6fa8;                  /* neon pink glow */
+  --secondary: #6fb1ff;                /* neon blue glow */
+  --accent: #ffe14d;                   /* neon gold glow */
+  --destructive: #ff4d6d;
+
+  --primary-strong: #ff3d8a;
+  --secondary-strong: #3d8fff;
+  --destructive-strong: #ff1f4d;
+  --accent-strong: #ffe14d;
+
+  --primary-foreground: #1a0b2e;       /* dark text on neon fills reads better than white */
+  --secondary-foreground: #1a0b2e;
+  --accent-foreground: #1a0b2e;
+  --destructive-foreground: #1a0b2e;
+
+  --muted: #241540;
+  --muted-foreground: #b89fd1;         /* 7.1:1 on --muted — verified AA pass */
+  --border: #ffe14d;                   /* neon gold outline instead of black — black is
+                                           invisible against a near-black background */
+  --input: #f5d1ea;
+  --input-background: #2d1b4e;
+  --switch-background: #8670ad;        /* was #4a3670 — 1.5:1 vs card (fail 1.4.11); now 3.6:1 */
+  --ring: #ff6fa8;
+
+  --chart-1: #ff6fa8;
+  --chart-2: #6fb1ff;
+  --chart-3: #ffe14d;
+  --chart-4: #4dff9f;
+  --chart-5: #d1b3ff;
+
+  --sidebar: #2d1b4e;
+  --sidebar-foreground: #f5d1ea;
+  --sidebar-primary: #ff6fa8;
+  --sidebar-primary-foreground: #1a0b2e;
+  --sidebar-accent: #241540;
+  --sidebar-accent-foreground: #f5d1ea;
+  --sidebar-border: #ffe14d;
+  --sidebar-ring: #ff6fa8;
+
+  --font-weight-medium: 700;
+  --font-weight-normal: 400;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-strong: var(--secondary-strong);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-strong: var(--destructive-strong);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --font-display: var(--font-family-display);
+  --font-subheading: var(--font-family-subheading);
+  --font-body: var(--font-family-body);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    font-family: var(--font-family-body);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family-body);
+  }
+
+  /* ---- SC 2.4.7 Focus Visible + SC 2.4.11 Focus Not Obscured (Minimum) ----
+     Every focusable element gets a solid, high-contrast outline that sits
+     OUTSIDE the element (offset), so it's never covered by borders, sticky
+     headers, or the pixel-border shadow trick. `--ring` was already checked
+     for ≥3:1 against both card and page background in both themes. */
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  /* Anything sticky/fixed (nav bars, vote-result banners, etc.) needs this
+     so a focused element scrolled underneath it is still visible per 2.4.11. */
+  :focus-visible {
+    scroll-margin-block: 80px;
+  }
+
+  /* ---- SC 2.5.8 Target Size (Minimum) — new in WCAG 2.2 ----
+     Every button, link-as-button, input, checkbox/radio hit area, and
+     switch must be at least 24×24 CSS px; we use 44px for comfortable
+     touch use. Inline text links inside a sentence are exempt by spec. */
+  button,
+  [role='button'],
+  input[type='checkbox'],
+  input[type='radio'],
+  input[type='submit'],
+  .switch,
+  a.button {
+    min-width: var(--tap-target-min);
+    min-height: var(--tap-target-min);
+  }
+
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea {
+    min-height: var(--tap-target-min);
+  }
+
+  /* ---- SC 2.2.2 Pause, Stop, Hide (carried over, still required at A/AA
+     audits) — the pixel-float/pulse/blink/CRT animations all loop forever.
+     Respect reduced-motion so users who need it can turn them off. ---- */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .crt-effect::before {
+      display: none;
+    }
+  }
+
+  /* Display font: big moments only — hero title, reveal announcement, main CTA */
+  h1, .text-display {
+    font-family: var(--font-family-display);
+  }
+
+  /* Subheading font: section headers, buttons, form labels, vote counts */
+  h2, h3, h4, button, label, .text-subheading {
+    font-family: var(--font-family-subheading);
+  }
+
+  /* Body font stays on paragraphs and inputs for actual reading comfort */
+  p, input, textarea, .text-body {
+    font-family: var(--font-family-body);
+  }
+}
+
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-normal); /* Press Start 2P has one weight only */
+      line-height: 1.5;
+    }
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-normal); /* VT323 has one weight too */
+      line-height: 1.4;
+    }
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.4;
+    }
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.4;
+    }
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.6; /* a bit more open for a non-pixel body font */
+    }
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      letter-spacing: 0.02em; /* VT323 reads slightly tighter; open it up a touch */
+    }
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* 8-bit pixel border effect — unchanged, still core to the identity */
+.pixel-border {
+  box-shadow:
+    0 -4px 0 0 var(--border),
+    4px 0 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    -4px 0 0 0 var(--border);
+}
+
+@keyframes pixel-float {
+  0%, 100% { transform: translateY(0px); }
+  25% { transform: translateY(-8px); }
+  50% { transform: translateY(0px); }
+  75% { transform: translateY(-4px); }
+}
+
+@keyframes pixel-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.crt-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}

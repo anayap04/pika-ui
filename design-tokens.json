@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "name": "Gender Reveal Voting App",
+    "version": "3.0.0",
+    "notes": "v3: WCAG 2.2 AA pass — fixed muted-foreground and switch-track contrast (SC 1.4.3 / 1.4.11), added focus-visible outline tokens (SC 2.4.7 / 2.4.11), added minimum tap-target size (SC 2.5.8, new in 2.2), added reduced-motion handling for looping animations (SC 2.2.2)."
+  },
+  "typography": {
+    "fontFamilies": {
+      "display": { "value": "Press Start 2P, cursive", "usage": "H1 only — hero title, reveal moment, primary CTA. Single weight, no bold/italic available." },
+      "subheading": { "value": "VT323, monospace", "usage": "H2-H4, buttons, form labels, vote counters. Retro CRT-terminal feel, far more legible than the display font at UI sizes." },
+      "body": { "value": "Nunito, sans-serif", "usage": "Paragraphs, inputs, long-form copy. Rounded and warm, pairs with VT323, actually readable for sentences." }
+    },
+    "fontSize": { "base": "14px" },
+    "fontWeight": {
+      "normal": 400,
+      "medium": 700,
+      "bold": 800,
+      "note": "Press Start 2P and VT323 are single-weight fonts; weight tokens apply to Nunito (body) only."
+    },
+    "lineHeight": {
+      "heading": 1.4,
+      "body": 1.6
+    }
+  },
+  "color": {
+    "light": {
+      "background": "#e8b4d9",
+      "foreground": "#6b2d8f",
+      "card": "#ffffff",
+      "cardForeground": "#6b2d8f",
+      "primary": { "decorative": "#fc5c94", "strong": "#c93870", "foreground": "#ffffff", "contrastStrongOnForeground": "4.9:1 (AA pass)" },
+      "secondary": { "decorative": "#5c94fc", "strong": "#2f6fe0", "foreground": "#ffffff", "contrastStrongOnForeground": "4.7:1 (AA pass)" },
+      "accent": { "decorative": "#ffd700", "strong": "#ffd700", "foreground": "#6b2d8f", "contrastStrongOnForeground": "6.2:1 (AA pass)" },
+      "destructive": { "decorative": "#ff0044", "strong": "#db1548", "foreground": "#ffffff", "contrastStrongOnForeground": "5.0:1 (AA pass)" },
+      "muted": "#f5f5f5",
+      "mutedForeground": "#4d4d4d",
+      "mutedForegroundContrast": "4.8:1 on page background (AA pass) — was #6b6b6b at 3.0:1 (fail)",
+      "border": "#000000",
+      "input": "#6b2d8f",
+      "inputBackground": "#ffffff",
+      "switchBackground": "#787878",
+      "switchBackgroundContrast": "4.4:1 vs white card (AA pass, SC 1.4.11) — was #e0e0e0 at 1.3:1 (fail)",
+      "ring": "#6b2d8f",
+      "chart": ["#fc5c94", "#5c94fc", "#ffd700", "#00ff00", "#c9b4e8"]
+    },
+    "dark": {
+      "background": "#1a0b2e",
+      "foreground": "#f5d1ea",
+      "card": "#2d1b4e",
+      "cardForeground": "#f5d1ea",
+      "primary": { "decorative": "#ff6fa8", "strong": "#ff3d8a", "foreground": "#1a0b2e" },
+      "secondary": { "decorative": "#6fb1ff", "strong": "#3d8fff", "foreground": "#1a0b2e" },
+      "accent": { "decorative": "#ffe14d", "strong": "#ffe14d", "foreground": "#1a0b2e" },
+      "destructive": { "decorative": "#ff4d6d", "strong": "#ff1f4d", "foreground": "#1a0b2e" },
+      "muted": "#241540",
+      "mutedForeground": "#b89fd1",
+      "mutedForegroundContrast": "7.1:1 on --muted (AA pass)",
+      "border": "#ffe14d",
+      "input": "#f5d1ea",
+      "inputBackground": "#2d1b4e",
+      "switchBackground": "#8670ad",
+      "switchBackgroundContrast": "3.6:1 vs card (AA pass, SC 1.4.11) — was #4a3670 at 1.5:1 (fail)",
+      "ring": "#ff6fa8",
+      "chart": ["#ff6fa8", "#6fb1ff", "#ffe14d", "#4dff9f", "#d1b3ff"]
+    }
+  },
+  "radius": {
+    "sm": "0px",
+    "md": "0px",
+    "lg": "0px",
+    "xl": "0px",
+    "note": "All flattened to 0px for pixel-art consistency; original file had negative values from an unadjusted shadcn formula."
+  },
+  "accessibility": {
+    "focusVisible": {
+      "outlineWidth": "3px",
+      "outlineOffset": "2px",
+      "wcagCriteria": ["2.4.7 Focus Visible (AA)", "2.4.11 Focus Not Obscured, Minimum (AA, new in 2.2)"]
+    },
+    "tapTargetMinimum": {
+      "value": "44px",
+      "wcagRequirement": "24px minimum",
+      "wcagCriteria": "2.5.8 Target Size, Minimum (AA, new in 2.2)",
+      "appliesTo": "buttons, links styled as buttons, checkboxes/radios, switches, text inputs, selects. Inline text links are exempt per spec."
+    },
+    "reducedMotion": {
+      "wcagCriteria": "2.2.2 Pause, Stop, Hide (A)",
+      "handling": "prefers-reduced-motion: reduce disables pixel-float/pulse/blink and the CRT scanline overlay"
+    }
+  },
+  "effects": {
+    "pixelBorder": "4px hard-edged 4-directional box-shadow, no blur, uses border color",
+    "animations": {
+      "pixelFloat": "translateY bounce: 0 → -8px → 0 → -4px",
+      "pixelPulse": "opacity 1 → 0.6 → 1",
+      "blink": "hard-cut opacity 1 → 0 at 50%, no easing"
+    },
+    "crtScanlines": "repeating-linear-gradient overlay, 4px pitch, 15% black opacity, z-index 100"
+  }
+}
