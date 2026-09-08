@@ -1,5 +1,5 @@
 import React from 'react';
-import { fontFamilies, fontSizes, fontWeights, lineHeights, colors } from '../../../tokens';
+import { fontFamilies, fontSizes, fontWeights, lineHeights, theme } from '../../../tokens';
 
 export interface ParagraphProps extends React.HTMLAttributes<HTMLParagraphElement> {
   size?: 'sm' | 'md' | 'lg';
@@ -14,10 +14,10 @@ const sizeMap = {
 };
 
 const colorMap = {
-  foreground: colors.light.foreground,
-  muted: colors.light.mutedForeground,
-  primary: colors.light.primaryStrong,
-  secondary: colors.light.secondaryStrong,
+  foreground: theme.foreground,
+  muted: theme.mutedForeground,
+  primary: theme.primaryStrong,
+  secondary: theme.secondaryStrong,
 };
 
 export const Paragraph: React.FC<ParagraphProps> = ({

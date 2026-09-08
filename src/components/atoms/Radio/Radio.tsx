@@ -1,4 +1,4 @@
-import { colors, spacing, accessibility, fontFamilies, fontWeights } from '../../../tokens';
+import { theme, spacing, accessibility, fontFamilies, fontWeights } from '../../../tokens';
 import React, { useId } from 'react';
 
 export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
@@ -55,8 +55,8 @@ export const Radio: React.FC<RadioProps> = ({
           ...sizeStyles[size],
           cursor: disabled ? 'not-allowed' : 'pointer',
           opacity: disabled ? 0.6 : 1,
-          accentColor: colors.light.primaryStrong,
-          border: `2px solid ${colors.light.border}`,
+          accentColor: theme.primaryStrong,
+          border: `2px solid ${theme.border}`,
           outline: 'none',
         }}
         {...props}
@@ -68,7 +68,7 @@ export const Radio: React.FC<RadioProps> = ({
             fontFamily: fontFamilies.body,
             fontSize: '14px',
             fontWeight: fontWeights.normal,
-            color: colors.light.foreground,
+            color: theme.foreground,
             cursor: disabled ? 'not-allowed' : 'pointer',
             opacity: disabled ? 0.6 : 1,
             userSelect: 'none',

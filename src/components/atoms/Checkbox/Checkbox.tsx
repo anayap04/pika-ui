@@ -1,4 +1,4 @@
-import { colors, spacing, accessibility, fontFamilies, fontWeights } from '../../../tokens';
+import { theme, spacing, accessibility, fontFamilies, fontWeights } from '../../../tokens';
 import React, { useId } from 'react';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
@@ -55,8 +55,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           ...sizeStyles[size],
           cursor: disabled ? 'not-allowed' : 'pointer',
           opacity: disabled ? 0.6 : 1,
-          accentColor: colors.light.primaryStrong,
-          border: `2px solid ${colors.light.border}`,
+          accentColor: theme.primaryStrong,
+          border: `2px solid ${theme.border}`,
           borderRadius: '2px',
           outline: 'none',
         }}
@@ -69,7 +69,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             fontFamily: fontFamilies.body,
             fontSize: '14px',
             fontWeight: fontWeights.normal,
-            color: colors.light.foreground,
+            color: theme.foreground,
             cursor: disabled ? 'not-allowed' : 'pointer',
             opacity: disabled ? 0.6 : 1,
             userSelect: 'none',

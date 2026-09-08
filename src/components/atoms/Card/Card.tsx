@@ -1,4 +1,4 @@
-import { colors, spacing } from '../../../tokens';
+import { theme, spacing } from '../../../tokens';
 import React from 'react';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -22,15 +22,15 @@ const paddingStyles = {
 // a second offset border via box-shadow for the stepped "8-bit" depth effect.
 const variantStyles = {
   default: {
-    background: colors.light.card,
-    border: `4px solid ${colors.light.border}`,
+    background: theme.card,
+    border: `4px solid ${theme.border}`,
     borderRadius: 0,
   },
   elevated: {
-    background: colors.light.card,
-    border: `4px solid ${colors.light.border}`,
+    background: theme.card,
+    border: `4px solid ${theme.border}`,
     borderRadius: 0,
-    boxShadow: `0 -4px 0 0 ${colors.light.border}, 4px 0 0 0 ${colors.light.border}, 0 4px 0 0 ${colors.light.border}, -4px 0 0 0 ${colors.light.border}, 8px 8px 0 0 ${colors.light.border}`,
+    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}, 8px 8px 0 0 ${theme.border}`,
   },
 };
 

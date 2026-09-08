@@ -1,13 +1,36 @@
 import type { Preview } from '@storybook/react-vite'
 import '../src/styles/fonts'
+import '../src/styles/theme.css'
 import pikaTheme from './theme'
+import { withTheme } from './withTheme'
 
 const preview: Preview = {
+  decorators: [withTheme],
+
+  globalTypes: {
+    theme: {
+      description: 'Light / dark theme (both meet WCAG 2.2 AAA)',
+      toolbar: {
+        title: 'Theme',
+        icon: 'contrast',
+        items: [
+          { value: 'light', title: 'Light', icon: 'sun' },
+          { value: 'dark', title: 'Dark (arcade night)', icon: 'moon' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+
+  initialGlobals: {
+    theme: 'light',
+  },
+
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
 
@@ -20,20 +43,6 @@ const preview: Preview = {
 
     docs: {
       theme: pikaTheme,
-    },
-
-    backgrounds: {
-      options: {
-        // AAA-safe cream: token `foreground` (#6b2d8f) sits at 7.7:1 here.
-        paper: { name: 'Manual paper (AAA)', value: '#faf3e3' },
-        pixel: { name: 'Pixel (pink)', value: '#e8b4d9' },
-        arcade: { name: 'Arcade (night)', value: '#1a0b2e' },
-        light: { name: 'Light', value: '#ffffff' },
-      },
-    },
-
-    initialGlobals: {
-      backgrounds: { value: 'paper' },
     },
 
     a11y: {
@@ -54,6 +63,6 @@ const preview: Preview = {
       },
     },
   },
-};
+}
 
-export default preview;
+export default preview

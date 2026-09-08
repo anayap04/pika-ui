@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Toggle } from './Toggle';
+import { theme } from '../../../tokens';
 
 const meta = {
   title: 'Atoms/Toggle',
@@ -8,7 +9,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Accessible toggle switch for binary on/off selections. Supports 2 sizes (sm, md) with 44px minimum tap target (md size). Includes proper role="switch" and aria-checked attributes.\n\n**Accessibility**: ✓ role="switch" with aria-checked for semantic meaning ✓ 44px minimum height (md size; SC 2.5.8) ✓ Visible focus outline (SC 2.4.7) ✓ Uses useId() for unique label associations ✓ Color contrast verified (WCAG AA) ✓ Animated thumb shows clear on/off state ✓ Smooth transitions (150ms) respect prefers-reduced-motion.\n\n**Testing**: Verify both sizes with tap target compliance. Test toggle state changes (checked/unchecked). Confirm aria-checked attribute updates. Validate focus outline visibility. Check animated thumb movement. Test keyboard interaction (Space to toggle, Tab to focus). Verify animation respects prefers-reduced-motion.',
+        component: 'Accessible toggle switch for binary on/off selections. Supports 2 sizes (sm, md) with 44px minimum tap target (md size). Includes proper role="switch" and aria-checked attributes.\n\n**Accessibility**: ✓ role="switch" with aria-checked for semantic meaning ✓ 44px minimum height (md size; SC 2.5.8) ✓ Visible focus outline (SC 2.4.7) ✓ Uses useId() for unique label associations ✓ Color contrast verified (WCAG 2.2 AAA) ✓ Animated thumb shows clear on/off state ✓ Smooth transitions (150ms) respect prefers-reduced-motion.\n\n**Testing**: Verify both sizes with tap target compliance. Test toggle state changes (checked/unchecked). Confirm aria-checked attribute updates. Validate focus outline visibility. Check animated thumb movement. Test keyboard interaction (Space to toggle, Tab to focus). Verify animation respects prefers-reduced-motion.',
       },
     },
   },
@@ -157,7 +158,7 @@ export const Accessibility: Story = {
           Tap Target Size (44px min)
         </p>
         <Toggle size="md" label="Click or tap to toggle" />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           44px height minimum (WCAG 2.2 SC 2.5.8)
         </p>
       </div>
@@ -166,7 +167,7 @@ export const Accessibility: Story = {
           Focus Visible (Tab to see)
         </p>
         <Toggle size="md" label="Tab to focus" autoFocus />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Proper focus handling with outline
         </p>
       </div>
@@ -175,7 +176,7 @@ export const Accessibility: Story = {
           ARIA Attributes (role="switch", aria-checked)
         </p>
         <Toggle size="md" label="Screen reader friendly" />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Proper switch role and aria-checked state (WCAG 2.2 SC 4.1.2)
         </p>
       </div>

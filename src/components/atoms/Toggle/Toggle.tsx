@@ -1,4 +1,4 @@
-import { colors, spacing, accessibility, fontFamilies, fontWeights, transitions } from '../../../tokens';
+import { theme, spacing, accessibility, fontFamilies, fontWeights, transitions } from '../../../tokens';
 import React, { useId } from 'react';
 
 export interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
@@ -74,8 +74,8 @@ export const Toggle: React.FC<ToggleProps> = ({
             display: 'inline-block',
             width: sizeConfig.width,
             height: sizeConfig.height,
-            backgroundColor: checked ? colors.light.primaryStrong : colors.light.switchBackground,
-            border: `2px solid ${colors.light.border}`,
+            backgroundColor: checked ? theme.primaryStrong : theme.switchBackground,
+            border: `2px solid ${theme.border}`,
             borderRadius: '12px',
             cursor: disabled ? 'not-allowed' : 'pointer',
             opacity: disabled ? 0.6 : 1,
@@ -89,10 +89,10 @@ export const Toggle: React.FC<ToggleProps> = ({
               left: checked ? `calc(${sizeConfig.width} - ${sizeConfig.toggleWidth} - 2px)` : '2px',
               width: sizeConfig.toggleWidth,
               height: sizeConfig.toggleHeight,
-              backgroundColor: colors.light.card,
+              backgroundColor: theme.card,
               borderRadius: '10px',
               transition: transitions.fast,
-              border: `1px solid ${colors.light.border}`,
+              border: `1px solid ${theme.border}`,
             }}
           />
         </label>
@@ -104,7 +104,7 @@ export const Toggle: React.FC<ToggleProps> = ({
             fontFamily: fontFamilies.body,
             fontSize: '14px',
             fontWeight: fontWeights.normal,
-            color: colors.light.foreground,
+            color: theme.foreground,
             cursor: disabled ? 'not-allowed' : 'pointer',
             opacity: disabled ? 0.6 : 1,
             userSelect: 'none',

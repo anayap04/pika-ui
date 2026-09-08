@@ -1,4 +1,4 @@
-import { colors, spacing, fontFamilies, fontWeights, accessibility } from '../../../tokens';
+import { theme, spacing, fontFamilies, fontWeights, accessibility } from '../../../tokens';
 import React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -31,28 +31,28 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: {
-    background: colors.light.primaryStrong,
-    color: colors.light.primaryForeground,
-    border: `4px solid ${colors.light.border}`,
-    boxShadow: `0 -4px 0 0 ${colors.light.border}, 4px 0 0 0 ${colors.light.border}, 0 4px 0 0 ${colors.light.border}, -4px 0 0 0 ${colors.light.border}`,
+    background: theme.primaryStrong,
+    color: theme.primaryForeground,
+    border: `4px solid ${theme.border}`,
+    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
   },
   secondary: {
-    background: colors.light.secondaryStrong,
-    color: colors.light.secondaryForeground,
-    border: `4px solid ${colors.light.border}`,
-    boxShadow: `0 -4px 0 0 ${colors.light.border}, 4px 0 0 0 ${colors.light.border}, 0 4px 0 0 ${colors.light.border}, -4px 0 0 0 ${colors.light.border}`,
+    background: theme.secondaryStrong,
+    color: theme.secondaryForeground,
+    border: `4px solid ${theme.border}`,
+    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
   },
   accent: {
-    background: colors.light.accentStrong,
-    color: colors.light.accentForeground,
-    border: `4px solid ${colors.light.border}`,
-    boxShadow: `0 -4px 0 0 ${colors.light.border}, 4px 0 0 0 ${colors.light.border}, 0 4px 0 0 ${colors.light.border}, -4px 0 0 0 ${colors.light.border}`,
+    background: theme.accentStrong,
+    color: theme.accentForeground,
+    border: `4px solid ${theme.border}`,
+    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
   },
   destructive: {
-    background: colors.light.destructiveStrong,
-    color: colors.light.destructiveForeground,
-    border: `4px solid ${colors.light.border}`,
-    boxShadow: `0 -4px 0 0 ${colors.light.border}, 4px 0 0 0 ${colors.light.border}, 0 4px 0 0 ${colors.light.border}, -4px 0 0 0 ${colors.light.border}`,
+    background: theme.destructiveStrong,
+    color: theme.destructiveForeground,
+    border: `4px solid ${theme.border}`,
+    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
   },
 };
 

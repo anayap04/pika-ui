@@ -13,9 +13,9 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  /* #45195e on the #e8b4d9 app background = 7.7:1 (WCAG 2.2 AAA, SC 1.4.6) */
-  color: #45195e;
-  background-color: #e8b4d9;
+  /* Palette + light/dark switching come from ./styles/theme.css (--pk-*). */
+  color: var(--pk-foreground, #6b2d8f);
+  background-color: var(--pk-background, #faf3e3);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -56,13 +56,13 @@ p {
 }
 
 a {
-  /* #142d70 on the #e8b4d9 app background = 7.3:1 (WCAG 2.2 AAA, SC 1.4.6) */
-  color: #142d70;
+  /* secondary-strong: ≥8:1 on the light grounds, ≥9:1 on dark (WCAG 2.2 AAA) */
+  color: var(--pk-secondary-strong, #164499);
   font-weight: 700;
   text-decoration: underline;
 }
 a:hover {
-  color: #45195e;
+  color: var(--pk-foreground, #6b2d8f);
 }
 
 /* Sharp corners everywhere — the pixel aesthetic has no rounded edges. */
@@ -79,19 +79,5 @@ button {
   cursor: pointer;
 }
 
-/* Focus is always visible and never obscured (WCAG 2.2 SC 2.4.7 / 2.4.11). */
-:focus-visible {
-  /* 3px ring, ≥3:1 against both the pink page and white surfaces (SC 1.4.11) */
-  outline: 3px solid #45195e;
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+/* Focus visibility (SC 2.4.7 / 2.4.11), placeholder contrast (SC 1.4.6) and
+   reduced-motion (SC 2.2.2) are all defined once in ./styles/theme.css. */

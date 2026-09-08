@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from './Checkbox';
+import { theme } from '../../../tokens';
 
 const meta = {
   title: 'Atoms/Checkbox',
@@ -8,7 +9,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Accessible checkbox input with optional label. Supports 3 sizes (sm, md, lg) with 44px minimum tap target (md/lg sizes). Includes proper ARIA attributes and focus handling.\n\n**Accessibility**: ✓ Native HTML checkbox with proper labeling via htmlFor ✓ 44px minimum tap target (md/lg sizes; sc 2.5.8) ✓ Uses useId() for unique label associations ✓ Visible focus outline (SC 2.4.7) ✓ Color contrast verified (primary color on white, WCAG AA).\n\n**Testing**: Test all 3 sizes and tap target compliance. Verify label association using DevTools. Confirm checked/unchecked state changes. Validate disabled state. Check focus outline visibility. Test keyboard navigation (Space to toggle, Tab to focus).',
+        component: 'Accessible checkbox input with optional label. Supports 3 sizes (sm, md, lg) with 44px minimum tap target (md/lg sizes). Includes proper ARIA attributes and focus handling.\n\n**Accessibility**: ✓ Native HTML checkbox with proper labeling via htmlFor ✓ 44px minimum tap target (md/lg sizes; sc 2.5.8) ✓ Uses useId() for unique label associations ✓ Visible focus outline (SC 2.4.7) ✓ Color contrast verified (primary color on white, WCAG 2.2 AAA).\n\n**Testing**: Test all 3 sizes and tap target compliance. Verify label association using DevTools. Confirm checked/unchecked state changes. Validate disabled state. Check focus outline visibility. Test keyboard navigation (Space to toggle, Tab to focus).',
       },
     },
   },
@@ -133,7 +134,7 @@ export const Accessibility: Story = {
           Tap Target Size (44px min)
         </p>
         <Checkbox size="md" label="Click or tap to check" />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           44×44px minimum (WCAG 2.2 SC 2.5.8)
         </p>
       </div>
@@ -142,7 +143,7 @@ export const Accessibility: Story = {
           Focus Visible (Tab to see)
         </p>
         <Checkbox size="md" label="Tab to focus" autoFocus />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Browser default focus ring visible
         </p>
       </div>
@@ -151,7 +152,7 @@ export const Accessibility: Story = {
           Label Association
         </p>
         <Checkbox size="md" label="Click label to toggle" id="demo-checkbox" />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Clicking label toggles checkbox (proper htmlFor association)
         </p>
       </div>

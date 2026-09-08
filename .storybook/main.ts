@@ -5,7 +5,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
  * The manager runs in its own bundle and can't see the self-hosted @fontsource
  * copies, so it pulls the three faces from Google Fonts. The preview / docs
  * pages and the browser test-runner keep using the self-hosted copies
- * (src/styles/fonts.ts, imported in preview.ts) — no network dependency there.
+ * (src/styles/fonts.ts, imported in preview.tsx) — no network dependency there.
  */
 const managerFonts = `
   <link rel="preconnect" href="https://fonts.googleapis.com">

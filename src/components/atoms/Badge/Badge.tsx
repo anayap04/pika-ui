@@ -1,4 +1,4 @@
-import { colors, spacing, fontFamilies, fontWeights, radii } from '../../../tokens';
+import { theme, spacing, fontFamilies, fontWeights, radii } from '../../../tokens';
 import React from 'react';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -8,29 +8,29 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const variantStyles = {
   primary: {
-    background: colors.light.primaryStrong,
-    color: colors.light.primaryForeground,
-    border: `2px solid ${colors.light.border}`,
+    background: theme.primaryStrong,
+    color: theme.primaryForeground,
+    border: `2px solid ${theme.border}`,
   },
   secondary: {
-    background: colors.light.secondaryStrong,
-    color: colors.light.secondaryForeground,
-    border: `2px solid ${colors.light.border}`,
+    background: theme.secondaryStrong,
+    color: theme.secondaryForeground,
+    border: `2px solid ${theme.border}`,
   },
   accent: {
-    background: colors.light.accentStrong,
-    color: colors.light.accentForeground,
-    border: `2px solid ${colors.light.border}`,
+    background: theme.accentStrong,
+    color: theme.accentForeground,
+    border: `2px solid ${theme.border}`,
   },
   destructive: {
-    background: colors.light.destructiveStrong,
-    color: colors.light.destructiveForeground,
-    border: `2px solid ${colors.light.border}`,
+    background: theme.destructiveStrong,
+    color: theme.destructiveForeground,
+    border: `2px solid ${theme.border}`,
   },
   muted: {
-    background: colors.light.muted,
-    color: colors.light.mutedForeground,
-    border: `2px solid ${colors.light.border}`,
+    background: theme.muted,
+    color: theme.mutedForeground,
+    border: `2px solid ${theme.border}`,
   },
 };
 

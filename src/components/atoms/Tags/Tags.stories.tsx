@@ -8,7 +8,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Tag component for displaying labels, categories, or removable items. Supports 5 color variants, optional icons, and removable functionality with close button.\n\n**Accessibility**: ✓ Inline display with flex layout for proper text flow ✓ Color contrast verified for all 5 variants (WCAG AA) ✓ Remove button has aria-label for clarity ✓ Keyboard accessible close button (optional) ✓ Uses VT323 monospace for consistent styling.\n\n**Testing**: Verify all 5 color variants render correctly. Test removable tag with close button interaction. Confirm optional icon rendering. Validate color contrast ratios per variant. Check close button aria-label and accessibility. Test keyboard focus on close button.',
+        component: 'Tag component for displaying labels, categories, or removable items. Supports 5 color variants, optional icons, and removable functionality with close button.\n\n**Accessibility**: ✓ Inline display with flex layout for proper text flow ✓ Color contrast verified for all 5 variants (WCAG 2.2 AAA, each ≥7:1) ✓ Remove button has aria-label for clarity ✓ Keyboard accessible close button (optional) ✓ Uses VT323 monospace for consistent styling.\n\n**Testing**: Verify all 5 color variants render correctly. Test removable tag with close button interaction. Confirm optional icon rendering. Validate color contrast ratios per variant. Check close button aria-label and accessibility. Test keyboard focus on close button.',
       },
     },
   },

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Input } from './Input';
+import { theme } from '../../../tokens';
 
 const meta = {
   title: 'Atoms/Input',
@@ -8,7 +9,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Input component for text entry with 3 size options (sm, md, lg). All inputs meet WCAG 2.2 AA standards with 44px minimum height tap targets and proper focus outlines.\n\n**Accessibility**: ✓ 44px minimum height for tap target (md/lg sizes; SC 2.5.8) ✓ Visible focus outline with 3px solid ring (SC 2.4.7) ✓ Purple text (#6b2d8f) on white background for 4.6:1 contrast ratio (AA) ✓ Supports placeholder text without labels ✓ Disabled state clear (opacity 0.6).\n\n**Testing**: Verify all 3 sizes render with correct heights. Confirm tap target compliance (min 44px). Test focus outline visibility. Validate text color contrast using color contrast analyzer. Test disabled state visual feedback. Confirm placeholder text behavior. Test keyboard input and focus navigation.',
+        component: 'Input component for text entry with 3 size options (sm, md, lg). All inputs meet WCAG 2.2 AAA standards with 44px minimum height tap targets and proper focus outlines.\n\n**Accessibility**: ✓ 44px minimum height for tap target (md/lg sizes; SC 2.5.8) ✓ Visible focus outline with 3px solid ring (SC 2.4.7) ✓ Purple text (#6b2d8f) on white background for 8.8:1 contrast ratio (AAA) ✓ Supports placeholder text without labels ✓ Disabled state clear (opacity 0.6).\n\n**Testing**: Verify all 3 sizes render with correct heights. Confirm tap target compliance (min 44px). Test focus outline visibility. Validate text color contrast using color contrast analyzer. Test disabled state visual feedback. Confirm placeholder text behavior. Test keyboard input and focus navigation.',
       },
     },
   },
@@ -122,22 +123,22 @@ export const Accessibility: Story = {
       <div>
         <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: 'bold' }}>Tap Target Size (44px min)</p>
         <Input size="sm" placeholder="Small size (44px height)" />
-        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Minimum 44×44px hit area (WCAG 2.2 SC 2.5.8)
         </p>
       </div>
       <div>
         <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: 'bold' }}>Focus Outline (Tab to see)</p>
         <Input size="md" placeholder="Tab to see focus outline" autoFocus />
-        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           3px solid ring outline with 2px offset (WCAG 2.2 SC 2.4.7 & 2.4.11)
         </p>
       </div>
       <div>
         <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: 'bold' }}>Color Contrast</p>
-        <Input size="md" placeholder="Purple text on white background (4.6:1 AA pass)" />
-        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: '#666' }}>
-          Input text color: #6b2d8f on #ffffff (SC 1.4.3 WCAG AA)
+        <Input size="md" placeholder="Purple text on white background (8.8:1 AAA pass)" />
+        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
+          Input text color: #6b2d8f on #ffffff — 8.8:1 (SC 1.4.6 WCAG AAA)
         </p>
       </div>
     </div>
@@ -188,7 +189,7 @@ export const FormIntegration: Story = {
       <button
         style={{
           padding: '12px 24px',
-          backgroundColor: '#9c2957',
+          backgroundColor: '#87214b',
           color: '#fff',
           border: '4px solid #000',
           fontSize: '12px',

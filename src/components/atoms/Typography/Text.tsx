@@ -1,5 +1,5 @@
 import React from 'react';
-import { fontFamilies, fontSizes, fontWeights, colors } from '../../../tokens';
+import { fontFamilies, fontSizes, fontWeights, theme } from '../../../tokens';
 
 export interface TextProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: 'body' | 'subheading';
@@ -20,12 +20,13 @@ const sizeMap = {
 };
 
 const colorMap = {
-  foreground: colors.light.foreground,
-  muted: colors.light.mutedForeground,
-  primary: colors.light.primaryStrong,
-  secondary: colors.light.secondaryStrong,
-  accent: colors.light.accentForeground,
-  destructive: colors.light.destructiveForeground,
+  foreground: theme.foreground,
+  muted: theme.mutedForeground,
+  primary: theme.primaryStrong,
+  secondary: theme.secondaryStrong,
+  accent: theme.accentText,       // not accentForeground — that's for text ON gold, invisible on the dark page
+  // was destructiveForeground (#fff) — white text, invisible on light grounds
+  destructive: theme.destructiveStrong,
 };
 
 export const Text: React.FC<TextProps> = ({

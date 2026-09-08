@@ -23,4 +23,12 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // Storybook config files are dev-only and don't take part in Fast Refresh,
+    // so they may export decorators/helpers alongside components.
+    files: ['.storybook/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])

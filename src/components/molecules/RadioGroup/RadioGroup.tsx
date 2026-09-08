@@ -1,4 +1,4 @@
-import { colors, spacing, fontFamilies } from '../../../tokens';
+import { theme, spacing, fontFamilies } from '../../../tokens';
 import React, { useId } from 'react';
 
 export interface RadioOption {
@@ -74,7 +74,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
               style={{
                 fontFamily: fontFamilies.body,
                 fontSize: '14px',
-                color: colors.light.foreground,
+                color: theme.foreground,
               }}
             >
               {option.label}

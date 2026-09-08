@@ -18,7 +18,8 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Types** | ✅ passing | `tsc -b`, strict, no errors |
 | **Lint** | ✅ passing | flat ESLint config (`@eslint/js`, `typescript-eslint`, React Hooks, Storybook) — 0 warnings |
 | **Tests** | ✅ 161 / 161 | story smoke tests via `@storybook/addon-vitest` in a real browser (Vitest 4 + Playwright Chromium) |
-| **Accessibility** | 🎯 targeting AAA | `@storybook/addon-a11y` runs the full WCAG 2.2 rule set **plus** axe `color-contrast-enhanced` (AAA 7:1); reported per-story, not yet CI-blocking (`a11y.test: 'todo'`) |
+| **Accessibility** | 🎯 AAA, both themes | `@storybook/addon-a11y` runs the full WCAG 2.2 rule set **plus** axe `color-contrast-enhanced` (AAA 7:1); every text pairing verified ≥7:1 in light **and** dark; reported per-story, not yet CI-blocking (`a11y.test: 'todo'`) |
+| **Theming** | ✅ light + dark | `src/styles/theme.css` drives `--pk-*` custom properties; components read them via `theme` in `src/tokens`. Switches on `[data-theme]`, `.dark`, or `prefers-color-scheme`. Storybook has a **Theme** toolbar toggle |
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
 | **Coverage** | ➖ none tracked | `@vitest/coverage-v8` installed but no threshold/report configured |
 | **Release** | 🚧 pre-release | `v0.0.0`, `private`, no published package, no CHANGELOG |
@@ -43,10 +44,14 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
   (`atoms/Badge.tsx`) into folders (`atoms/Badge/`); several folders are still
   untracked. Commit the reorg before building on top of it.
 - **a11y is advisory, not enforced.** Flip `a11y.test` to `'error'` in
-  `.storybook/preview.ts` once the AAA backlog is clear to gate CI.
-- **Chromatic baselines need re-approval** after the recent Storybook theme /
-  default-background change (pink → *Manual paper*).
-- No dark-theme stories yet, though `colors.dark` tokens exist.
+  `.storybook/preview.tsx` now that both themes are AAA-clean, to gate CI.
+- **Chromatic baselines need re-approval** — the theme refactor changed the
+  default ground (pink → *manual paper*), added a per-story surface wrapper, and
+  re-tuned the `*Strong` colours for AAA on paper.
+- **`design-tokens.json` is stale.** It still lists the v3 (AA-only) palette;
+  `src/tokens/index.ts` + `src/styles/theme.css` are now the source of truth.
+- **`colors.dark` has no dedicated stories** — dark mode is exercised via the
+  Storybook Theme toggle rather than fixed dark stories.
 
 ---
 
@@ -75,7 +80,7 @@ npm run storybook      # dev — http://localhost:6006
 
 | Token group | Source of truth | Highlights |
 | --- | --- | --- |
-| **Colour** | `src/tokens/index.ts` ⇄ `design-tokens.json` (v3) | decorative tints for fills only; every text pairing uses a `*Strong` token verified at ≥7:1 (AAA) |
+| **Colour** | `src/tokens/index.ts` + `src/styles/theme.css` | light + dark `--pk-*` custom properties; decorative tints for fills only; every text pairing uses a `*Strong` / `*Text` token verified ≥7:1 (AAA) in both themes |
 | **Type** | `src/styles/fonts.ts` (self-hosted `@fontsource`) | `Press Start 2P` (display / H1), `VT323` (UI / labels — single 400 weight), `Nunito` (body) |
 | **Spacing** | `spacing` token | 4 · 8 · 16 · 24 · 32 px hard grid |
 | **Radius** | `radii` token | `0px` everywhere — pixel art has no rounded corners |
@@ -96,7 +101,7 @@ npm run storybook      # dev — http://localhost:6006
 ## Project structure
 
 ```
-.storybook/         Storybook config — retro AAA manager theme, a11y, backgrounds
+.storybook/         Storybook config — retro AAA manager theme, a11y, light/dark toggle
 src/
   components/
     atoms/          Button, Card, Input, Typography, Badge, Checkbox, Radio, Toggle, Tags
@@ -104,9 +109,11 @@ src/
     organisms/      (planned)
   stories/
     Overview.mdx    design-system homepage
-  tokens/           design tokens (mirrors design-tokens.json)
-  styles/           self-hosted webfonts
-design-tokens.json  canonical token export (v3.0.0)
+  styles/
+    theme.css       --pk-* colour tokens (light + dark) + a11y baseline
+    fonts.ts        self-hosted @fontsource webfonts
+  tokens/           colour + type + spacing tokens, and the `theme` var accessor
+design-tokens.json  stale v3 export — superseded by src/tokens + src/styles/theme.css
 ```
 
 Each component folder is `Component.tsx` + `Component.stories.tsx` + `index.ts`

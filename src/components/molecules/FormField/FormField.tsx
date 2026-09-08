@@ -1,4 +1,4 @@
-import { colors, spacing, fontFamilies, fontWeights } from '../../../tokens';
+import { theme, spacing, fontFamilies, fontWeights } from '../../../tokens';
 import React from 'react';
 
 export interface FormFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
@@ -33,7 +33,7 @@ export const FormField: React.FC<FormFieldProps> = ({
           fontFamily: fontFamilies.subheading,
           fontSize: '14px',
           fontWeight: fontWeights.bold,
-          color: error ? colors.light.destructive : colors.light.foreground,
+          color: error ? theme.destructiveStrong : theme.foreground,
           display: 'flex',
           alignItems: 'center',
           gap: spacing.xs,
@@ -43,7 +43,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         {required && (
           <span
             style={{
-              color: colors.light.destructive,
+              color: theme.destructiveStrong,
               fontWeight: fontWeights.bold,
             }}
           >
@@ -57,7 +57,7 @@ export const FormField: React.FC<FormFieldProps> = ({
           style={{
             fontFamily: fontFamilies.body,
             fontSize: '12px',
-            color: colors.light.destructive,
+            color: theme.destructiveStrong,
             marginTop: '-4px',
           }}
         >
@@ -69,7 +69,7 @@ export const FormField: React.FC<FormFieldProps> = ({
           style={{
             fontFamily: fontFamilies.body,
             fontSize: '12px',
-            color: colors.light.mutedForeground,
+            color: theme.mutedForeground,
             marginTop: '-4px',
           }}
         >

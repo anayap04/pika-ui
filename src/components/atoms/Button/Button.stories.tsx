@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './Button';
+import { theme } from '../../../tokens';
 
 const meta = {
   title: 'Atoms/Button',
@@ -8,7 +9,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Button component with pixel-art styling (4px hard-edged borders). Supports 4 variants (primary, secondary, accent, destructive) and 3 sizes (sm, md, lg). All buttons meet WCAG 2.2 AA accessibility standards with 44px minimum tap targets and visible focus outlines.\n\n**Accessibility**: ✓ 44px minimum height for tap target (WCAG 2.2 SC 2.5.8) ✓ Visible focus outline with 3px solid ring (WCAG 2.2 SC 2.4.7) ✓ Color contrast verified (WCAG 2.2 AA) ✓ Disabled state reduces opacity for distinction.\n\n**Testing**: Verify all 4 variants render with correct colors. Test 3 sizes for tap target compliance (min 44px). Confirm disabled state (opacity 0.6). Validate focus outline visibility using Tab key. Check hover/active state visual feedback.',
+        component: 'Button component with pixel-art styling (4px hard-edged borders). Supports 4 variants (primary, secondary, accent, destructive) and 3 sizes (sm, md, lg). All buttons meet WCAG 2.2 AAA accessibility standards with 44px minimum tap targets and visible focus outlines.\n\n**Accessibility**: ✓ 44px minimum height for tap target (WCAG 2.2 SC 2.5.8) ✓ Visible focus outline with 3px solid ring (WCAG 2.2 SC 2.4.7) ✓ Color contrast verified (WCAG 2.2 AAA — every variant ≥7:1) ✓ Disabled state reduces opacity for distinction.\n\n**Testing**: Verify all 4 variants render with correct colors. Test 3 sizes for tap target compliance (min 44px). Confirm disabled state (opacity 0.6). Validate focus outline visibility using Tab key. Check hover/active state visual feedback.',
       },
     },
   },
@@ -189,7 +190,7 @@ export const Accessibility: Story = {
         <Button variant="primary" size="sm">
           Click me
         </Button>
-        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Hover or focus: minimum 44×44px hit area (WCAG 2.2 SC 2.5.8)
         </p>
       </div>
@@ -198,7 +199,7 @@ export const Accessibility: Story = {
         <Button variant="primary" autoFocus>
           Focus Outline
         </Button>
-        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           3px solid ring outline with 2px offset (WCAG 2.2 SC 2.4.7 & 2.4.11)
         </p>
       </div>

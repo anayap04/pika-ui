@@ -1,4 +1,4 @@
-import { colors, spacing } from '../../../tokens';
+import { theme, spacing } from '../../../tokens';
 import React from 'react';
 import { Card } from '../../atoms/Card';
 
@@ -21,8 +21,12 @@ const paddingStyles = {
 export const CardSection: React.FC<CardSectionProps> = ({
   header,
   footer,
-  headerBackground = colors.light.secondary,
-  footerBackground = colors.light.secondary,
+  // Default to the muted band, not the decorative `secondary` blue: dark
+  // `foreground` header/footer content on #5c94fc is only 3:1 (fails AAA and AA),
+  // whereas on #f5f5f5 it clears 7:1. Callers passing light-on-dark content can
+  // still override with `secondaryStrong` etc.
+  headerBackground = theme.muted,
+  footerBackground = theme.muted,
   variant = 'default',
   padding = 'md',
   children,
@@ -38,7 +42,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
           style={{
             padding: paddingValue,
             backgroundColor: headerBackground,
-            borderBottom: `1px solid ${colors.light.border}`,
+            borderBottom: `1px solid ${theme.border}`,
             marginBottom: paddingValue,
           }}
         >
@@ -55,7 +59,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
           style={{
             padding: paddingValue,
             backgroundColor: footerBackground,
-            borderTop: `1px solid ${colors.light.border}`,
+            borderTop: `1px solid ${theme.border}`,
             marginTop: paddingValue,
           }}
         >

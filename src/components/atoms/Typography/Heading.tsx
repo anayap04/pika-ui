@@ -1,5 +1,5 @@
 import React from 'react';
-import { fontFamilies, fontSizes, fontWeights, lineHeights, colors } from '../../../tokens';
+import { fontFamilies, fontSizes, fontWeights, lineHeights, theme } from '../../../tokens';
 
 export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level: 1 | 2 | 3 | 4;
@@ -27,13 +27,16 @@ const variantFontFamilyMap = {
   body: fontFamilies.body,
 };
 
+// Text colours must come from the AAA-safe `*Strong` / foreground tokens — the
+// bare `primary` / `secondary` / `accent` / `destructive` tints are decorative
+// (2–4:1) and fail contrast as text.
 const colorMap = {
-  foreground: colors.light.foreground,
-  muted: colors.light.mutedForeground,
-  primary: colors.light.primary,
-  secondary: colors.light.secondary,
-  accent: colors.light.accent,
-  destructive: colors.light.destructive,
+  foreground: theme.foreground,
+  muted: theme.mutedForeground,
+  primary: theme.primaryStrong,
+  secondary: theme.secondaryStrong,
+  accent: theme.accentText,       // not accentForeground — that's for text ON gold, invisible on the dark page
+  destructive: theme.destructiveStrong,
 };
 
 export const Heading: React.FC<HeadingProps> = ({

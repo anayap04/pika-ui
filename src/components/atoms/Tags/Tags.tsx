@@ -1,4 +1,4 @@
-import { colors, spacing, fontFamilies, fontWeights } from '../../../tokens';
+import { theme, spacing, fontFamilies, fontWeights } from '../../../tokens';
 import React from 'react';
 
 export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -11,29 +11,29 @@ export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const variantStyles = {
   primary: {
-    background: colors.light.primaryStrong,
-    color: colors.light.primaryForeground,
-    border: `1px solid ${colors.light.border}`,
+    background: theme.primaryStrong,
+    color: theme.primaryForeground,
+    border: `1px solid ${theme.border}`,
   },
   secondary: {
-    background: colors.light.secondaryStrong,
-    color: colors.light.secondaryForeground,
-    border: `1px solid ${colors.light.border}`,
+    background: theme.secondaryStrong,
+    color: theme.secondaryForeground,
+    border: `1px solid ${theme.border}`,
   },
   accent: {
-    background: colors.light.accentStrong,
-    color: colors.light.accentForeground,
-    border: `1px solid ${colors.light.border}`,
+    background: theme.accentStrong,
+    color: theme.accentForeground,
+    border: `1px solid ${theme.border}`,
   },
   destructive: {
-    background: colors.light.destructiveStrong,
-    color: colors.light.destructiveForeground,
-    border: `1px solid ${colors.light.border}`,
+    background: theme.destructiveStrong,
+    color: theme.destructiveForeground,
+    border: `1px solid ${theme.border}`,
   },
   muted: {
-    background: colors.light.muted,
-    color: colors.light.mutedForeground,
-    border: `1px solid ${colors.light.border}`,
+    background: theme.muted,
+    color: theme.mutedForeground,
+    border: `1px solid ${theme.border}`,
   },
 };
 

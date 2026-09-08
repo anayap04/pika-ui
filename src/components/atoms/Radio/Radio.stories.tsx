@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Radio } from './Radio';
+import { theme } from '../../../tokens';
 
 const meta = {
   title: 'Atoms/Radio',
@@ -8,7 +9,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Accessible radio button input for mutually exclusive selections. Supports 3 sizes (sm, md, lg) with 44px minimum tap target (md/lg sizes). Includes proper ARIA attributes and label association.\n\n**Accessibility**: ✓ Native HTML radio with proper label association via htmlFor ✓ 44px minimum tap target (md/lg sizes; SC 2.5.8) ✓ Uses useId() for unique associations ✓ Visible focus outline (SC 2.4.7) ✓ Color contrast verified (primary color, WCAG AA) ✓ Proper name grouping for mutually exclusive options.\n\n**Testing**: Test all 3 sizes for tap target compliance. Verify label associations and name grouping. Confirm mutual exclusivity (only one selected per group). Validate disabled state. Check focus outline visibility. Test keyboard navigation (Arrow keys move selection, Space/Enter to select).',
+        component: 'Accessible radio button input for mutually exclusive selections. Supports 3 sizes (sm, md, lg) with 44px minimum tap target (md/lg sizes). Includes proper ARIA attributes and label association.\n\n**Accessibility**: ✓ Native HTML radio with proper label association via htmlFor ✓ 44px minimum tap target (md/lg sizes; SC 2.5.8) ✓ Uses useId() for unique associations ✓ Visible focus outline (SC 2.4.7) ✓ Color contrast verified (primary color, WCAG 2.2 AAA) ✓ Proper name grouping for mutually exclusive options.\n\n**Testing**: Test all 3 sizes for tap target compliance. Verify label associations and name grouping. Confirm mutual exclusivity (only one selected per group). Validate disabled state. Check focus outline visibility. Test keyboard navigation (Arrow keys move selection, Space/Enter to select).',
       },
     },
   },
@@ -153,7 +154,7 @@ export const Accessibility: Story = {
           Tap Target Size (44px min)
         </p>
         <Radio size="md" label="Click or tap to select" />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           44×44px minimum (WCAG 2.2 SC 2.5.8)
         </p>
       </div>
@@ -162,7 +163,7 @@ export const Accessibility: Story = {
           Focus Visible (Tab to see)
         </p>
         <Radio size="md" label="Tab to focus" autoFocus />
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Browser default focus ring visible
         </p>
       </div>
@@ -174,7 +175,7 @@ export const Accessibility: Story = {
           <Radio name="exclusive-demo" label="Option A" value="a" />
           <Radio name="exclusive-demo" label="Option B" value="b" />
         </div>
-        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: '#666' }}>
+        <p style={{ margin: '12px 0 0 0', fontSize: '11px', color: theme.mutedForeground }}>
           Use same name attribute for radio button groups
         </p>
       </div>

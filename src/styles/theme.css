@@ -1,0 +1,144 @@
+/* ============================================================
+   PIKA UI — themeable colour tokens (--pk-*)
+   ------------------------------------------------------------
+   Components read these through `theme` in src/tokens/index.ts
+   (each value is `var(--pk-x, <light hex>)`), so importing this
+   file switches every component between light and dark.
+
+   Activation, in priority order:
+     :root[data-theme="dark"]  /  .dark        explicit opt-in
+     :root[data-theme="light"]                 explicit opt-out (wins over OS)
+     @media (prefers-color-scheme: dark)       follows the OS
+
+   Every text pairing here is verified WCAG 2.2 AAA (SC 1.4.6,
+   7:1 body / 4.5:1 large) in BOTH themes; borders / rings /
+   switch tracks clear SC 1.4.11 (3:1).
+   ============================================================ */
+
+:root {
+  color-scheme: light dark;
+
+  --pk-background: #faf3e3;
+  --pk-foreground: #6b2d8f;
+  --pk-card: #ffffff;
+  --pk-card-foreground: #6b2d8f;
+
+  --pk-primary: #fc5c94;              /* decorative fill only */
+  --pk-primary-strong: #87214b;       /* text + fill (8.1–8.9:1) */
+  --pk-primary-foreground: #ffffff;
+  --pk-secondary: #5c94fc;            /* decorative fill only */
+  --pk-secondary-strong: #164499;     /* text + fill (8.2–9.1:1) */
+  --pk-secondary-foreground: #ffffff;
+  --pk-accent: #ffd700;
+  --pk-accent-strong: #ffd700;
+  --pk-accent-foreground: #3d1a52;    /* text ON the gold fill (10.2:1) */
+  --pk-accent-text: #3d1a52;          /* "accent" as standalone page text (12.9:1) */
+  --pk-destructive: #ff0044;          /* decorative fill only */
+  --pk-destructive-strong: #99002a;   /* text + fill (8.0–8.8:1) */
+  --pk-destructive-foreground: #ffffff;
+
+  --pk-muted: #f5f5f5;
+  --pk-muted-foreground: #4d4d4d;     /* 7.7–8.5:1 */
+  --pk-border: #000000;
+  --pk-input: #6b2d8f;                /* entered text — 8.8:1 on white */
+  --pk-input-background: #ffffff;
+  --pk-switch-background: #787878;    /* non-text 4.0–4.4:1 */
+  --pk-ring: #6b2d8f;
+  --pk-placeholder: #575757;          /* 7.2:1 on white, visibly dimmer than entered text */
+}
+
+/* ---- Dark: "arcade at night" — follows the OS unless overridden ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --pk-background: #1a0b2e;
+    --pk-foreground: #f5d1ea;
+    --pk-card: #2d1b4e;
+    --pk-card-foreground: #f5d1ea;
+
+    --pk-primary: #ff6fa8;
+    --pk-primary-strong: #ff99c4;
+    --pk-primary-foreground: #1a0b2e;
+    --pk-secondary: #6fb1ff;
+    --pk-secondary-strong: #8cc0ff;
+    --pk-secondary-foreground: #1a0b2e;
+    --pk-accent: #ffe14d;
+    --pk-accent-strong: #ffe14d;
+    --pk-accent-foreground: #1a0b2e;
+    --pk-accent-text: #ffe14d;
+    --pk-destructive: #ff4d6d;
+    --pk-destructive-strong: #ff9aa8;
+    --pk-destructive-foreground: #1a0b2e;
+
+    --pk-muted: #241540;
+    --pk-muted-foreground: #c4aed9;
+    --pk-border: #ffe14d;
+    --pk-input: #f5d1ea;
+    --pk-input-background: #2d1b4e;
+    --pk-switch-background: #9a86bf;
+    --pk-ring: #ff99c4;
+    --pk-placeholder: #c4aed9;        /* 7.6:1 on #2d1b4e */
+  }
+}
+
+/* ---- Dark: explicit opt-in (wins in both directions) ---- */
+:root[data-theme='dark'],
+.dark {
+  --pk-background: #1a0b2e;
+  --pk-foreground: #f5d1ea;
+  --pk-card: #2d1b4e;
+  --pk-card-foreground: #f5d1ea;
+
+  --pk-primary: #ff6fa8;
+  --pk-primary-strong: #ff99c4;
+  --pk-primary-foreground: #1a0b2e;
+  --pk-secondary: #6fb1ff;
+  --pk-secondary-strong: #8cc0ff;
+  --pk-secondary-foreground: #1a0b2e;
+  --pk-accent: #ffe14d;
+  --pk-accent-strong: #ffe14d;
+  --pk-accent-foreground: #1a0b2e;
+  --pk-accent-text: #ffe14d;
+  --pk-destructive: #ff4d6d;
+  --pk-destructive-strong: #ff9aa8;
+  --pk-destructive-foreground: #1a0b2e;
+
+  --pk-muted: #241540;
+  --pk-muted-foreground: #c4aed9;
+  --pk-border: #ffe14d;
+  --pk-input: #f5d1ea;
+  --pk-input-background: #2d1b4e;
+  --pk-switch-background: #9a86bf;
+  --pk-ring: #ff99c4;
+  --pk-placeholder: #c4aed9;
+}
+
+/* ------------------------------------------------------------
+   Cross-cutting a11y rules that need real CSS (inline styles
+   can't target ::placeholder or :focus-visible).
+   ------------------------------------------------------------ */
+
+/* SC 1.4.6 — placeholder text is legible, and never dimmed below its
+   token value by the UA default (Firefox drops it to ~54%). */
+input::placeholder,
+textarea::placeholder {
+  color: var(--pk-placeholder);
+  opacity: 1;
+}
+
+/* SC 2.4.7 / 2.4.11 — a visible focus ring on anything focusable, in case a
+   component's inline `outline: none` wins the cascade for keyboard users. */
+:focus-visible {
+  outline: 3px solid var(--pk-ring);
+  outline-offset: 2px;
+}
+
+/* SC 2.2.2 — respect reduced-motion for the looping pixel animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,4 +1,4 @@
-import { colors, spacing, fontFamilies } from '../../../tokens';
+import { theme, spacing, fontFamilies } from '../../../tokens';
 import React, { useId } from 'react';
 
 export interface CheckboxOption {
@@ -79,7 +79,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
               style={{
                 fontFamily: fontFamilies.body,
                 fontSize: '14px',
-                color: colors.light.foreground,
+                color: theme.foreground,
               }}
             >
               {option.label}
