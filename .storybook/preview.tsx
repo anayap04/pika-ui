@@ -49,7 +49,7 @@ const preview: Preview = {
       // 'todo' - surface violations in the test UI without failing CI
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
-      test: 'todo',
+      test: 'error',
       // Full WCAG 2.2 rule set + AAA-enhanced contrast check
       // (axe `color-contrast-enhanced`: 7:1 body / 4.5:1 large text).
       options: {

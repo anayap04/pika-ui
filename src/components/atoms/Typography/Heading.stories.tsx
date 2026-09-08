@@ -150,3 +150,88 @@ export const AllColors: Story = {
     </div>
   ),
 };
+
+// Dark theme variants
+export const H1DisplayDark: Story = {
+  args: {
+    level: 1,
+    variant: 'display',
+    color: 'foreground',
+    children: 'Gender Reveal Voting App',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const H2SubheadingDark: Story = {
+  args: {
+    level: 2,
+    variant: 'subheading',
+    color: 'foreground',
+    children: 'Make Your Prediction',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllLevelsDark: Story = {
+  args: { level: 1 },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <Heading level={1} variant="display" color="foreground">
+        Level 1: Display (Press Start 2P)
+      </Heading>
+      <Heading level={2} variant="subheading" color="foreground">
+        Level 2: Subheading (VT323)
+      </Heading>
+      <Heading level={3} variant="subheading" color="foreground">
+        Level 3: Subheading (VT323)
+      </Heading>
+      <Heading level={4} variant="subheading" color="foreground">
+        Level 4: Subheading (VT323)
+      </Heading>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllColorsDark: Story = {
+  args: { level: 2 },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Heading level={2} color="foreground">
+        Foreground
+      </Heading>
+      <Heading level={2} color="muted">
+        Muted
+      </Heading>
+      <Heading level={2} color="primary">
+        Primary
+      </Heading>
+      <Heading level={2} color="secondary">
+        Secondary
+      </Heading>
+      <Heading level={2} color="accent">
+        Accent
+      </Heading>
+      <Heading level={2} color="destructive">
+        Destructive
+      </Heading>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};

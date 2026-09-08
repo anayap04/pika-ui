@@ -182,3 +182,69 @@ export const Accessibility: Story = {
     </div>
   ),
 };
+
+// Dark theme variants
+export const DefaultDark: Story = {
+  args: {
+    size: 'md',
+    label: 'Option 1',
+    disabled: false,
+    checked: false,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const CheckedDark: Story = {
+  args: {
+    size: 'md',
+    label: 'Option selected',
+    disabled: false,
+    checked: true,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllSizesDark: Story = {
+  args: { disabled: false },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Radio size="sm" label="Small (20px)" />
+      <Radio size="md" label="Medium (44px) — default" />
+      <Radio size="lg" label="Large (56px)" />
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const RadioGroupDark: Story = {
+  args: { size: 'md' },
+  render: () => (
+    <fieldset style={{ border: '1px solid #ccc', padding: '16px', borderRadius: '4px' }}>
+      <legend style={{ fontSize: '14px', fontWeight: '700', marginBottom: '12px' }}>
+        Choose your prediction
+      </legend>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <Radio name="prediction" value="girl" label="It will be a girl 👧" />
+        <Radio name="prediction" value="boy" label="It will be a boy 👦" />
+        <Radio name="prediction" value="surprise" label="Surprise me! 🎉" />
+      </div>
+    </fieldset>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};

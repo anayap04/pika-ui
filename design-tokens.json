@@ -1,8 +1,8 @@
 {
   "meta": {
-    "name": "Gender Reveal Voting App",
-    "version": "3.0.0",
-    "notes": "v3: WCAG 2.2 AA pass — fixed muted-foreground and switch-track contrast (SC 1.4.3 / 1.4.11), added focus-visible outline tokens (SC 2.4.7 / 2.4.11), added minimum tap-target size (SC 2.5.8, new in 2.2), added reduced-motion handling for looping animations (SC 2.2.2)."
+    "name": "Pika UI",
+    "version": "0.1.0",
+    "notes": "v0.1.0 (Pika UI 0.1.0): WCAG 2.2 AAA pass — upgraded from AA to AAA (7:1 body text / 4.5:1 large text in both themes), changed light ground from pink (#e8b4d9) to 'manual paper' (#faf3e3) for better contrast, updated all *Strong colors for AAA compliance, enhanced focus rings (3px solid, 2px offset), verified 44×44px tap targets, full reduced-motion support (SC 2.2.2). All text pairings verified ≥7:1 in light AND dark."
   },
   "typography": {
     "fontFamilies": {
@@ -24,44 +24,80 @@
   },
   "color": {
     "light": {
-      "background": "#e8b4d9",
+      "background": "#faf3e3",
+      "background_note": "Manual paper — AAA ground (brand pink #e8b4d9 is decorative-only: foreground on it is 5:1, fails AAA)",
       "foreground": "#6b2d8f",
+      "foreground_contrast": "8.8:1 on white, 7.9:1 on manual paper (AAA)",
       "card": "#ffffff",
       "cardForeground": "#6b2d8f",
-      "primary": { "decorative": "#fc5c94", "strong": "#c93870", "foreground": "#ffffff", "contrastStrongOnForeground": "4.9:1 (AA pass)" },
-      "secondary": { "decorative": "#5c94fc", "strong": "#2f6fe0", "foreground": "#ffffff", "contrastStrongOnForeground": "4.7:1 (AA pass)" },
-      "accent": { "decorative": "#ffd700", "strong": "#ffd700", "foreground": "#6b2d8f", "contrastStrongOnForeground": "6.2:1 (AA pass)" },
-      "destructive": { "decorative": "#ff0044", "strong": "#db1548", "foreground": "#ffffff", "contrastStrongOnForeground": "5.0:1 (AA pass)" },
+      "primary": "#fc5c94",
+      "primary_note": "Decorative only (2.9:1) — do not use for text",
+      "primaryStrong": "#87214b",
+      "primaryStrong_contrast": "8.9:1 white, 8.1:1 paper, 8.9:1 under white (AAA)",
+      "primaryForeground": "#ffffff",
+      "secondary": "#5c94fc",
+      "secondary_note": "Decorative only (3.0:1) — do not use for text",
+      "secondaryStrong": "#164499",
+      "secondaryStrong_contrast": "9.1:1 white, 8.2:1 paper, 9.1:1 under white (AAA)",
+      "secondaryForeground": "#ffffff",
+      "accent": "#ffd700",
+      "accent_note": "Decorative only (1.4:1) — do not use for text",
+      "accentStrong": "#ffd700",
+      "accentForeground": "#3d1a52",
+      "accentForeground_note": "Text ON the gold fill — 10.2:1 on gold (AAA)",
+      "accentText": "#3d1a52",
+      "accentText_note": "Accent as standalone text on the page — 12.9:1 paper (AAA)",
+      "destructive": "#ff0044",
+      "destructive_note": "Decorative only (3.9:1) — do not use for text",
+      "destructiveStrong": "#99002a",
+      "destructiveStrong_contrast": "8.8:1 white, 8.0:1 paper, 8.8:1 under white (AAA)",
+      "destructiveForeground": "#ffffff",
       "muted": "#f5f5f5",
       "mutedForeground": "#4d4d4d",
-      "mutedForegroundContrast": "4.8:1 on page background (AA pass) — was #6b6b6b at 3.0:1 (fail)",
+      "mutedForeground_contrast": "8.5:1 white, 7.7:1 paper, 7.8:1 on muted fill (AAA)",
       "border": "#000000",
       "input": "#6b2d8f",
       "inputBackground": "#ffffff",
       "switchBackground": "#787878",
-      "switchBackgroundContrast": "4.4:1 vs white card (AA pass, SC 1.4.11) — was #e0e0e0 at 1.3:1 (fail)",
-      "ring": "#6b2d8f",
-      "chart": ["#fc5c94", "#5c94fc", "#ffd700", "#00ff00", "#c9b4e8"]
+      "switchBackground_contrast": "Non-text: 4.4:1 vs white, 4.0:1 vs paper (SC 1.4.11, 3:1 minimum)",
+      "ring": "#6b2d8f"
     },
     "dark": {
       "background": "#1a0b2e",
       "foreground": "#f5d1ea",
       "card": "#2d1b4e",
       "cardForeground": "#f5d1ea",
-      "primary": { "decorative": "#ff6fa8", "strong": "#ff3d8a", "foreground": "#1a0b2e" },
-      "secondary": { "decorative": "#6fb1ff", "strong": "#3d8fff", "foreground": "#1a0b2e" },
-      "accent": { "decorative": "#ffe14d", "strong": "#ffe14d", "foreground": "#1a0b2e" },
-      "destructive": { "decorative": "#ff4d6d", "strong": "#ff1f4d", "foreground": "#1a0b2e" },
+      "primary": "#ff6fa8",
+      "primary_note": "Decorative only",
+      "primaryStrong": "#ff99c4",
+      "primaryStrong_contrast": "9.4:1 bg, 7.7:1 card, 9.4:1 under dark text (AAA)",
+      "primaryForeground": "#1a0b2e",
+      "secondary": "#6fb1ff",
+      "secondary_note": "Decorative only",
+      "secondaryStrong": "#8cc0ff",
+      "secondaryStrong_contrast": "9.8:1 bg, 8.1:1 card, 9.8:1 under dark text (AAA)",
+      "secondaryForeground": "#1a0b2e",
+      "accent": "#ffe14d",
+      "accentStrong": "#ffe14d",
+      "accentForeground": "#1a0b2e",
+      "accentForeground_note": "Text ON the gold fill — 14.3:1 on gold (AAA)",
+      "accentText": "#ffe14d",
+      "accentText_note": "Accent as standalone text on dark page — 14.3:1 bg (AAA)",
+      "destructive": "#ff4d6d",
+      "destructive_note": "Decorative only",
+      "destructiveStrong": "#ff9aa8",
+      "destructiveStrong_contrast": "9.2:1 bg, 7.6:1 card, 9.2:1 under dark text (AAA)",
+      "destructiveForeground": "#1a0b2e",
       "muted": "#241540",
-      "mutedForeground": "#b89fd1",
-      "mutedForegroundContrast": "7.1:1 on --muted (AA pass)",
+      "mutedForeground": "#c4aed9",
+      "mutedForeground_contrast": "9.2:1 bg, 7.6:1 card, 8.3:1 muted (AAA)",
       "border": "#ffe14d",
+      "border_note": "Neon gold vs deep purple — 14.3:1 (non-text)",
       "input": "#f5d1ea",
       "inputBackground": "#2d1b4e",
-      "switchBackground": "#8670ad",
-      "switchBackgroundContrast": "3.6:1 vs card (AA pass, SC 1.4.11) — was #4a3670 at 1.5:1 (fail)",
-      "ring": "#ff6fa8",
-      "chart": ["#ff6fa8", "#6fb1ff", "#ffe14d", "#4dff9f", "#d1b3ff"]
+      "switchBackground": "#9a86bf",
+      "switchBackground_contrast": "Non-text: 4.7:1 vs card (SC 1.4.11, 3:1 minimum)",
+      "ring": "#ff99c4"
     }
   },
   "radius": {
@@ -69,11 +105,27 @@
     "md": "0px",
     "lg": "0px",
     "xl": "0px",
-    "note": "All flattened to 0px for pixel-art consistency; original file had negative values from an unadjusted shadcn formula."
+    "note": "All flattened to 0px for pixel-art consistency"
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "note": "4px hard grid for arcade alignment"
   },
   "accessibility": {
+    "contrast": {
+      "level": "WCAG 2.2 AAA",
+      "bodyText": "7:1 minimum in both light and dark themes",
+      "largeText": "4.5:1 minimum in both light and dark themes",
+      "nonText": "3:1 minimum (borders, switch tracks, focus rings)",
+      "note": "Every *Strong and *Text colour pair verified in both themes"
+    },
     "focusVisible": {
       "outlineWidth": "3px",
+      "outlineStyle": "solid",
       "outlineOffset": "2px",
       "wcagCriteria": ["2.4.7 Focus Visible (AA)", "2.4.11 Focus Not Obscured, Minimum (AA, new in 2.2)"]
     },
@@ -93,8 +145,9 @@
     "animations": {
       "pixelFloat": "translateY bounce: 0 → -8px → 0 → -4px",
       "pixelPulse": "opacity 1 → 0.6 → 1",
-      "blink": "hard-cut opacity 1 → 0 at 50%, no easing"
+      "blink": "hard-cut opacity 1 → 0 at 50%, no easing",
+      "note": "All disabled under prefers-reduced-motion (SC 2.2.2)"
     },
-    "crtScanlines": "repeating-linear-gradient overlay, 4px pitch, 15% black opacity, z-index 100"
+    "crtScanlines": "repeating-linear-gradient overlay, 4px pitch, 15% black opacity, z-index 100, disabled under prefers-reduced-motion"
   }
 }

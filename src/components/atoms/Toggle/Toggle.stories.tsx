@@ -183,3 +183,105 @@ export const Accessibility: Story = {
     </div>
   ),
 };
+
+// Dark theme variants
+export const OffDark: Story = {
+  args: {
+    size: 'md',
+    label: 'Dark mode',
+    disabled: false,
+    checked: false,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const OnDark: Story = {
+  args: {
+    size: 'md',
+    label: 'Dark mode',
+    disabled: false,
+    checked: true,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllSizesDark: Story = {
+  args: { disabled: false },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Toggle size="sm" label="Small toggle" />
+      <Toggle size="md" label="Medium toggle (44px tap target)" />
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllStatesDark: Story = {
+  args: { size: 'md' },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div>
+        <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: '700' }}>Off</p>
+        <Toggle checked={false} label="Disabled" />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: '700' }}>On</p>
+        <Toggle checked={true} label="Enabled" />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: '700' }}>Disabled Off</p>
+        <Toggle checked={false} disabled label="Locked" />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px 0', fontSize: '12px', fontWeight: '700' }}>Disabled On</p>
+        <Toggle checked={true} disabled label="Locked" />
+      </div>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const SettingsPanelDark: Story = {
+  args: { size: 'md' },
+  render: () => (
+    <div
+      style={{
+        border: '1px solid #000',
+        padding: '24px',
+        borderRadius: '0px',
+        width: '300px',
+      }}
+    >
+      <h3 style={{ margin: '0 0 16px 0', fontSize: '14px', fontWeight: '700', fontFamily: "'VT323', monospace" }}>
+        SETTINGS
+      </h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <Toggle label="Dark Mode" checked={false} />
+        <Toggle label="Sound Effects" checked={true} />
+        <Toggle label="Notifications" checked={true} />
+        <Toggle label="Analytics" checked={false} />
+      </div>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};

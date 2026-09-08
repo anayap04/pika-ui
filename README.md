@@ -39,17 +39,6 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 
 ### Known gaps / tech debt
 
-- **Storybook a11y is still advisory.** Structural a11y is CI-blocking via the
-  `@sa11y/vitest` unit tests, but `@storybook/addon-a11y` itself stays at
-  `a11y.test: 'todo'` in `.storybook/preview.tsx`. Flip it to `'error'` to also
-  gate the browser project on the AAA `color-contrast-enhanced` check.
-- **Chromatic baselines need re-approval** — the theme refactor changed the
-  default ground (pink → *manual paper*), added a per-story surface wrapper, and
-  re-tuned the `*Strong` colours for AAA on paper.
-- **`design-tokens.json` is stale.** It still lists the v3 (AA-only) palette;
-  `src/tokens/index.ts` + `src/styles/theme.css` are now the source of truth.
-- **`colors.dark` has no dedicated stories** — dark mode is exercised via the
-  Storybook Theme toggle rather than fixed dark stories.
 - **Phase 4 (Organisms)** — Complex composite components planned for future releases.
 
 ---

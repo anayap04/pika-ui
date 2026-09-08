@@ -200,3 +200,60 @@ export const FormIntegration: Story = {
     },
   },
 };
+
+// Dark theme variants
+export const DefaultDark: Story = {
+  args: {
+    size: 'md',
+    placeholder: 'Enter your name...',
+    disabled: false,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllSizesDark: Story = {
+  args: { size: 'md' },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
+      <Input size="sm" placeholder="Small (12px, 44px height)" />
+      <Input size="md" placeholder="Medium (14px, 44px height)" />
+      <Input size="lg" placeholder="Large (16px, 44px height)" />
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const WithValueDark: Story = {
+  args: {
+    size: 'md',
+    value: 'Miguel Angel Sandoval',
+    disabled: false,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const FocusedDark: Story = {
+  args: {
+    size: 'md',
+    placeholder: 'Tab or click to focus',
+    autoFocus: true,
+    disabled: false,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};

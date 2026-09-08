@@ -106,3 +106,64 @@ export const LabelVariations: Story = {
     </div>
   ),
 };
+
+// Dark theme variants
+export const BasicInputDark: Story = {
+  render: () => (
+    <FormField label="Email Address">
+      <Input placeholder="Enter your email" />
+    </FormField>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const WithHintDark: Story = {
+  render: () => (
+    <FormField label="Password" hint="Must be at least 8 characters">
+      <Input type="password" placeholder="Enter password" />
+    </FormField>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const WithErrorDark: Story = {
+  render: () => (
+    <FormField label="Username" error="Username already taken" required>
+      <Input placeholder="Choose a username" />
+    </FormField>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const FormExampleDark: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
+      <FormField label="Email" required>
+        <Input placeholder="your@email.com" />
+      </FormField>
+      <FormField label="Password" required hint="At least 8 characters">
+        <Input type="password" placeholder="Enter password" />
+      </FormField>
+      <FormField label="Accept Terms" required>
+        <Checkbox label="I accept the terms and conditions" />
+      </FormField>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};

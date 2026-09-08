@@ -136,3 +136,87 @@ export const StatusBadges: Story = {
     </div>
   ),
 };
+
+// Dark theme variants
+export const PrimaryDark: Story = {
+  args: {
+    variant: 'primary',
+    size: 'md',
+    children: 'TEAM GIRL',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const SecondaryDark: Story = {
+  args: {
+    variant: 'secondary',
+    size: 'md',
+    children: 'TEAM BOY',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AccentDark: Story = {
+  args: {
+    variant: 'accent',
+    size: 'md',
+    children: 'VOTE CAST',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const DestructiveDark: Story = {
+  args: {
+    variant: 'destructive',
+    size: 'md',
+    children: 'ERROR',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const MutedDark: Story = {
+  args: {
+    variant: 'muted',
+    size: 'md',
+    children: 'LOCKED',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllVariantsDark: Story = {
+  args: { size: 'md' },
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Badge variant="primary">Primary</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="accent">Accent</Badge>
+      <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="muted">Muted</Badge>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};

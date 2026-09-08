@@ -213,3 +213,93 @@ export const Accessibility: Story = {
     },
   },
 };
+
+// Dark theme variants
+export const PrimaryDark: Story = {
+  args: {
+    variant: 'primary',
+    size: 'md',
+    disabled: false,
+    children: 'EQUIPO NIÑA',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const SecondaryDark: Story = {
+  args: {
+    variant: 'secondary',
+    size: 'md',
+    disabled: false,
+    children: 'EQUIPO NIÑO',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AccentDark: Story = {
+  args: {
+    variant: 'accent',
+    size: 'md',
+    disabled: false,
+    children: 'VOTE NOW',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const DestructiveDark: Story = {
+  args: {
+    variant: 'destructive',
+    size: 'md',
+    disabled: false,
+    children: 'DELETE VOTE',
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllVariantsDark: Story = {
+  args: { variant: 'primary', size: 'md' },
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="accent">Accent</Button>
+      <Button variant="destructive">Destructive</Button>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllSizesDark: Story = {
+  args: { variant: 'primary', size: 'md' },
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-end' }}>
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};

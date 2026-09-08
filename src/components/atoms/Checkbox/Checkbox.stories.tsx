@@ -159,3 +159,69 @@ export const Accessibility: Story = {
     </div>
   ),
 };
+
+// Dark theme variants
+export const DefaultDark: Story = {
+  args: {
+    size: 'md',
+    label: 'Agree to terms',
+    disabled: false,
+    checked: false,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const CheckedDark: Story = {
+  args: {
+    size: 'md',
+    label: 'Agree to terms',
+    disabled: false,
+    checked: true,
+  },
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const AllSizesDark: Story = {
+  args: { disabled: false },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Checkbox size="sm" label="Small (20px)" />
+      <Checkbox size="md" label="Medium (44px) — default" />
+      <Checkbox size="lg" label="Large (56px)" />
+    </div>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
+
+export const CheckboxGroupDark: Story = {
+  args: { size: 'md' },
+  render: () => (
+    <fieldset style={{ border: '1px solid #ccc', padding: '16px', borderRadius: '4px' }}>
+      <legend style={{ fontSize: '14px', fontWeight: '700', marginBottom: '12px' }}>
+        Which team do you think it will be?
+      </legend>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <Checkbox label="Team Girl" name="team" value="girl" />
+        <Checkbox label="Team Boy" name="team" value="boy" />
+        <Checkbox label="Surprise me!" name="team" value="surprise" />
+      </div>
+    </fieldset>
+  ),
+  parameters: {
+    globals: {
+      theme: 'dark',
+    },
+  },
+};
