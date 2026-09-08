@@ -1,7 +1,3 @@
-import * as a11yAddonAnnotations from "@storybook/addon-a11y/preview";
-import { setProjectAnnotations } from '@storybook/react-vite';
-import * as projectAnnotations from './preview';
-
-// This is an important step to apply the right configuration when testing your stories.
-// More info at: https://storybook.js.org/docs/api/portable-stories/portable-stories-vitest#setprojectannotations
-setProjectAnnotations([a11yAddonAnnotations, projectAnnotations]);
+// Storybook 10.3+ automatically provisions preview annotations,
+// so this file is kept but can be removed entirely if no custom setup is needed.
+// For now, it's included in the vitest config as a placeholder for future custom setup code.
