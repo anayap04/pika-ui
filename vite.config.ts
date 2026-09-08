@@ -42,26 +42,65 @@ export default defineConfig({
     minify: 'terser'
   },
   test: {
-    projects: [{
-      extends: true,
-      plugins: [
-      // The plugin will run tests for the stories defined in your Storybook config
-      // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-      storybookTest({
-        configDir: path.join(dirname, '.storybook')
-      })],
-      test: {
-        name: 'storybook',
-        browser: {
-          enabled: true,
-          headless: true,
-          provider: playwright({}),
-          instances: [{
-            browser: 'chromium'
-          }]
+    // Coverage is measured over the `unit` project (jsdom). The `storybook`
+    // project is a browser smoke suite and is excluded from the coverage gate.
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'text-summary', 'html', 'lcov'],
+      reportsDirectory: './coverage',
+      include: [
+        'src/components/**/*.{ts,tsx}',
+        'src/tokens/**/*.ts',
+        'src/utils/**/*.ts',
+      ],
+      exclude: [
+        '**/*.stories.tsx',
+        '**/*.test.{ts,tsx}',
+        // Barrel files — re-exports only, no logic. `src/tokens/index.ts` is a
+        // real source module and is intentionally NOT matched here.
+        'src/components/**/index.ts',
+        'src/utils/index.ts',
+        // Deprecated re-export shims — superseded by the atoms/ barrel.
+        'src/components/{Button,Card,Input}.tsx',
+      ],
+      thresholds: {
+        statements: 85,
+        branches: 85,
+        functions: 85,
+        lines: 85,
+      },
+    },
+    projects: [
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, '.storybook'),
+          }),
+        ],
+        test: {
+          name: 'storybook',
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [{ browser: 'chromium' }],
+          },
+          setupFiles: ['.storybook/vitest.setup.ts'],
         },
-        setupFiles: ['.storybook/vitest.setup.ts']
-      }
-    }]
-  }
+      },
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          environment: 'jsdom',
+          globals: true,
+          include: ['src/**/*.test.{ts,tsx}'],
+          setupFiles: ['./src/test/setup.ts'],
+        },
+      },
+    ],
+  },
 });

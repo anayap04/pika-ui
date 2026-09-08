@@ -1,14 +1,11 @@
 name: Build & Publish to NPM
 
+# Push/PR quality checks live in ci.yml. This workflow is the release path:
+# it re-runs the full gate on a version tag, then publishes.
 on:
   push:
-    branches:
-      - main
     tags:
       - 'v*'
-  pull_request:
-    branches:
-      - main
 
 jobs:
   test-and-build:
@@ -17,29 +14,29 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x]
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run linting
         run: npm run lint
-      
+
       - name: Type check
-        run: npx tsc -b
-      
-      - name: Run tests
-        run: npx vitest run
-      
+        run: npm run typecheck
+
+      - name: Unit tests + a11y (sa11y) + coverage (85% threshold enforced)
+        run: npm run test:coverage
+
       - name: Build library
         run: npm run build
       

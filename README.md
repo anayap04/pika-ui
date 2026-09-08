@@ -2,6 +2,9 @@
 
 **A retro arcade design system — 8-bit looks, WCAG 2.2 AAA manners.**
 
+[![CI](https://github.com/anayap10/pika-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/anayap10/pika-ui/actions/workflows/ci.yml)
+![Coverage](https://img.shields.io/badge/coverage-%E2%89%A585%25-brightgreen)
+
 Pika UI is the React component library behind the *Gender Reveal Voting App*. It
 takes the warmth of an old arcade cabinet — hard 4px borders, a pink-and-gold
 palette, `Press Start 2P` / `VT323` lettering, zero border-radius — and holds
@@ -17,11 +20,12 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Build** | ✅ passing | `npm run build` (tsc project refs + Vite 7) and `npm run build-storybook` both clean |
 | **Types** | ✅ passing | `tsc -b`, strict, no errors |
 | **Lint** | ✅ passing | flat ESLint config (`@eslint/js`, `typescript-eslint`, React Hooks, Storybook) — 0 warnings |
-| **Tests** | ✅ 161 / 161 | story smoke tests via `@storybook/addon-vitest` in a real browser (Vitest 4 + Playwright Chromium) |
-| **Accessibility** | 🎯 AAA, both themes | `@storybook/addon-a11y` runs the full WCAG 2.2 rule set **plus** axe `color-contrast-enhanced` (AAA 7:1); every text pairing verified ≥7:1 in light **and** dark; reported per-story, not yet CI-blocking (`a11y.test: 'todo'`) |
+| **Tests** | ✅ passing | **unit tests** (Vitest 4 + jsdom + Testing Library) for every atom, molecule and token module, **`@sa11y/vitest` `toBeAccessible` axe checks** on every component, plus story smoke / a11y tests via `@storybook/addon-vitest` in a real browser (Playwright Chromium) |
+| **Accessibility** | 🎯 AAA, both themes | **CI-blocking** `@sa11y/vitest` axe checks (WCAG 2.1 A/AA base ruleset) on every component in the unit suite — roles, names, label associations, ARIA. Plus `@storybook/addon-a11y` per-story with the full WCAG 2.2 rule set **and** axe `color-contrast-enhanced` (AAA 7:1); every text pairing verified ≥7:1 in light **and** dark (jsdom has no layout, so contrast is checked in the browser project, not the sa11y unit tests) |
 | **Theming** | ✅ light + dark | `src/styles/theme.css` drives `--pk-*` custom properties; components read them via `theme` in `src/tokens`. Switches on `[data-theme]`, `.dark`, or `prefers-color-scheme`. Storybook has a **Theme** toolbar toggle |
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
-| **Coverage** | ➖ none tracked | `@vitest/coverage-v8` installed but no threshold/report configured |
+| **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
+| **CI** | ✅ GitHub Actions | `.github/workflows/ci.yml` runs lint → types → unit tests + coverage → build, plus a Storybook browser-test job, on every push to `main` and PR |
 | **Release** | 🚧 pre-release | `v0.0.0`, `private`, no published package, no CHANGELOG |
 | **Docs** | ✅ living | Storybook is the source of truth — `Overview/Introduction` homepage + autodocs on every component |
 
@@ -35,16 +39,13 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 
 ### Known gaps / tech debt
 
-- **Standalone `*.test.tsx` files are not executed.** The Vitest config defines a
-  single `storybook` project scoped to `*.stories.*` / `*.mdx`, and there is no
-  `test` npm script. The per-component `*.test.tsx` stubs are vestigial — real
-  coverage lives in the story smoke tests. Add a second Vitest project (or a
-  `test` script) if unit tests are wanted.
 - **Working tree mid-migration.** Components are being moved from flat files
   (`atoms/Badge.tsx`) into folders (`atoms/Badge/`); several folders are still
   untracked. Commit the reorg before building on top of it.
-- **a11y is advisory, not enforced.** Flip `a11y.test` to `'error'` in
-  `.storybook/preview.tsx` now that both themes are AAA-clean, to gate CI.
+- **Storybook a11y is still advisory.** Structural a11y is now CI-blocking via the
+  `@sa11y/vitest` unit tests, but `@storybook/addon-a11y` itself stays at
+  `a11y.test: 'todo'` in `.storybook/preview.tsx`. Flip it to `'error'` to also
+  gate the browser project on the AAA `color-contrast-enhanced` check.
 - **Chromatic baselines need re-approval** — the theme refactor changed the
   default ground (pink → *manual paper*), added a per-story surface wrapper, and
   re-tuned the `*Strong` colours for AAA on paper.
@@ -71,8 +72,57 @@ npm run storybook      # dev — http://localhost:6006
 | `npm run dev` | Vite playground app (`src/main.tsx`) |
 | `npm run build` | type-check + library build → `dist/` |
 | `npm run lint` | ESLint over the repo |
-| `npx vitest run` | run the story smoke + a11y test suite |
+| `npm run typecheck` | `tsc -b` project-reference type-check |
+| `npm test` | run the unit test suite (Vitest `unit` project, jsdom) |
+| `npm run test:watch` | unit tests in watch mode |
+| `npm run test:coverage` | unit tests + v8 coverage report (fails under 85%) |
+| `npm run test:a11y` | just the `@sa11y/vitest` accessibility matrix ([src/test/a11y.test.tsx](src/test/a11y.test.tsx)) |
+| `npm run test:storybook` | story smoke + a11y suite in a real browser (needs Playwright) |
+| `npm run test:all` | both Vitest projects (`unit` + `storybook`) |
 | `npm run chromatic` | push a visual-regression build to Chromatic |
+
+---
+
+## Testing
+
+Two Vitest **projects** run from one config ([vite.config.ts](vite.config.ts)):
+
+| Project | Environment | Scope | Command |
+| --- | --- | --- | --- |
+| `unit` | jsdom + `@testing-library/react` | `src/**/*.test.{ts,tsx}` — behaviour, props, variants, a11y wiring | `npm test` |
+| `storybook` | Playwright Chromium | every `*.stories.tsx` — render smoke + `@storybook/addon-a11y` | `npm run test:storybook` |
+
+### Accessibility (`@sa11y/vitest`)
+
+[src/test/setup.ts](src/test/setup.ts) calls `setup()` from
+[`@sa11y/vitest`](https://www.npmjs.com/package/@sa11y/vitest), which registers the
+async `toBeAccessible` matcher (axe-core, WCAG 2.1 A/AA base ruleset).
+[src/test/a11y.test.tsx](src/test/a11y.test.tsx) renders every atom and molecule in
+representative configurations and asserts:
+
+```tsx
+render(<Toggle label="Dark mode" />);
+await expect(document.body).toBeAccessible();
+```
+
+These run inside the `unit` project, so **CI fails on a structural a11y regression**
+(missing label, bad role, broken ARIA). jsdom has no layout engine, so
+colour-contrast rules do not run here — AAA contrast stays covered by
+`@storybook/addon-a11y` (`color-contrast-enhanced`) in the browser project.
+The matcher's type is declared in [src/test/sa11y.d.ts](src/test/sa11y.d.ts).
+
+### Coverage
+
+Measured over the `unit` project only (`src/components`, `src/tokens`,
+`src/utils`), reported as `text` / `html` / `lcov` into `coverage/`, and gated at
+**85%** for statements, branches, functions and lines. Barrel `index.ts` files and
+the deprecated `components/{Button,Card,Input}.tsx` shims are excluded.
+
+```bash
+npm run test:coverage        # -> coverage/index.html
+```
+
+CI runs the same gate — see [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
 ---
 
@@ -113,11 +163,15 @@ src/
     theme.css       --pk-* colour tokens (light + dark) + a11y baseline
     fonts.ts        self-hosted @fontsource webfonts
   tokens/           colour + type + spacing tokens, and the `theme` var accessor
+  test/
+    setup.ts        jest-dom + `@sa11y/vitest` matchers, Testing Library cleanup (`unit` project)
+    a11y.test.tsx   `toBeAccessible` axe checks for every component
+    sa11y.d.ts      `toBeAccessible` matcher type augmentation
 design-tokens.json  stale v3 export — superseded by src/tokens + src/styles/theme.css
 ```
 
-Each component folder is `Component.tsx` + `Component.stories.tsx` + `index.ts`
-(+ an optional `Component.test.tsx`).
+Each component folder is `Component.tsx` + `Component.stories.tsx` +
+`Component.test.tsx` + `index.ts`.
 
 ---
 
