@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Input } from './Input';
-import { theme } from '../../../tokens';
+import { Button } from '../Button';
+import { theme, fontFamilies } from '../../../tokens';
 
 const meta = {
   title: 'Atoms/Input',
@@ -178,28 +179,17 @@ export const FormIntegration: Story = {
             width: '100%',
             minHeight: '100px',
             padding: '8px 16px',
-            border: '4px solid #000',
+            border: `4px solid ${theme.border}`,
             borderRadius: '0px',
-            fontFamily: "'Nunito', sans-serif",
+            fontFamily: fontFamilies.body,
             fontSize: '14px',
+            color: theme.input,
+            backgroundColor: theme.inputBackground,
             boxSizing: 'border-box',
           }}
         />
       </div>
-      <button
-        style={{
-          padding: '12px 24px',
-          backgroundColor: '#87214b',
-          color: '#fff',
-          border: '4px solid #000',
-          fontSize: '12px',
-          letterSpacing: '0.05em',
-          cursor: 'pointer',
-          fontFamily: "'Press Start 2P', monospace",
-        }}
-      >
-        SUBMIT
-      </button>
+      <Button type="submit">SUBMIT</Button>
     </form>
   ),
   parameters: {

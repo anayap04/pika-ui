@@ -56,11 +56,12 @@ jobs:
     needs: test-and-build
     runs-on: ubuntu-latest
     # Only publish on version tags (v0.1.0, v1.0.0, etc.)
-    if: startsWith(github.ref, 'refs/tags/v') && github.event_name == 'push'
+    if: startsWith(github.ref, 'refs/tags/v')
     
-    # Permissions for creating GitHub releases
+    # Permissions for publishing to NPM and creating GitHub releases
     permissions:
       contents: write
+      id-token: write
     
     steps:
       - name: Checkout code
@@ -85,17 +86,23 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Create GitHub Release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
           body: |
-            Published to NPM: https://www.npmjs.com/package/@anayap10/pika-ui
+            # Pika UI ${{ github.ref_name }}
             
-            ## Changes
+            Published to NPM: https://www.npmjs.com/package/@anayap10/pika-ui/v/${{ github.ref_name }}
             
-            See the commit log for details: https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}
+            ## Install
+            
+            ```bash
+            npm install @anayap10/pika-ui@${{ github.ref_name }}
+            ```
+            
+            See the [CHANGELOG](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md) or [commit log](https://github.com/${{ github.repository }}/commits/${{ github.ref_name }}) for details.
           draft: false
           prerelease: false
