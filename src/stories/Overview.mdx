@@ -1,0 +1,237 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Overview/Introduction" />
+
+<div className="pika-home">
+
+<header className="pika-hero">
+  <p className="pika-kicker">◆ Insert coin ◆</p>
+  <h1>PIKA&nbsp;UI</h1>
+  <p className="pika-tagline">A retro arcade design system — 8-bit looks, WCAG&nbsp;2.2&nbsp;AAA manners.</p>
+  <div className="pika-hero-tags">
+    <span>Pixel borders</span>
+    <span>Zero radius</span>
+    <span>CRT type</span>
+    <span>AAA contrast</span>
+  </div>
+</header>
+
+## What is Pika UI?
+
+Pika UI is the component library behind the **Gender Reveal Voting App**. It takes
+the warmth of an old arcade cabinet — hard 4px borders, a pink-and-gold palette,
+`Press Start 2P` display type — and holds every one of those choices to the
+**AAA level of WCAG 2.2**: 7:1 text contrast, 3px focus rings, 44px tap targets,
+and full reduced-motion support.
+
+<div className="pika-stats">
+  <div className="pika-stat"><strong>8</strong><span>Atoms</span></div>
+  <div className="pika-stat"><strong>5</strong><span>Molecules</span></div>
+  <div className="pika-stat"><strong>3</strong><span>Type faces</span></div>
+  <div className="pika-stat"><strong>AAA</strong><span>WCAG 2.2 target</span></div>
+</div>
+
+## Design principles
+
+<div className="pika-cards">
+  <article className="pika-card">
+    <h3>Pixel, not plastic</h3>
+    <p>Every surface has a hard 4px border and 0px radius. Depth comes from
+    stacked box-shadows — the stepped “8-bit” look — never from blur.</p>
+  </article>
+  <article className="pika-card">
+    <h3>Readable retro</h3>
+    <p><code>Press Start 2P</code> is reserved for H1 and hero CTAs. UI text runs
+    on <code>VT323</code> (CRT terminal) and body copy on <code>Nunito</code>, so
+    sentences stay legible.</p>
+  </article>
+  <article className="pika-card">
+    <h3>Accessible by default</h3>
+    <p>Components ship with AAA colour pairings, visible focus, large hit areas
+    and semantic markup. The a11y addon runs the enhanced contrast check on every
+    story.</p>
+  </article>
+  <article className="pika-card">
+    <h3>Token-driven</h3>
+    <p>Colour, spacing, type and motion all come from <code>src/tokens</code>,
+    mirrored in <code>design-tokens.json</code>. Change a token, not a component.</p>
+  </article>
+</div>
+
+## Foundations
+
+### Type
+
+| Face | Role | Used for |
+| --- | --- | --- |
+| **Press Start 2P** | Display | H1, hero title, primary CTA |
+| **VT323** | Subheading | H2–H4, buttons, labels, counters |
+| **Nunito** | Body | Paragraphs, inputs, long-form copy |
+
+### Colour
+
+<div className="pika-swatches">
+  <div className="pika-swatch" style={{ background: '#9c2957', color: '#fff' }}>Primary&nbsp;7.3:1</div>
+  <div className="pika-swatch" style={{ background: '#1a4fb0', color: '#fff' }}>Secondary&nbsp;7.5:1</div>
+  <div className="pika-swatch" style={{ background: '#ffd700', color: '#3d1a52' }}>Accent&nbsp;10.2:1</div>
+  <div className="pika-swatch" style={{ background: '#b00030', color: '#fff' }}>Destructive&nbsp;7.3:1</div>
+  <div className="pika-swatch" style={{ background: '#faf3e3', color: '#241026', borderStyle: 'dashed' }}>Paper&nbsp;15:1</div>
+</div>
+
+Decorative tints (`#fc5c94`, `#5c94fc`, …) are for fills and art only. Anything
+carrying text uses the `*Strong` token, each verified at ≥7:1.
+
+### Spacing &amp; radius
+
+4 · 8 · 16 · 24 · 32&nbsp;px on a hard grid. All radii are **0px** — pixel art has
+no rounded corners.
+
+## Accessibility commitments
+
+<div className="pika-a11y">
+  <div><strong>SC 1.4.6 — Contrast (AAA)</strong><span>Body text ≥ 7:1, large text ≥ 4.5:1. Enforced in CI via <code>color-contrast-enhanced</code>.</span></div>
+  <div><strong>SC 2.4.7 / 2.4.11 — Focus Visible</strong><span>3px solid ring, 2px offset, never clipped by sticky UI.</span></div>
+  <div><strong>SC 2.5.8 — Target Size</strong><span>Interactive controls are at least 44×44px (spec minimum is 24px).</span></div>
+  <div><strong>SC 2.2.2 — Pause, Stop, Hide</strong><span><code>prefers-reduced-motion</code> disables pixel-float, pulse, blink and the CRT scanline overlay.</span></div>
+  <div><strong>SC 1.3.1 — Info &amp; Relationships</strong><span>Semantic elements, real labels, grouped form controls (<code>FormField</code>, <code>RadioGroup</code>).</span></div>
+  <div><strong>SC 1.4.11 — Non-text Contrast</strong><span>Borders, switch tracks and focus rings all clear 3:1.</span></div>
+</div>
+
+## Getting around
+
+- **Foundations** — tokens for colour, type, spacing and motion.
+- **Atoms** — Button, Card, Input, Badge, Checkbox, Radio, Toggle, Tags, Typography.
+- **Molecules** — FormField, RadioGroup, CheckboxGroup, ButtonGroup, CardSection.
+- Use the **Accessibility** tab in the addons panel to see the live axe report,
+  and the **Backgrounds** toolbar to check components on <em>Manual paper (AAA)</em>,
+  pixel pink, or arcade night.
+
+<footer className="pika-foot">Pika UI · retro design system · built with Storybook {`→`} press <kbd>/</kbd> to search</footer>
+
+</div>
+
+<style>{`
+  .pika-home {
+    font-family: 'Nunito', system-ui, sans-serif;
+    color: #241026;
+    max-width: 900px;
+  }
+  .pika-home h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 15px;
+    margin: 2.6rem 0 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 4px solid #241026;
+  }
+  .pika-home h3 {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 1.5rem;
+    margin: 1.4rem 0 0.5rem;
+  }
+  .pika-home p, .pika-home li, .pika-home td, .pika-home th { font-size: 16px; line-height: 1.65; }
+  .pika-home code {
+    background: #f2e7d0;
+    border: 1px solid #241026;
+    padding: 0.05em 0.35em;
+    font-family: 'VT323', monospace;
+    font-size: 1.05em;
+  }
+  .pika-home table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; }
+  .pika-home th, .pika-home td { border: 2px solid #241026; padding: 0.5rem 0.75rem; text-align: left; }
+  .pika-home th { background: #241026; color: #faf3e3; font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .pika-hero {
+    background: #e8b4d9;
+    border: 4px solid #241026;
+    box-shadow: 8px 8px 0 0 #241026;
+    padding: 2.4rem 2rem;
+    margin: 0.5rem 0 2rem;
+    text-align: center;
+  }
+  .pika-hero h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(28px, 6vw, 46px);
+    margin: 0.4rem 0;
+    color: #241026;
+    text-shadow: 4px 4px 0 #fc5c94;
+  }
+  .pika-kicker { font-family: 'VT323', monospace; font-size: 1.3rem; letter-spacing: 0.2em; margin: 0; color: #6b1f4d; }
+  .pika-tagline { max-width: 34ch; margin: 0.6rem auto 1.2rem; font-weight: 700; }
+  .pika-hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .pika-hero-tags span {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #faf3e3;
+    border: 2px solid #241026;
+    padding: 0.25rem 0.7rem;
+    font-size: 1rem;
+  }
+
+  .pika-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.2rem 0; }
+  .pika-stat {
+    border: 4px solid #241026;
+    background: #fff;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 4px 4px 0 0 #241026;
+  }
+  .pika-stat strong { display: block; font-family: 'Press Start 2P', monospace; font-size: 20px; color: #9c2957; }
+  .pika-stat span { font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.1rem; }
+
+  .pika-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+  .pika-card {
+    border: 4px solid #241026;
+    background: #fff;
+    padding: 1rem 1.1rem;
+    box-shadow: 6px 6px 0 0 #241026;
+  }
+  .pika-card h3 { margin-top: 0; }
+  .pika-card p { margin-bottom: 0; }
+
+  .pika-swatches { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.6rem 0; }
+  .pika-swatch {
+    flex: 1 1 150px;
+    border: 3px solid #241026;
+    padding: 0.9rem 0.8rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .pika-a11y { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+  .pika-a11y div {
+    border-left: 6px solid #1a4fb0;
+    background: #fff;
+    border-top: 2px solid #241026;
+    border-right: 2px solid #241026;
+    border-bottom: 2px solid #241026;
+    padding: 0.7rem 0.9rem;
+  }
+  .pika-a11y strong { display: block; font-family: 'VT323', monospace; font-size: 1.15rem; letter-spacing: 0.03em; margin-bottom: 0.2rem; }
+  .pika-a11y span { font-size: 14px; line-height: 1.55; display: block; }
+
+  .pika-foot {
+    margin: 2.5rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 4px dashed #241026;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .pika-foot kbd {
+    border: 2px solid #241026;
+    background: #faf3e3;
+    padding: 0 0.4em;
+    font-family: 'VT323', monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pika-home * { transition: none !important; animation: none !important; }
+  }
+`}</style>

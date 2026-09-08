@@ -1,11 +1,21 @@
+/* ============================================================
+   PIKA UI — global baseline for the pixel-art design system
+   Fonts are loaded from ./styles/fonts (bundled @fontsource).
+   ============================================================ */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  --pika-font-display: 'Press Start 2P', 'VT323', monospace;
+  --pika-font-subheading: 'VT323', 'Press Start 2P', monospace;
+  --pika-font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  font-family: var(--pika-font-body);
+  line-height: 1.6;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* #45195e on the #e8b4d9 app background = 7.7:1 (WCAG 2.2 AAA, SC 1.4.6) */
+  color: #45195e;
+  background-color: #e8b4d9;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,56 +23,75 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
+/* Pixel-art type scale: hard corners, one weight for the pixel faces. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--pika-font-display);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2rem;
+  line-height: 1.5;
+}
+
+p {
+  font-family: var(--pika-font-body);
+  line-height: 1.6;
+}
+
+a {
+  /* #142d70 on the #e8b4d9 app background = 7.3:1 (WCAG 2.2 AAA, SC 1.4.6) */
+  color: #142d70;
+  font-weight: 700;
+  text-decoration: underline;
+}
+a:hover {
+  color: #45195e;
+}
+
+/* Sharp corners everywhere — the pixel aesthetic has no rounded edges. */
+button,
+input,
+select,
+textarea {
+  border-radius: 0;
+  font-family: inherit;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-family: var(--pika-font-display);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+/* Focus is always visible and never obscured (WCAG 2.2 SC 2.4.7 / 2.4.11). */
+:focus-visible {
+  /* 3px ring, ≥3:1 against both the pink page and white surfaces (SC 1.4.11) */
+  outline: 3px solid #45195e;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

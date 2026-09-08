@@ -1,5 +1,7 @@
-// Design tokens aligned with design-tokens.json (WCAG 2.2 AA compliant)
+// Design tokens aligned with design-tokens.json
 // Light theme as default, dark theme via CSS vars
+// Text/background pairings used by the atoms target WCAG 2.2 AAA (1.4.6):
+// 7:1 for body-size text, 4.5:1 for large text.
 
 export const colors = {
   light: {
@@ -8,16 +10,16 @@ export const colors = {
     card: '#ffffff',
     cardForeground: '#6b2d8f',
     primary: '#fc5c94',
-    primaryStrong: '#c93870',       // For text on primary fills
+    primaryStrong: '#9c2957',       // Fill under white text — 7.3:1 (AAA)
     primaryForeground: '#ffffff',
     secondary: '#5c94fc',
-    secondaryStrong: '#2f6fe0',     // For text on secondary fills
+    secondaryStrong: '#1a4fb0',     // Fill under white text — 7.5:1 (AAA)
     secondaryForeground: '#ffffff',
     accent: '#ffd700',
     accentStrong: '#ffd700',
-    accentForeground: '#6b2d8f',
+    accentForeground: '#3d1a52',    // Dark plum on gold — 10.2:1 (AAA)
     destructive: '#ff0044',
-    destructiveStrong: '#db1548',   // For text on destructive fills
+    destructiveStrong: '#b00030',   // Fill under white text — 7.3:1 (AAA)
     destructiveForeground: '#ffffff',
     muted: '#f5f5f5',
     mutedForeground: '#4d4d4d',     // 4.8:1 contrast on pink bg (AA pass)
@@ -79,9 +81,9 @@ export const fontSizes = {
 };
 
 export const fontFamilies = {
-  display: "'Press Start 2P', cursive",      // H1, hero, big CTAs
-  subheading: "'VT323', monospace",          // H2-H4, buttons, labels
-  body: "'Nunito', sans-serif",              // Paragraphs, inputs, body text
+  display: "'Press Start 2P', 'VT323', monospace",           // H1, hero, buttons, big CTAs
+  subheading: "'VT323', 'Press Start 2P', monospace",        // H2-H4, labels, captions
+  body: "'Nunito', system-ui, -apple-system, sans-serif",    // Paragraphs, inputs, body text
 };
 
 export const fontWeights = {
