@@ -2,7 +2,7 @@
 
 **A retro arcade design system — 8-bit looks, WCAG 2.2 AAA manners.**
 
-[![CI](https://github.com/anayap10/pika-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/anayap10/pika-ui/actions/workflows/ci.yml)
+[![CI](https://github.com/anayap04/pika-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/anayap04/pika-ui/actions/workflows/ci.yml)
 ![Coverage](https://img.shields.io/badge/coverage-%E2%89%A585%25-brightgreen)
 
 Pika UI is the React component library behind the *Gender Reveal Voting App*. It
@@ -26,7 +26,7 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
 | **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
 | **CI** | ✅ GitHub Actions | `.github/workflows/ci.yml` runs lint → types → unit tests + coverage → build, plus a Storybook browser-test job, on every push to `main` and PR |
-| **Release** | 🚧 pre-release | `v0.0.0`, `private`, no published package, no CHANGELOG |
+| **Release** | ✅ v0.1.0 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
 | **Docs** | ✅ living | Storybook is the source of truth — `Overview/Introduction` homepage + autodocs on every component |
 
 ### Component inventory
@@ -39,10 +39,7 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 
 ### Known gaps / tech debt
 
-- **Working tree mid-migration.** Components are being moved from flat files
-  (`atoms/Badge.tsx`) into folders (`atoms/Badge/`); several folders are still
-  untracked. Commit the reorg before building on top of it.
-- **Storybook a11y is still advisory.** Structural a11y is now CI-blocking via the
+- **Storybook a11y is still advisory.** Structural a11y is CI-blocking via the
   `@sa11y/vitest` unit tests, but `@storybook/addon-a11y` itself stays at
   `a11y.test: 'todo'` in `.storybook/preview.tsx`. Flip it to `'error'` to also
   gate the browser project on the AAA `color-contrast-enhanced` check.
@@ -53,14 +50,25 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
   `src/tokens/index.ts` + `src/styles/theme.css` are now the source of truth.
 - **`colors.dark` has no dedicated stories** — dark mode is exercised via the
   Storybook Theme toggle rather than fixed dark stories.
+- **Phase 4 (Organisms)** — Complex composite components planned for future releases.
 
 ---
 
 ## Getting started
 
-**Requirements:** Node.js `20.19+` or `22.12+` (Storybook 10).
+**Requirements:** Node.js `22.12+` (Storybook 10).
+
+### From NPM (as a consumer)
 
 ```bash
+npm install @anayap10/pika-ui
+```
+
+### Local development (contributing to Pika UI)
+
+```bash
+git clone https://github.com/anayap04/pika-ui.git
+cd pika-ui
 npm install
 npm run storybook      # dev — http://localhost:6006
 ```
@@ -69,8 +77,7 @@ npm run storybook      # dev — http://localhost:6006
 | --- | --- |
 | `npm run storybook` | Storybook dev server (component workbench + docs) |
 | `npm run build-storybook` | static Storybook build → `storybook-static/` |
-| `npm run dev` | Vite playground app (`src/main.tsx`) |
-| `npm run build` | type-check + library build → `dist/` |
+| `npm run build` | type-check + library build (ESM + CommonJS) → `dist/` |
 | `npm run lint` | ESLint over the repo |
 | `npm run typecheck` | `tsc -b` project-reference type-check |
 | `npm test` | run the unit test suite (Vitest `unit` project, jsdom) |
@@ -80,6 +87,7 @@ npm run storybook      # dev — http://localhost:6006
 | `npm run test:storybook` | story smoke + a11y suite in a real browser (needs Playwright) |
 | `npm run test:all` | both Vitest projects (`unit` + `storybook`) |
 | `npm run chromatic` | push a visual-regression build to Chromatic |
+| `npm publish` | publish to NPM (CI automation via GitHub Actions on version tags) |
 
 ---
 
@@ -151,12 +159,16 @@ CI runs the same gate — see [`.github/workflows/ci.yml`](.github/workflows/ci.
 ## Project structure
 
 ```
+.github/
+  workflows/
+    ci.yml          Lint, type-check, unit tests, coverage gate, build on every push/PR
+    publish.yml     Test → Build → Publish to NPM on version tags
 .storybook/         Storybook config — retro AAA manager theme, a11y, light/dark toggle
 src/
   components/
     atoms/          Button, Card, Input, Typography, Badge, Checkbox, Radio, Toggle, Tags
     molecules/      FormField, RadioGroup, CheckboxGroup, ButtonGroup, CardSection
-    organisms/      (planned)
+    organisms/      (planned — Phase 4)
   stories/
     Overview.mdx    design-system homepage
   styles/
@@ -167,6 +179,7 @@ src/
     setup.ts        jest-dom + `@sa11y/vitest` matchers, Testing Library cleanup (`unit` project)
     a11y.test.tsx   `toBeAccessible` axe checks for every component
     sa11y.d.ts      `toBeAccessible` matcher type augmentation
+.nvmrc              Node version lock (22.12.0)
 design-tokens.json  stale v3 export — superseded by src/tokens + src/styles/theme.css
 ```
 
