@@ -9,9 +9,38 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
+// Library build entry point
+const libEntry = path.resolve(dirname, 'src/components/index.ts');
+
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [react()],
+  build: {
+    lib: {
+      entry: libEntry,
+      name: 'PikaUI',
+      fileName: (format) => {
+        if (format === 'es') return 'index.js';
+        if (format === 'cjs') return 'index.cjs';
+        return 'index.umd.js';
+      },
+      formats: ['es', 'cjs']
+    },
+    rollupOptions: {
+      // Externalize dependencies that shouldn't be bundled
+      external: ['react', 'react-dom'],
+      output: {
+        // Provide global variables to use in the UMD build
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
+    },
+    copyPublicDir: false,
+    sourcemap: true,
+    minify: 'terser'
+  },
   test: {
     projects: [{
       extends: true,
