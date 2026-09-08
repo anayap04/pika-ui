@@ -95,6 +95,8 @@ export const WithoutLabel: Story = {
     size: 'md',
     disabled: false,
     checked: false,
+    // No visible <label>, so the control still needs an accessible name.
+    'aria-label': 'Select this option',
   },
 };
 

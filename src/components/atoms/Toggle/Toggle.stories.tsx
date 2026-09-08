@@ -88,6 +88,8 @@ export const WithoutLabel: Story = {
     size: 'md',
     disabled: false,
     checked: false,
+    // No visible <label>, so the switch still needs an accessible name.
+    'aria-label': 'Enable notifications',
   },
 };
 

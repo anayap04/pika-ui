@@ -62,8 +62,10 @@ export const Large: Story = {
 export const WithValue: Story = {
   args: {
     size: 'md',
-    value: 'Miguel Angel Sandoval',
+    defaultValue: 'Miguel Angel Sandoval',
     disabled: false,
+    // Standalone input with no visible <label> — needs an accessible name.
+    'aria-label': 'Full name',
   },
   parameters: {
     docs: {
@@ -234,8 +236,10 @@ export const AllSizesDark: Story = {
 export const WithValueDark: Story = {
   args: {
     size: 'md',
-    value: 'Miguel Angel Sandoval',
+    defaultValue: 'Miguel Angel Sandoval',
     disabled: false,
+    // Standalone input with no visible <label> — needs an accessible name.
+    'aria-label': 'Full name',
   },
   parameters: {
     globals: {
