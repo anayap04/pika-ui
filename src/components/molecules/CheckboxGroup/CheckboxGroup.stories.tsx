@@ -111,6 +111,24 @@ export const PreferenceSelection: Story = {
   render: (args) => <ControlledCheckboxGroup {...args} />,
 };
 
+export const Perks: Story = {
+  args: {
+    values: [],
+    options: [
+      { value: 'sfx', label: 'Sound effects' },
+      { value: 'crt', label: 'CRT overlay' },
+    ],
+  },
+  render: (args) => <ControlledCheckboxGroup {...args} />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Fully controlled multi-selection: each change returns the complete next values array.',
+      },
+    },
+  },
+};
+
 export const AllSizes: Story = {
   args: {},
   render: () => (

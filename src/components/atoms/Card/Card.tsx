@@ -1,4 +1,4 @@
-import { theme, spacing } from '../../../tokens';
+import { theme, spacing, shadows, transitions } from '../../../tokens';
 import React from 'react';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,8 +18,9 @@ const paddingStyles = {
   },
 };
 
-// Pixel-art cards: hard 4px borders, zero radius. The elevated variant stacks
-// a second offset border via box-shadow for the stepped "8-bit" depth effect.
+// Pixel-art cards: hard 4px borders, zero radius. The elevated variant adds the
+// stepped "8-bit" depth — a doubled outline plus one 8px corner step — via the
+// shared `--pk-shadow-pixel-elevated` token. Never a blur, never a soft ramp.
 const variantStyles = {
   default: {
     background: theme.card,
@@ -30,7 +31,7 @@ const variantStyles = {
     background: theme.card,
     border: `4px solid ${theme.border}`,
     borderRadius: 0,
-    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}, 8px 8px 0 0 ${theme.border}`,
+    boxShadow: shadows.pixelElevated,
   },
 };
 
@@ -43,6 +44,9 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       style={{
+        // Colour-only transition — smooths the border/shadow when the theme
+        // flips (black outline ↔ neon gold); no transform, ever.
+        transition: transitions.fast,
         ...variantStyles[variant],
         ...paddingStyles[padding],
         ...style,

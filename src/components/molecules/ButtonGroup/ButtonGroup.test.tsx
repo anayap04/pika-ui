@@ -24,6 +24,16 @@ describe('ButtonGroup', () => {
     expect(screen.getByRole('group')).toHaveStyle({ flexDirection: 'row', flexWrap: 'wrap' });
   });
 
+  it('defaults to the tightest gap that clears button pixel shadows', () => {
+    render(
+      <ButtonGroup>
+        <button>One</button>
+        <button>Two</button>
+      </ButtonGroup>,
+    );
+    expect(screen.getByRole('group')).toHaveStyle({ gap: '8px' });
+  });
+
   it('switches to a non-wrapping column when vertical', () => {
     render(
       <ButtonGroup orientation="vertical">

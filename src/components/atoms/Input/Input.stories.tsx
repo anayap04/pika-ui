@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Input } from './Input';
 import { Button } from '../Button';
+import { FormField } from '../../molecules/FormField';
 import { theme, fontFamilies } from '../../../tokens';
 
 const meta = {
@@ -159,12 +160,9 @@ export const FormIntegration: Story = {
   args: { size: 'md' },
   render: () => (
     <form style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
-      <div>
-        <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', marginBottom: '8px' }}>
-          Name
-        </label>
-        <Input size="md" placeholder="Full name" />
-      </div>
+      <FormField label="Your name" required hint="Shown next to your vote">
+        <Input placeholder="Type here..." />
+      </FormField>
       <div>
         <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', marginBottom: '8px' }}>
           Email

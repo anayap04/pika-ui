@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react-vite'
 import '../src/styles/fonts'
-import '../src/styles/theme.css'
+import '../src/tokens/index.css'
 import pikaTheme from './theme'
 import { withTheme } from './withTheme'
 

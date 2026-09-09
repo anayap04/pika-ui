@@ -1,5 +1,5 @@
 import React from 'react';
-import { fontFamilies, fontSizes, fontWeights, theme } from '../../../tokens';
+import { fontFamilies, fontSizes, fontWeights, letterSpacings, theme } from '../../../tokens';
 
 export interface TextProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: 'body' | 'subheading';
@@ -42,7 +42,11 @@ export const Text: React.FC<TextProps> = ({
       style={{
         fontFamily: fontFamilyMap[variant],
         fontSize: sizeMap[size],
-        fontWeight: fontWeights[weight],
+        fontWeight: variant === 'subheading' ? fontWeights.normal : fontWeights[weight],
+        ...(variant === 'subheading' && {
+          textTransform: 'uppercase',
+          letterSpacing: letterSpacings.caps,
+        }),
         color: colorMap[color],
         ...style,
       }}

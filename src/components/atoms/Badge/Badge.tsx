@@ -1,4 +1,12 @@
-import { theme, spacing, fontFamilies, fontWeights, radii } from '../../../tokens';
+import {
+  theme,
+  spacing,
+  fontFamilies,
+  fontWeights,
+  radii,
+  transitions,
+  letterSpacings,
+} from '../../../tokens';
 import React from 'react';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -64,9 +72,14 @@ export const Badge: React.FC<BadgeProps> = ({
     <span
       style={{
         fontFamily: fontFamilies.subheading,
+        // VT323 badges are set in caps with a little tracking (the type spec:
+        // "labels, badges and counters, upper case with 0.04–0.2em tracking").
+        textTransform: 'uppercase',
+        letterSpacing: letterSpacings.caps,
         display: 'inline-block',
         whiteSpace: 'nowrap',
         borderRadius: radii.sm,
+        transition: transitions.fast,
         ...variantStyles[variant],
         ...sizeStyles[size],
         ...style,

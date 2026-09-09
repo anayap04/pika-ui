@@ -34,8 +34,8 @@ export const WithHint: Story = {
 
 export const Required: Story = {
   render: () => (
-    <FormField label="Full Name" required>
-      <Input placeholder="Enter your full name" />
+    <FormField label="Your name" required>
+      <Input placeholder="First and last" />
     </FormField>
   ),
 };
@@ -44,6 +44,14 @@ export const WithError: Story = {
   render: () => (
     <FormField label="Username" error="Username already taken" required>
       <Input placeholder="Choose a username" />
+    </FormField>
+  ),
+};
+
+export const NumericValidation: Story = {
+  render: () => (
+    <FormField label="Guess the weight" required error="Numbers only, please">
+      <Input inputMode="numeric" />
     </FormField>
   ),
 };
@@ -100,7 +108,7 @@ export const LabelVariations: Story = {
       <FormField label="With Hint" hint="Enter a valid email address">
         <Input placeholder="email@example.com" />
       </FormField>
-      <FormField label="With Error" error="This field has an error">
+      <FormField label="With Error" error="Something's not right here">
         <Input placeholder="Something went wrong" />
       </FormField>
     </div>

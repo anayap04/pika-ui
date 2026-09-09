@@ -7,4 +7,4 @@ export { Badge, type BadgeProps } from './Badge';
 export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Radio, type RadioProps } from './Radio';
 export { Toggle, type ToggleProps } from './Toggle';
-export { Tags, type TagsProps } from './Tags';
+export { Tag, type TagProps, Tags, type TagsProps } from './Tags';

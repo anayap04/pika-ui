@@ -28,6 +28,13 @@ describe('CheckboxGroup', () => {
     expect(onChange).toHaveBeenCalledWith(['a']);
   });
 
+  it('emits the complete next values array when adding a selection', async () => {
+    const onChange = vi.fn();
+    render(<CheckboxGroup options={options} values={['b']} onChange={onChange} />);
+    await userEvent.click(screen.getByLabelText('Apple'));
+    expect(onChange).toHaveBeenCalledWith(['b', 'a']);
+  });
+
   it('removes a value on uncheck', async () => {
     const onChange = vi.fn();
     render(<CheckboxGroup options={options} values={['a', 'b']} onChange={onChange} />);

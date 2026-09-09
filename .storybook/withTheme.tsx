@@ -4,7 +4,7 @@ import type { Decorator } from '@storybook/react-vite'
 /**
  * Paints the active theme's ground behind every story and flips the
  * `data-theme` attribute on <html> so the `--pk-*` custom properties (and the
- * `::placeholder` / `:focus-visible` rules in src/styles/theme.css) resolve to
+ * `::placeholder` / `:focus-visible` rules in src/tokens/base.css) resolve to
  * the right theme. Wired up in preview.tsx.
  */
 const ThemeSurface = ({

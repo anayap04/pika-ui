@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { CardSection } from './CardSection';
+import { theme } from '../../../tokens';
 
 describe('CardSection', () => {
   it('always renders its children', () => {
@@ -22,6 +23,16 @@ describe('CardSection', () => {
   it('renders the footer band when a footer node is passed', () => {
     render(<CardSection footer={<span>Foot</span>}>Body</CardSection>);
     expect(screen.getByText('Foot')).toBeInTheDocument();
+  });
+
+  it('uses the muted token for default header and footer bands', () => {
+    render(
+      <CardSection header={<span>Head</span>} footer={<span>Foot</span>}>
+        Body
+      </CardSection>,
+    );
+    expect(screen.getByText('Head').parentElement).toHaveStyle({ backgroundColor: theme.muted });
+    expect(screen.getByText('Foot').parentElement).toHaveStyle({ backgroundColor: theme.muted });
   });
 
   it('applies a custom header background colour', () => {

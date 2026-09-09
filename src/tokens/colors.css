@@ -1,0 +1,132 @@
+/* ============================================================
+   PIKA UI — colour tokens (--pk-*)
+   The JS accessor in src/tokens/index.ts reads these same names.
+   Every text pairing is verified WCAG 2.2 AAA (SC 1.4.6: 7:1 body,
+   4.5:1 large) in BOTH themes. Borders / rings / switch tracks
+   clear SC 1.4.11 (3:1).
+   The bare --pk-primary / -secondary / -accent / -destructive tints
+   are DECORATIVE FILLS ONLY (2-4:1). Text always uses *-strong.
+
+   Theme activation, in priority order:
+     :root[data-theme="dark"] / .dark        explicit opt-in
+     :root[data-theme="light"]               explicit opt-out (wins over OS)
+     @media (prefers-color-scheme: dark)     follows the OS
+   ============================================================ */
+:root {
+  color-scheme: light dark;
+
+  /* ---- Base palette: light ("manual paper") ---- */
+  --pk-background: #faf3e3;           /* arcade manual cream */
+  --pk-foreground: #6b2d8f;           /* body + heading ink, 7.9:1 on paper */
+  --pk-card: #ffffff;
+  --pk-card-foreground: #6b2d8f;
+
+  --pk-primary: #fc5c94;              /* decorative fill only (2.9:1) */
+  --pk-primary-strong: #87214b;       /* text + fill — 8.9:1 white, 8.1:1 paper */
+  --pk-primary-foreground: #ffffff;
+  --pk-secondary: #5c94fc;            /* decorative fill only (3.0:1) */
+  --pk-secondary-strong: #164499;     /* text + fill — 9.1:1 white, 8.2:1 paper */
+  --pk-secondary-foreground: #ffffff;
+  --pk-accent: #ffd700;               /* decorative fill only (1.4:1) */
+  --pk-accent-strong: #ffd700;
+  --pk-accent-foreground: #3d1a52;    /* text ON the gold fill — 10.2:1 */
+  --pk-accent-text: #3d1a52;          /* accent as standalone page text — 12.9:1 */
+  --pk-destructive: #ff0044;          /* decorative fill only (3.9:1) */
+  --pk-destructive-strong: #99002a;   /* text + fill — 8.8:1 white, 8.0:1 paper */
+  --pk-destructive-foreground: #ffffff;
+
+  --pk-muted: #f5f5f5;
+  --pk-muted-foreground: #4d4d4d;     /* 8.5:1 white, 7.7:1 paper */
+  --pk-border: #000000;               /* hard pixel outline */
+  --pk-input: #6b2d8f;                /* entered text */
+  --pk-input-background: #ffffff;
+  --pk-switch-background: #787878;    /* non-text 4.0-4.4:1 */
+  --pk-ring: #6b2d8f;
+  --pk-placeholder: #575757;          /* 7.2:1 on white, dimmer than entered text */
+
+  /* ---- Chart / data tints (decorative) ---- */
+  --pk-chart-1: #fc5c94;
+  --pk-chart-2: #5c94fc;
+  --pk-chart-3: #ffd700;
+  --pk-chart-4: #00ff00;
+  --pk-chart-5: #c9b4e8;
+
+  /* ---- Cabinet chrome: the darker plum ink used by the Storybook /
+     docs surface (.storybook/theme.ts). Not a component token. ---- */
+  --pk-chrome-ink: #241026;           /* 15.1:1 on paper, 16.9:1 on white */
+  --pk-chrome-plum: #5a1878;          /* links + selected state, 11.4:1 white */
+  --pk-chrome-magenta: #a8175c;       /* docs brand accent, 7.0:1 white */
+  --pk-chrome-paper: #faf3e3;
+
+  /* ---- Legacy Gender Reveal Voting App surface tints (decorative
+     only — repo root tokens.css). Kept for full-bleed backgrounds. ---- */
+  --pk-pixel-pink: #e8b4d9;
+  --pk-pixel-lilac: #c9b4e8;
+}
+
+/* ---- Dark: "arcade at night" ----
+   The same declaration list is applied by three selectors: the explicit
+   opt-in (data-theme="dark" / .dark), which always wins, and the OS-follow
+   media query, which is suppressed by an explicit data-theme="light". */
+:root[data-theme='dark'],
+.dark {
+  --pk-background: #1a0b2e;
+  --pk-foreground: #f5d1ea;
+  --pk-card: #2d1b4e;
+  --pk-card-foreground: #f5d1ea;
+  --pk-primary: #ff6fa8;
+  --pk-primary-strong: #ff99c4;
+  --pk-primary-foreground: #1a0b2e;
+  --pk-secondary: #6fb1ff;
+  --pk-secondary-strong: #8cc0ff;
+  --pk-secondary-foreground: #1a0b2e;
+  --pk-accent: #ffe14d;
+  --pk-accent-strong: #ffe14d;
+  --pk-accent-foreground: #1a0b2e;
+  --pk-accent-text: #ffe14d;
+  --pk-destructive: #ff4d6d;
+  --pk-destructive-strong: #ff9aa8;
+  --pk-destructive-foreground: #1a0b2e;
+  --pk-muted: #241540;
+  --pk-muted-foreground: #c4aed9;
+  --pk-border: #ffe14d;               /* gold outline — black is invisible at night */
+  --pk-input: #f5d1ea;
+  --pk-input-background: #2d1b4e;
+  --pk-switch-background: #9a86bf;
+  --pk-ring: #ff99c4;
+  --pk-placeholder: #c4aed9;
+  --pk-chart-4: #4dff9f;
+  --pk-chart-5: #d1b3ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    --pk-background: #1a0b2e;
+    --pk-foreground: #f5d1ea;
+    --pk-card: #2d1b4e;
+    --pk-card-foreground: #f5d1ea;
+    --pk-primary: #ff6fa8;
+    --pk-primary-strong: #ff99c4;
+    --pk-primary-foreground: #1a0b2e;
+    --pk-secondary: #6fb1ff;
+    --pk-secondary-strong: #8cc0ff;
+    --pk-secondary-foreground: #1a0b2e;
+    --pk-accent: #ffe14d;
+    --pk-accent-strong: #ffe14d;
+    --pk-accent-foreground: #1a0b2e;
+    --pk-accent-text: #ffe14d;
+    --pk-destructive: #ff4d6d;
+    --pk-destructive-strong: #ff9aa8;
+    --pk-destructive-foreground: #1a0b2e;
+    --pk-muted: #241540;
+    --pk-muted-foreground: #c4aed9;
+    --pk-border: #ffe14d;
+    --pk-input: #f5d1ea;
+    --pk-input-background: #2d1b4e;
+    --pk-switch-background: #9a86bf;
+    --pk-ring: #ff99c4;
+    --pk-placeholder: #c4aed9;
+    --pk-chart-4: #4dff9f;
+    --pk-chart-5: #d1b3ff;
+  }
+}

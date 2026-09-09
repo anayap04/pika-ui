@@ -1,4 +1,4 @@
-import { theme, spacing, accessibility, fontFamilies, fontWeights } from '../../../tokens';
+import { theme, spacing, accessibility, fontFamilies, fontWeights, transitions } from '../../../tokens';
 import React, { useId } from 'react';
 
 export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
@@ -58,6 +58,7 @@ export const Radio: React.FC<RadioProps> = ({
           accentColor: theme.primaryStrong,
           border: `2px solid ${theme.border}`,
           outline: 'none',
+          transition: transitions.fast,
         }}
         {...props}
       />

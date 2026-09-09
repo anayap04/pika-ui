@@ -44,7 +44,7 @@ export const Primary: Story = {
     variant: 'primary',
     size: 'md',
     disabled: false,
-    children: 'EQUIPO NIÑA',
+    children: 'CAST VOTE',
   },
 };
 
@@ -53,7 +53,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     size: 'md',
     disabled: false,
-    children: 'EQUIPO NIÑO',
+    children: 'NEXT ROUND',
   },
 };
 
@@ -71,7 +71,7 @@ export const Destructive: Story = {
     variant: 'destructive',
     size: 'md',
     disabled: false,
-    children: 'DELETE VOTE',
+    children: 'DELETE',
   },
 };
 
@@ -80,7 +80,7 @@ export const Small: Story = {
     variant: 'primary',
     size: 'sm',
     disabled: false,
-    children: 'Small',
+    children: 'SAVE',
   },
 };
 
@@ -89,7 +89,7 @@ export const Large: Story = {
     variant: 'primary',
     size: 'lg',
     disabled: false,
-    children: 'Large Button',
+    children: 'CONTINUE',
   },
 };
 
@@ -98,7 +98,7 @@ export const Disabled: Story = {
     variant: 'primary',
     size: 'md',
     disabled: true,
-    children: 'Disabled Button',
+    children: 'LOCKED',
   },
   parameters: {
     docs: {

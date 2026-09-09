@@ -76,6 +76,7 @@ export const Toggle: React.FC<ToggleProps> = ({
             height: sizeConfig.height,
             backgroundColor: checked ? theme.primaryStrong : theme.switchBackground,
             border: `2px solid ${theme.border}`,
+            // Documented radius exception: a square switch reads as a checkbox.
             borderRadius: '12px',
             cursor: disabled ? 'not-allowed' : 'pointer',
             opacity: disabled ? 0.6 : 1,
@@ -90,7 +91,7 @@ export const Toggle: React.FC<ToggleProps> = ({
               width: sizeConfig.toggleWidth,
               height: sizeConfig.toggleHeight,
               backgroundColor: theme.card,
-              borderRadius: '10px',
+              borderRadius: '10px', // paired exception with the 12px track
               transition: transitions.fast,
               border: `1px solid ${theme.border}`,
             }}

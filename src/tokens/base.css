@@ -1,0 +1,70 @@
+/* ============================================================
+   PIKA UI — global baseline + the a11y rules that need real CSS
+   (inline styles cannot target ::placeholder or :focus-visible).
+   ============================================================ */
+html { font-size: var(--pk-font-size-root); }
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--pk-font-body);
+  font-size: var(--pk-font-size-lg);
+  line-height: var(--pk-line-height-body);
+  font-weight: var(--pk-font-weight-normal);
+  color: var(--pk-foreground);
+  background-color: var(--pk-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 { font-weight: var(--pk-font-weight-normal); line-height: var(--pk-line-height-heading); margin: 0; }
+h1 { font-family: var(--pk-font-display); font-size: var(--pk-font-size-3xl); line-height: 1.5; }
+h2 { font-family: var(--pk-font-subheading); font-size: var(--pk-font-size-xl); }
+h3 { font-family: var(--pk-font-subheading); font-size: var(--pk-font-size-lg); }
+h4 { font-family: var(--pk-font-subheading); font-size: var(--pk-font-size-md); }
+p { font-family: var(--pk-font-body); line-height: var(--pk-line-height-body); margin: 0; }
+label { font-family: var(--pk-font-subheading); }
+
+a {
+  /* secondary-strong clears 8:1 on the light grounds, 9:1 on dark */
+  color: var(--pk-secondary-strong);
+  font-weight: var(--pk-font-weight-medium);
+  text-decoration: underline;
+}
+a:hover { color: var(--pk-foreground); }
+
+/* Sharp corners everywhere. */
+button, input, select, textarea { border-radius: 0; font-family: inherit; }
+button { font-family: var(--pk-font-display); cursor: pointer; }
+
+/* SC 2.5.8 Target Size — 44px minimum on every control.
+   Inline text links inside a sentence are exempt by spec. */
+button, [role='button'], input[type='checkbox'], input[type='radio'],
+input[type='submit'], .switch, a.button {
+  min-width: var(--pk-tap-target-min);
+  min-height: var(--pk-tap-target-min);
+}
+input:not([type='checkbox']):not([type='radio']), select, textarea {
+  min-height: var(--pk-tap-target-min);
+}
+
+/* SC 1.4.6 — placeholders stay legible; Firefox dims them to ~54% otherwise. */
+input::placeholder, textarea::placeholder { color: var(--pk-placeholder); opacity: 1; }
+
+/* SC 2.4.7 / 2.4.11 — a visible ring outside the element, never clipped. */
+:focus-visible {
+  outline: var(--pk-focus-ring-width) solid var(--pk-ring);
+  outline-offset: var(--pk-focus-ring-offset);
+  scroll-margin-block: 80px;
+}
+
+/* SC 2.2.2 Pause, Stop, Hide. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
