@@ -149,14 +149,14 @@ export const CustomHeaderColor: Story = {
 
   render: () => (
     <CardSection
-      // The bare `primary`/`accent` tints are decorative-only (they fail AAA as a
-      // text ground); pair the gold band with the AAA-safe `accentText` ink.
+      // Strong fills are the only custom bands that may carry text. Use light
+      // content against the dark primary fill.
       header={
-        <Heading level={3} style={{ color: colors.light.accentText }}>
+        <Heading level={3} style={{ color: colors.light.primaryForeground }}>
           Custom Header
         </Heading>
       }
-      headerBackground={colors.light.accent}
+      headerBackground={colors.light.primaryStrong}
     >
       <Paragraph>This card has a custom header background color.</Paragraph>
     </CardSection>

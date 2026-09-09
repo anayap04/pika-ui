@@ -22,6 +22,11 @@ describe('Tag', () => {
     expect(onRemove).toHaveBeenCalledOnce();
   });
 
+  it('keeps the remove control at the accepted 16px size', () => {
+    render(<Tag label="Team Pink" removable onRemove={() => {}} />);
+    expect(screen.getByRole('button')).toHaveStyle({ width: '16px', height: '16px' });
+  });
+
   it('renders a leading icon node when provided', () => {
     render(<Tag label="Star" icon={<span data-testid="icon">★</span>} />);
     expect(screen.getByTestId('icon')).toBeInTheDocument();

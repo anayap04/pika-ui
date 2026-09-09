@@ -1,0 +1,28 @@
+/* ============================================================
+   PIKA UI — spacing, borders, radius, target size
+   4 / 8 / 16 / 24 / 32 px hard grid. Radius is 0 everywhere:
+   pixel art has no rounded corners.
+   ============================================================ */
+:root {
+  --pk-space-xs: 4px;
+  --pk-space-sm: 8px;
+  --pk-space-md: 16px;
+  --pk-space-lg: 24px;
+  --pk-space-xl: 32px;
+
+  --pk-radius-sm: 0px;
+  --pk-radius-md: 0px;
+  --pk-radius-lg: 0px;
+  --pk-radius-xl: 0px;
+
+  --pk-border-width: 4px;        /* Button, Card, Input outline */
+  --pk-border-width-thin: 2px;   /* Badge, Checkbox, Radio, Toggle track */
+  --pk-border-width-hair: 1px;   /* Tag, card section dividers */
+
+  --pk-focus-ring-width: 3px;
+  --pk-focus-ring-offset: 2px;
+  --pk-tap-target-min: 44px;     /* WCAG 2.2 SC 2.5.8 asks 24px; 44px is the house rule */
+
+  --pk-step: 4px;                /* one pixel-shadow step */
+  --pk-step-2: 8px;              /* elevated card drop offset */
+}

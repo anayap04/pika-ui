@@ -15,12 +15,11 @@ export default meta;
 type Story = StoryObj<typeof ButtonGroup>;
 
 export const Horizontal: Story = {
-  args: { orientation: 'horizontal' },
+  args: { orientation: 'horizontal', gap: 'md' },
   render: () => (
-    <ButtonGroup orientation="horizontal">
-      <Button variant="primary">Action 1</Button>
-      <Button variant="secondary">Action 2</Button>
-      <Button variant="accent">Action 3</Button>
+    <ButtonGroup orientation="horizontal" gap="md">
+      <Button variant="primary">SAVE</Button>
+      <Button variant="secondary">CANCEL</Button>
     </ButtonGroup>
   ),
 };
@@ -29,9 +28,9 @@ export const Vertical: Story = {
   args: { orientation: 'vertical' },
   render: () => (
     <ButtonGroup orientation="vertical">
-      <Button variant="primary">Primary Action</Button>
-      <Button variant="secondary">Secondary Action</Button>
-      <Button variant="destructive">Delete</Button>
+      <Button variant="primary">SAVE</Button>
+      <Button variant="secondary">CANCEL</Button>
+      <Button variant="destructive">DELETE</Button>
     </ButtonGroup>
   ),
 };
@@ -41,10 +40,10 @@ export const SmallGap: Story = {
   render: () => (
     <ButtonGroup orientation="horizontal" gap="sm">
       <Button size="sm" variant="primary">
-        Save
+        SAVE
       </Button>
       <Button size="sm" variant="secondary">
-        Cancel
+        CANCEL
       </Button>
     </ButtonGroup>
   ),
@@ -64,8 +63,8 @@ export const LargeGap: Story = {
   args: { gap: 'lg', orientation: 'horizontal' },
   render: () => (
     <ButtonGroup orientation="horizontal" gap="lg">
-      <Button variant="accent">Vote Now</Button>
-      <Button variant="secondary">View Results</Button>
+      <Button variant="accent">VOTE NOW</Button>
+      <Button variant="secondary">RESULTS</Button>
     </ButtonGroup>
   ),
 };
@@ -75,13 +74,13 @@ export const MixedSizes: Story = {
   render: () => (
     <ButtonGroup orientation="horizontal">
       <Button size="sm" variant="secondary">
-        Small
+        SMALL
       </Button>
       <Button size="md" variant="primary">
-        Medium
+        MEDIUM
       </Button>
       <Button size="lg" variant="accent">
-        Large
+        LARGE
       </Button>
     </ButtonGroup>
   ),
@@ -91,8 +90,8 @@ export const VotingActions: Story = {
   args: { orientation: 'horizontal', gap: 'md' },
   render: () => (
     <ButtonGroup orientation="horizontal" gap="md">
-      <Button variant="primary">👧 Team Pink</Button>
-      <Button variant="accent">👦 Team Blue</Button>
+      <Button variant="primary">TEAM PINK</Button>
+      <Button variant="accent">TEAM BLUE</Button>
     </ButtonGroup>
   ),
 };
@@ -102,10 +101,10 @@ export const NavigationButtons: Story = {
   render: () => (
     <ButtonGroup orientation="horizontal" gap="sm">
       <Button size="sm" variant="secondary">
-        ← Back
+        BACK
       </Button>
       <Button size="sm" variant="primary">
-        Next →
+        NEXT
       </Button>
     </ButtonGroup>
   ),
@@ -115,9 +114,9 @@ export const FormActions: Story = {
   args: { orientation: 'horizontal', gap: 'md' },
   render: () => (
     <ButtonGroup orientation="horizontal" gap="md">
-      <Button variant="destructive">Clear Form</Button>
-      <Button variant="secondary">Save Draft</Button>
-      <Button variant="primary">Submit</Button>
+      <Button variant="destructive">CLEAR</Button>
+      <Button variant="secondary">SAVE DRAFT</Button>
+      <Button variant="primary">SUBMIT</Button>
     </ButtonGroup>
   ),
 };
@@ -129,17 +128,17 @@ export const AllOrientations: Story = {
       <div>
         <h3>Horizontal</h3>
         <ButtonGroup orientation="horizontal" gap="md">
-          <Button variant="primary">Button 1</Button>
-          <Button variant="secondary">Button 2</Button>
-          <Button variant="accent">Button 3</Button>
+          <Button variant="primary">ONE</Button>
+          <Button variant="secondary">TWO</Button>
+          <Button variant="accent">THREE</Button>
         </ButtonGroup>
       </div>
       <div>
         <h3>Vertical</h3>
         <ButtonGroup orientation="vertical" gap="md" style={{ width: '200px' }}>
-          <Button variant="primary">Button 1</Button>
-          <Button variant="secondary">Button 2</Button>
-          <Button variant="accent">Button 3</Button>
+          <Button variant="primary">ONE</Button>
+          <Button variant="secondary">TWO</Button>
+          <Button variant="accent">THREE</Button>
         </ButtonGroup>
       </div>
     </div>

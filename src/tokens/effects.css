@@ -1,0 +1,55 @@
+/* ============================================================
+   PIKA UI — the pixel effects. Depth is stepped, never blurred.
+   ============================================================ */
+:root {
+  /* Four hard offsets = a chunky outline that survives any background. */
+  --pk-shadow-pixel:
+    0 -4px 0 0 var(--pk-border),
+     4px 0 0 0 var(--pk-border),
+     0 4px 0 0 var(--pk-border),
+    -4px 0 0 0 var(--pk-border);
+  /* Elevated = pixel outline + one 8px stepped drop. */
+  --pk-shadow-pixel-elevated:
+    0 -4px 0 0 var(--pk-border),
+     4px 0 0 0 var(--pk-border),
+     0 4px 0 0 var(--pk-border),
+    -4px 0 0 0 var(--pk-border),
+     8px 8px 0 0 var(--pk-border);
+  --pk-shadow-step: 4px 4px 0 0 var(--pk-border);
+  --pk-shadow-step-lg: 8px 8px 0 0 var(--pk-border);
+
+  /* CRT scanline stripe — the only transparency in the system besides the
+     disabled state's opacity:.6. Dark gaps between lit phosphor lines read as
+     "dark stripes" in both themes; override per surface for a stronger effect. */
+  --pk-scanline: rgba(0, 0, 0, 0.15);
+}
+
+.pixel-border { box-shadow: var(--pk-shadow-pixel); }
+.pixel-elevated { box-shadow: var(--pk-shadow-pixel-elevated); }
+
+/* CRT scanline overlay — opt-in decorative texture for a full-bleed arcade
+   surface (a hero band, a cabinet panel), NOT a text column. Needs a
+   positioned parent; the stripes never intercept pointer events and are
+   hidden entirely under prefers-reduced-motion (SC 2.2.2). */
+.crt-effect { position: relative; }
+.crt-effect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--pk-scanline) 0,
+    var(--pk-scanline) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+@media (prefers-reduced-motion: reduce) {
+  .crt-effect::before { display: none; }
+}
+
+.animate-pixel-float { animation: var(--pk-anim-pixel-float); }
+.animate-pixel-pulse { animation: var(--pk-anim-pixel-pulse); }
+.animate-blink { animation: var(--pk-anim-blink); }

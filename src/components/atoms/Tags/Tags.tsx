@@ -1,4 +1,4 @@
-import { theme, spacing, fontFamilies, fontWeights } from '../../../tokens';
+import { theme, spacing, fontFamilies, fontWeights, transitions, glyphs } from '../../../tokens';
 import React from 'react';
 
 export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -56,6 +56,8 @@ export const Tag: React.FC<TagProps> = ({
         padding: `${spacing.xs} ${spacing.sm}`,
         fontSize: '12px',
         fontWeight: fontWeights.normal,
+        // Documented radius exception: 4px, a small softening on the 1px-bordered
+        // chip. Everything else in the system is 0.
         borderRadius: '4px',
         whiteSpace: 'nowrap',
         ...variantStyles[variant],
@@ -73,11 +75,18 @@ export const Tag: React.FC<TagProps> = ({
             marginLeft: spacing.xs,
             padding: 0,
             border: 'none',
+            borderRadius: 0,
             background: 'transparent',
             color: 'inherit',
             cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: 'bold',
+            // Match the tag's VT323 face — the global `button` rule sets Press
+            // Start 2P, and its single 400 weight keeps the × glyph crisp
+            // (asking for bold makes the browser fake it and smear the pixels).
+            fontFamily: fontFamilies.subheading,
+            fontSize: '16px',
+            fontWeight: fontWeights.normal,
+            lineHeight: 1,
+            transition: transitions.fast,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -86,7 +95,7 @@ export const Tag: React.FC<TagProps> = ({
           }}
           aria-label={`Remove ${label} tag`}
         >
-          ×
+          {glyphs.remove}
         </button>
       )}
     </span>

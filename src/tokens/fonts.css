@@ -1,0 +1,7 @@
+/* Pika UI type faces.
+   Upstream self-hosts these via @fontsource (src/styles/fonts.ts):
+   press-start-2p 400, vt323 400, nunito 400/600/700/800 (latin + latin-ext).
+   Here they are served from Google Fonts — same faces, no binaries in repo.
+   Drop real .woff2 files into assets/fonts/ and swap these @font-face srcs
+   if the design system must work offline. */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Nunito:wght@400;600;700;800&display=swap');

@@ -29,7 +29,7 @@ const meta = {
     },
     icon: {
       control: { type: 'text' },
-      description: 'Optional icon/emoji displayed before label',
+      description: 'Optional leading node — pass a unicode glyph (◆, ×), never emoji or SVG',
     },
   },
 } satisfies Meta<typeof Tag>;
@@ -49,7 +49,7 @@ export const WithIcon: Story = {
   args: {
     label: 'Team Girl',
     variant: 'primary',
-    icon: '👑',
+    icon: '◆',
     removable: false,
   },
 };
@@ -66,9 +66,9 @@ export const RemovableWithIcon: Story = {
   args: {
     label: 'Remove Me',
     variant: 'accent',
-    icon: '⚡',
+    icon: '◆',
     removable: true,
-    onRemove: () => alert('Tag removed!'),
+    onRemove: () => {},
   },
 };
 
@@ -142,11 +142,11 @@ export const TagCloud: Story = {
   args: { label: 'Tag' },
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', width: '400px' }}>
-      <Tag label="React" icon="⚛️" />
-      <Tag label="TypeScript" icon="📘" />
-      <Tag label="Storybook" icon="📚" />
-      <Tag label="Testing" icon="✅" />
-      <Tag label="Accessibility" icon="♿" />
+      <Tag label="React" />
+      <Tag label="TypeScript" />
+      <Tag label="Storybook" />
+      <Tag label="Testing" />
+      <Tag label="Accessibility" />
     </div>
   ),
 };
@@ -155,8 +155,8 @@ export const VotingAppTags: Story = {
   args: { label: 'Tag' },
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-      <Tag label="EQUIPO NIÑA" variant="primary" icon="👑" removable onRemove={() => {}} />
-      <Tag label="EQUIPO NIÑO" variant="secondary" icon="🎉" removable onRemove={() => {}} />
+      <Tag label="EQUIPO NIÑA" variant="primary" removable onRemove={() => {}} />
+      <Tag label="EQUIPO NIÑO" variant="secondary" removable onRemove={() => {}} />
       <Tag label="PENDING" variant="muted" />
       <Tag label="ERROR" variant="destructive" />
     </div>

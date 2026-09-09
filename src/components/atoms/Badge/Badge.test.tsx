@@ -28,6 +28,14 @@ describe('Badge', () => {
     expect(screen.getByText('Small')).toHaveStyle({ fontSize: '11px' });
   });
 
+  it('is a non-interactive uppercase status marker', () => {
+    render(<Badge variant="accent" size="sm">AAA</Badge>);
+    const badge = screen.getByText('AAA');
+    expect(badge).toHaveStyle({ textTransform: 'uppercase' });
+    expect(badge).not.toHaveAttribute('role');
+    expect(screen.queryByRole('button')).toBeNull();
+  });
+
   it('merges caller-supplied style and forwards arbitrary props', () => {
     render(
       <Badge style={{ marginTop: '10px' }} data-testid="badge" title="hi">

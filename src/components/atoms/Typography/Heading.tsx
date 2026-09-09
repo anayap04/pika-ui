@@ -1,5 +1,5 @@
 import React from 'react';
-import { fontFamilies, fontSizes, fontWeights, lineHeights, theme } from '../../../tokens';
+import { fontFamilies, fontSizes, fontWeights, letterSpacings, lineHeights, theme } from '../../../tokens';
 
 export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level: 1 | 2 | 3 | 4;
@@ -54,6 +54,10 @@ export const Heading: React.FC<HeadingProps> = ({
       fontSize: fontSizeMap[level],
       fontWeight: fontWeights.normal,
       lineHeight: lineHeights.heading,
+      ...(variant === 'subheading' && {
+        textTransform: 'uppercase',
+        letterSpacing: letterSpacings.caps,
+      }),
       color: colorMap[color],
       margin: 0,
       ...style,

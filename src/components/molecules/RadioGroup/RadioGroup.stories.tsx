@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RadioGroup, type RadioGroupProps } from './RadioGroup';
+import { FormField } from '../FormField';
 import { useState } from 'react';
 
 const meta = {
@@ -25,6 +26,15 @@ type Story = StoryObj<typeof meta>;
 const ControlledRadioGroup = (props: RadioGroupProps) => {
   const [value, setValue] = useState<string>('');
   return <RadioGroup {...props} value={value} onChange={setValue} />;
+};
+
+const ControlledRadioGroupField = (props: RadioGroupProps) => {
+  const [value, setValue] = useState<string>('');
+  return (
+    <FormField label="Team">
+      <RadioGroup {...props} value={value} onChange={setValue} />
+    </FormField>
+  );
 };
 
 export const Default: Story = {
@@ -86,6 +96,26 @@ export const VotingTeamSelection: Story = {
     ],
   },
   render: (args) => <ControlledRadioGroup {...args} />,
+};
+
+export const TeamField: Story = {
+  args: {
+    name: 'team',
+    options: [
+      { value: 'pink', label: 'Team Pink' },
+      { value: 'blue', label: 'Team Blue' },
+    ],
+  },
+  render: (args) => (
+    <ControlledRadioGroupField {...args} />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Controlled single selection with a visible FormField label; size changes the group gap, not the radio control.',
+      },
+    },
+  },
 };
 
 export const GenderGuessSelection: Story = {
