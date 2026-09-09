@@ -1,8 +1,8 @@
 {
   "meta": {
     "name": "Pika UI",
-    "version": "0.1.0",
-    "notes": "v0.1.0 (Pika UI 0.1.0): WCAG 2.2 AAA pass — upgraded from AA to AAA (7:1 body text / 4.5:1 large text in both themes), changed light ground from pink (#e8b4d9) to 'manual paper' (#faf3e3) for better contrast, updated all *Strong colors for AAA compliance, enhanced focus rings (3px solid, 2px offset), verified 44×44px tap targets, full reduced-motion support (SC 2.2.2). All text pairings verified ≥7:1 in light AND dark."
+    "version": "0.1.1",
+    "notes": "v0.1.1 (Pika UI 0.1.1): WCAG 2.2 AAA pass — upgraded from AA to AAA (7:1 body text / 4.5:1 large text in both themes), changed light ground from pink (#e8b4d9) to 'manual paper' (#faf3e3) for better contrast, updated all *Strong colors for AAA compliance, enhanced focus rings (3px solid, 2px offset), verified 44×44px tap targets, full reduced-motion support (SC 2.2.2). All text pairings verified ≥7:1 in light AND dark."
   },
   "typography": {
     "fontFamilies": {

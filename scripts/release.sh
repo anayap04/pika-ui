@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Release script for Pika UI
-# Usage: ./scripts/release.sh v0.1.0
+# Usage: ./scripts/release.sh v0.1.1
 
 set -e
 

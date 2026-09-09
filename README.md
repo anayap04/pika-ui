@@ -26,7 +26,7 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
 | **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
 | **CI** | ✅ GitHub Actions | `.github/workflows/ci.yml` runs lint → types → unit tests + coverage → build, plus a Storybook browser-test job, on every push to `main` and PR |
-| **Release** | ✅ v0.1.0 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
+| **Release** | ✅ v0.1.1 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
 | **Docs** | ✅ living | Storybook is the source of truth — `Overview/Introduction` homepage + autodocs on every component |
 
 ### Component inventory
