@@ -27,7 +27,7 @@ const meta = {
     weight: {
       control: { type: 'select' },
       options: ['normal', 'medium', 'bold'],
-      description: 'Font weight: normal (400), medium (700), bold (800)',
+      description: 'Font weight: normal (400), medium (600), bold (800)',
     },
   },
 } satisfies Meta<typeof Paragraph>;
@@ -59,7 +59,7 @@ export const Large: Story = {
     size: 'lg',
     color: 'foreground',
     weight: 'normal',
-    children: 'This is a large paragraph (16px). Use for prominent body text or call-to-action descriptions.',
+    children: 'Vote once. The result is revealed when the timer hits zero.',
   },
 };
 
@@ -124,7 +124,7 @@ export const AllWeights: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <Paragraph weight="normal">Normal (400) — Standard body text weight</Paragraph>
-      <Paragraph weight="medium">Medium (700) — Emphasized text within content</Paragraph>
+      <Paragraph weight="medium">Medium (600) — Emphasized text within content</Paragraph>
       <Paragraph weight="bold">Bold (800) — Strong emphasis for important phrases</Paragraph>
     </div>
   ),

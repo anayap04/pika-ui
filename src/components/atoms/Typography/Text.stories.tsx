@@ -8,7 +8,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Inline text component for spans with optional variant, size, color, and weight props. Perfect for inline emphasis, badges, or small text labels.',
+        component: 'Inline text component for spans with optional variant, size, color, and weight props. Body text supports weight choices; VT323 subheadings stay uppercase, tracked, and single-weight.',
       },
     },
   },
@@ -32,7 +32,7 @@ const meta = {
     weight: {
       control: { type: 'select' },
       options: ['normal', 'medium', 'bold'],
-      description: 'Font weight: normal (400), medium (700), bold (800)',
+      description: 'Font weight for body text; subheadings always use the single VT323 weight',
     },
   },
 } satisfies Meta<typeof Text>;
@@ -55,8 +55,7 @@ export const SubheadingVariant: Story = {
     variant: 'subheading',
     size: 'md',
     color: 'foreground',
-    weight: 'normal',
-    children: 'VT323 monospace text',
+    children: 'INSERT COIN',
   },
   parameters: {
     docs: {
@@ -103,13 +102,12 @@ export const Badge: Story = {
     variant: 'subheading',
     size: 'md',
     color: 'primary',
-    weight: 'bold',
-    children: 'TEAM NIÑA',
+    children: 'TEAM PINK',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Text styled as a badge label — bold subheading with primary color.',
+        story: 'Text styled as a tracked uppercase subheading with primary color.',
       },
     },
   },

@@ -1,6 +1,7 @@
-// Design tokens aligned with design-tokens.json
+// Design tokens — the JS mirror of the --pk-* custom properties in
+// src/tokens/*.css (barrel: src/tokens/index.css).
 // Light theme is the default; dark theme activates on `[data-theme="dark"]`,
-// `.dark`, or `prefers-color-scheme: dark` (see src/styles/theme.css).
+// `.dark`, or `prefers-color-scheme: dark` (see src/tokens/colors.css).
 //
 // Text/background pairings target WCAG 2.2 AAA (SC 1.4.6): 7:1 for body-size
 // text, 4.5:1 for large text — in BOTH themes. The `*Strong` colours are the
@@ -118,13 +119,20 @@ export const fontFamilies = {
 
 export const fontWeights = {
   normal: 400,
-  medium: 700,   // Only Nunito (body) supports real weights
+  medium: 600,   // Only Nunito (body) supports real weights
   bold: 800,
 };
 
 export const lineHeights = {
   heading: 1.4,
   body: 1.6,
+};
+
+// Tracking. The pixel faces (Press Start 2P / VT323) set in caps read better
+// with a little air between glyphs; Nunito body copy never needs it.
+export const letterSpacings = {
+  button: '0.05em', // Press Start 2P button labels
+  caps: '0.06em',   // VT323 labels, badges, counters — always upper case
 };
 
 export const accessibility = {
@@ -138,6 +146,41 @@ export const transitions = {
   base: '200ms ease-out',
   slow: '300ms ease-out',
 };
+
+/**
+ * Pixel depth: stacked hard offsets of the border colour, never a blur radius.
+ * Values are `var(--pk-shadow-*)` references (src/tokens/effects.css) with the
+ * light-theme expansion baked in as the fallback, so `boxShadow: shadows.pixel`
+ * renders with zero JS and then follows the theme because `--pk-border`
+ * switches underneath (black in light, neon gold at night).
+ *
+ *   pixel          4 hard offsets — a doubled outline, flat on the page
+ *   pixelElevated  the same 4 plus one 8px corner step — one notch of lift
+ */
+const pixelShadowLayers = [
+  '0 -4px 0 0 #000000',
+  '4px 0 0 0 #000000',
+  '0 4px 0 0 #000000',
+  '-4px 0 0 0 #000000',
+];
+
+export const shadows = {
+  pixel: `var(--pk-shadow-pixel, ${pixelShadowLayers.join(', ')})`,
+  pixelElevated: `var(--pk-shadow-pixel-elevated, ${[...pixelShadowLayers, '8px 8px 0 0 #000000'].join(', ')})`,
+};
+
+/**
+ * The four unicode glyphs the system uses as iconography — they are type, not
+ * SVG: each inherits `color` and `font-size` and is set in a pixel face. There
+ * is no icon font and no sprite (see the design guidelines). Never emoji in
+ * product UI. Pair `required` with `aria-hidden` and a visually-hidden word.
+ */
+export const glyphs = {
+  diamond: '◆', // ◆ hero kickers, decorative bullets — "◆ Insert coin ◆"
+  remove: '×', // × the Tag remove affordance
+  required: '*', // required-field marker
+  arrow: '→', // → "next", footer continuations
+} as const;
 
 // Helper: Get color from theme (use in components with useTheme or CSS var fallback)
 export const getColorVar = (colorKey: keyof typeof colors.light, isDark = false) => {

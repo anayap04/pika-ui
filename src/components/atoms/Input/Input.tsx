@@ -1,4 +1,4 @@
-import { theme, spacing, fontFamilies, fontSizes, accessibility } from '../../../tokens';
+import { theme, spacing, fontFamilies, fontSizes, accessibility, transitions } from '../../../tokens';
 import React from 'react';
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -35,7 +35,8 @@ export const Input: React.FC<InputProps> = ({ size = 'md', disabled, style, ...p
         backgroundColor: theme.inputBackground,
         color: theme.input,
         outline: 'none',
-        transition: 'all 150ms ease-out',
+        // Focus/hover change colour only, never shape or size.
+        transition: transitions.fast,
         opacity: disabled ? 0.6 : 1,
         ...sizeStyles[size],
         ...style,

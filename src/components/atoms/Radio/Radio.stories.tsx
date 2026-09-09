@@ -119,9 +119,9 @@ export const RadioGroup: Story = {
         Choose your prediction
       </legend>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <Radio name="prediction" value="girl" label="It will be a girl 👧" />
-        <Radio name="prediction" value="boy" label="It will be a boy 👦" />
-        <Radio name="prediction" value="surprise" label="Surprise me! 🎉" />
+        <Radio name="prediction" value="girl" label="It will be a girl" />
+        <Radio name="prediction" value="boy" label="It will be a boy" />
+        <Radio name="prediction" value="surprise" label="Surprise me" />
       </div>
     </fieldset>
   ),
@@ -138,10 +138,10 @@ export const VotingTeamSelection: Story = {
         <Radio
           name="team"
           value="girl"
-          label="EQUIPO NIÑA 👑 (31 votes, 61%)"
+          label="EQUIPO NIÑA — 31 votes, 61%"
           checked={true}
         />
-        <Radio name="team" value="boy" label="EQUIPO NIÑO (20 votes, 39%)" />
+        <Radio name="team" value="boy" label="EQUIPO NIÑO — 20 votes, 39%" />
       </div>
     </fieldset>
   ),
@@ -238,9 +238,9 @@ export const RadioGroupDark: Story = {
         Choose your prediction
       </legend>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <Radio name="prediction" value="girl" label="It will be a girl 👧" />
-        <Radio name="prediction" value="boy" label="It will be a boy 👦" />
-        <Radio name="prediction" value="surprise" label="Surprise me! 🎉" />
+        <Radio name="prediction" value="girl" label="It will be a girl" />
+        <Radio name="prediction" value="boy" label="It will be a boy" />
+        <Radio name="prediction" value="surprise" label="Surprise me" />
       </div>
     </fieldset>
   ),

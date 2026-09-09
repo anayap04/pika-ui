@@ -7,8 +7,14 @@ describe('Input', () => {
   it('renders a text input and accepts typing', async () => {
     render(<Input placeholder="Name" />);
     const input = screen.getByPlaceholderText('Name');
+    expect(input).toHaveStyle({ fontFamily: "'Nunito', system-ui, -apple-system, sans-serif" });
     await userEvent.type(input, 'Pika');
     expect(input).toHaveValue('Pika');
+  });
+
+  it('keeps labels outside the Input API for FormField to provide', () => {
+    render(<Input aria-label="Your name" placeholder="Type here..." />);
+    expect(screen.getByRole('textbox')).not.toHaveAttribute('label');
   });
 
   it.each([

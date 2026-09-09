@@ -76,9 +76,9 @@ export const Muted: Story = {
 
 export const Small: Story = {
   args: {
-    variant: 'primary',
+    variant: 'accent',
     size: 'sm',
-    children: 'NEW',
+    children: 'AAA',
   },
 };
 

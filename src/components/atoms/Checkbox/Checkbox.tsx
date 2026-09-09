@@ -1,4 +1,4 @@
-import { theme, spacing, accessibility, fontFamilies, fontWeights } from '../../../tokens';
+import { theme, spacing, accessibility, fontFamilies, fontWeights, transitions } from '../../../tokens';
 import React, { useId } from 'react';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
@@ -57,8 +57,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           opacity: disabled ? 0.6 : 1,
           accentColor: theme.primaryStrong,
           border: `2px solid ${theme.border}`,
-          borderRadius: '2px',
+          borderRadius: 0, // pixel art has no rounded corners (Toggle + Tag are the only exceptions)
           outline: 'none',
+          transition: transitions.fast,
         }}
         {...props}
       />

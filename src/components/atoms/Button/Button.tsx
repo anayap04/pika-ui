@@ -1,4 +1,13 @@
-import { theme, spacing, fontFamilies, fontWeights, accessibility } from '../../../tokens';
+import {
+  theme,
+  spacing,
+  fontFamilies,
+  fontWeights,
+  accessibility,
+  shadows,
+  transitions,
+  letterSpacings,
+} from '../../../tokens';
 import React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -29,30 +38,32 @@ const sizeStyles = {
   },
 };
 
+// All variants share the pixel outline + the doubled-offset shadow; only the
+// fill and its text colour change (hover/press change colour only — never shape).
 const variantStyles = {
   primary: {
     background: theme.primaryStrong,
     color: theme.primaryForeground,
     border: `4px solid ${theme.border}`,
-    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
+    boxShadow: shadows.pixel,
   },
   secondary: {
     background: theme.secondaryStrong,
     color: theme.secondaryForeground,
     border: `4px solid ${theme.border}`,
-    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
+    boxShadow: shadows.pixel,
   },
   accent: {
     background: theme.accentStrong,
     color: theme.accentForeground,
     border: `4px solid ${theme.border}`,
-    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
+    boxShadow: shadows.pixel,
   },
   destructive: {
     background: theme.destructiveStrong,
     color: theme.destructiveForeground,
     border: `4px solid ${theme.border}`,
-    boxShadow: `0 -4px 0 0 ${theme.border}, 4px 0 0 0 ${theme.border}, 0 4px 0 0 ${theme.border}, -4px 0 0 0 ${theme.border}`,
+    boxShadow: shadows.pixel,
   },
 };
 
@@ -70,12 +81,14 @@ export const Button: React.FC<ButtonProps> = ({
         fontFamily: fontFamilies.display,
         fontWeight: fontWeights.normal,
         lineHeight: 1.5,
-        letterSpacing: '0.05em',
+        letterSpacing: letterSpacings.button,
         borderRadius: 0,
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.6 : 1,
         outline: 'none',
-        transition: 'all 150ms ease-out',
+        // Hover/press change colour only — never a transform: a 4px pixel border
+        // shifting by a subpixel looks broken.
+        transition: transitions.fast,
         ...sizeStyles[size],
         ...variantStyles[variant],
         ...style,

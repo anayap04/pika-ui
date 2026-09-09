@@ -1,0 +1,22 @@
+/* ============================================================
+   PIKA UI — the one stylesheet to link.
+
+   Import order matters: the value tokens (typography, spacing,
+   colours, motion) must load before the rules that consume them
+   (effects, base).
+
+   Fonts are loaded separately via src/styles/fonts.ts (@fontsource,
+   bundled so Storybook / Chromatic / the test runner never hit the
+   network). tokens/fonts.css is the Google-Fonts CDN fallback for
+   consumers who prefer that — it is deliberately NOT imported here.
+
+   The JS mirror of these tokens lives in src/tokens/index.ts; every
+   --pk-* colour name below is what that module's `theme` accessor
+   references, with the light hex baked in as a fallback.
+   ============================================================ */
+@import './typography.css';
+@import './spacing.css';
+@import './colors.css';
+@import './motion.css';
+@import './effects.css';
+@import './base.css';

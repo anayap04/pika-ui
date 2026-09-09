@@ -22,7 +22,7 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Lint** | ✅ passing | flat ESLint config (`@eslint/js`, `typescript-eslint`, React Hooks, Storybook) — 0 warnings |
 | **Tests** | ✅ passing | **unit tests** (Vitest 4 + jsdom + Testing Library) for every atom, molecule and token module, **`@sa11y/vitest` `toBeAccessible` axe checks** on every component, plus story smoke / a11y tests via `@storybook/addon-vitest` in a real browser (Playwright Chromium) |
 | **Accessibility** | 🎯 AAA, both themes | **CI-blocking** `@sa11y/vitest` axe checks (WCAG 2.1 A/AA base ruleset) on every component in the unit suite — roles, names, label associations, ARIA. Plus `@storybook/addon-a11y` per-story with the full WCAG 2.2 rule set **and** axe `color-contrast-enhanced` (AAA 7:1); every text pairing verified ≥7:1 in light **and** dark (jsdom has no layout, so contrast is checked in the browser project, not the sa11y unit tests) |
-| **Theming** | ✅ light + dark | `src/styles/theme.css` drives `--pk-*` custom properties; components read them via `theme` in `src/tokens`. Switches on `[data-theme]`, `.dark`, or `prefers-color-scheme`. Storybook has a **Theme** toolbar toggle |
+| **Theming** | ✅ light + dark | `src/tokens/colors.css` drives `--pk-*` custom properties; components read them via `theme` in `src/tokens`. Switches on `[data-theme]`, `.dark`, or `prefers-color-scheme`. Storybook has a **Theme** toolbar toggle |
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
 | **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
 | **CI** | ✅ GitHub Actions | `.github/workflows/ci.yml` runs lint → types → unit tests + coverage → build, plus a Storybook browser-test job, on every push to `main` and PR |
@@ -127,7 +127,8 @@ CI runs the same gate — see [`.github/workflows/ci.yml`](.github/workflows/ci.
 
 | Token group | Source of truth | Highlights |
 | --- | --- | --- |
-| **Colour** | `src/tokens/index.ts` + `src/styles/theme.css` | light + dark `--pk-*` custom properties; decorative tints for fills only; every text pairing uses a `*Strong` / `*Text` token verified ≥7:1 (AAA) in both themes |
+| **Colour** | `src/tokens/index.ts` + `src/tokens/colors.css` | light + dark `--pk-*` custom properties; decorative tints for fills only; every text pairing uses a `*Strong` / `*Text` token verified ≥7:1 (AAA) in both themes |
+| **Effects** | `shadows` token + `src/tokens/effects.css` | pixel depth is stacked hard offsets of `--pk-border` (`--pk-shadow-pixel` / `-elevated`) — never a blur; `.crt-effect` scanline overlay is opt-in and off under `prefers-reduced-motion` |
 | **Type** | `src/styles/fonts.ts` (self-hosted `@fontsource`) | `Press Start 2P` (display / H1), `VT323` (UI / labels — single 400 weight), `Nunito` (body) |
 | **Spacing** | `spacing` token | 4 · 8 · 16 · 24 · 32 px hard grid |
 | **Radius** | `radii` token | `0px` everywhere — pixel art has no rounded corners |
@@ -161,15 +162,20 @@ src/
   stories/
     Overview.mdx    design-system homepage
   styles/
-    theme.css       --pk-* colour tokens (light + dark) + a11y baseline
     fonts.ts        self-hosted @fontsource webfonts
-  tokens/           colour + type + spacing tokens, and the `theme` var accessor
+  tokens/
+    index.css       the one stylesheet to link — @imports the partials below
+    colors.css      --pk-* colour tokens (light + dark, OS-follow + opt-in)
+    typography.css spacing.css motion.css effects.css   value tokens
+    base.css        global baseline + the a11y rules that need real CSS
+    fonts.css       Google-Fonts CDN fallback (not imported by index.css)
+    index.ts        the JS mirror of the tokens + the `theme` var accessor
   test/
     setup.ts        jest-dom + `@sa11y/vitest` matchers, Testing Library cleanup (`unit` project)
     a11y.test.tsx   `toBeAccessible` axe checks for every component
     sa11y.d.ts      `toBeAccessible` matcher type augmentation
 .nvmrc              Node version lock (22.12.0)
-design-tokens.json  stale v3 export — superseded by src/tokens + src/styles/theme.css
+design-tokens.json  stale v3 export — superseded by src/tokens/
 ```
 
 Each component folder is `Component.tsx` + `Component.stories.tsx` +

@@ -11,6 +11,9 @@ import {
   lineHeights,
   accessibility,
   transitions,
+  shadows,
+  glyphs,
+  letterSpacings,
   getColorVar,
 } from './index';
 
@@ -46,6 +49,32 @@ describe('tokens', () => {
 
   it('pins the tap-target minimum to 44px (WCAG 2.2 SC 2.5.8)', () => {
     expect(accessibility.tapTargetMin).toBe('44px');
+  });
+
+  it('exposes the pixel shadows as themeable var() refs with a light fallback', () => {
+    expect(shadows.pixel).toBe(
+      'var(--pk-shadow-pixel, 0 -4px 0 0 #000000, 4px 0 0 0 #000000, 0 4px 0 0 #000000, -4px 0 0 0 #000000)',
+    );
+    expect(shadows.pixelElevated).toContain('var(--pk-shadow-pixel-elevated,');
+    expect(shadows.pixelElevated).toContain('8px 8px 0 0 #000000');
+  });
+
+  it('builds pixel depth from hard offsets only — no blur radius', () => {
+    // every layer is "<x> <y> 0 0 <colour>": the third (blur) value is always 0
+    expect(shadows.pixel).not.toMatch(/-?\d+px\s+-?\d+px\s+[1-9]/);
+    expect(shadows.pixelElevated).not.toMatch(/-?\d+px\s+-?\d+px\s+[1-9]/);
+  });
+
+  it('exposes the four brand glyphs as single unicode code points (never emoji)', () => {
+    expect(glyphs).toEqual({ diamond: '◆', remove: '×', required: '*', arrow: '→' });
+    for (const g of Object.values(glyphs)) {
+      expect([...g]).toHaveLength(1);
+    }
+  });
+
+  it('exposes caps tracking for the pixel faces (0.04–0.2em per the type spec)', () => {
+    expect(letterSpacings.button).toBe('0.05em');
+    expect(letterSpacings.caps).toBe('0.06em');
   });
 
   describe('getColorVar', () => {

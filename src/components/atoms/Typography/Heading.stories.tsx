@@ -40,7 +40,7 @@ export const H1Display: Story = {
     level: 1,
     variant: 'display',
     color: 'foreground',
-    children: 'Gender Reveal Voting App',
+    children: 'PIKA UI',
   },
   parameters: {
     docs: {
@@ -65,7 +65,7 @@ export const H3Subheading: Story = {
     level: 3,
     variant: 'subheading',
     color: 'foreground',
-    children: 'Vote for Your Team',
+    children: 'VOTE TALLY',
   },
 };
 
@@ -83,7 +83,7 @@ export const HeadingPrimary: Story = {
     level: 2,
     variant: 'subheading',
     color: 'primary',
-    children: 'Primary Heading',
+    children: 'VOTE TALLY',
   },
 };
 

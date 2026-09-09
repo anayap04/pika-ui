@@ -52,8 +52,13 @@ describe('RadioGroup', () => {
     });
   });
 
-  it.each(['sm', 'md', 'lg'] as const)('accepts the %s size', (size) => {
+  it.each([
+    ['sm', '8px'],
+    ['md', '16px'],
+    ['lg', '24px'],
+  ] as const)('uses %s size for the group gap', (size, gap) => {
     render(<RadioGroup name="color" options={options} size={size} />);
-    expect(screen.getByRole('group')).toBeInTheDocument();
+    expect(screen.getByRole('group')).toHaveStyle({ gap });
+    expect(screen.getByLabelText('Red')).toHaveStyle({ width: '', height: '' });
   });
 });

@@ -50,6 +50,17 @@ describe('FormField', () => {
     expect(screen.queryByText('hidden hint')).toBeNull();
   });
 
+  it('uses the destructive-strong token for error text', () => {
+    render(
+      <FormField label="Guess the weight" required error="Numbers only, please">
+        <input inputMode="numeric" />
+      </FormField>,
+    );
+    expect(screen.getByRole('alert')).toHaveStyle({
+      color: 'var(--pk-destructive-strong, #99002a)',
+    });
+  });
+
   it('colours the label with the destructive token when in error', () => {
     render(
       <FormField label="Broken" error="bad">
@@ -58,6 +69,41 @@ describe('FormField', () => {
     );
     const label = screen.getByText('Broken');
     expect(label).toHaveStyle({ color: 'var(--pk-destructive-strong, #99002a)' });
+  });
+
+  it('associates the label with the control and wires aria-describedby to the hint', () => {
+    render(
+      <FormField label="Nickname" hint="Shown next to your vote">
+        <input />
+      </FormField>,
+    );
+    const input = screen.getByLabelText('Nickname');
+    const hint = screen.getByText('Shown next to your vote');
+    expect(input.getAttribute('aria-describedby')).toBe(hint.id);
+    expect(input).not.toHaveAttribute('aria-invalid');
+  });
+
+  it('points aria-describedby at the error and marks the control invalid', () => {
+    render(
+      <FormField label="Weight" error="Numbers only, please">
+        <input />
+      </FormField>,
+    );
+    const input = screen.getByLabelText('Weight');
+    const error = screen.getByRole('alert');
+    expect(input.getAttribute('aria-describedby')).toBe(error.id);
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('keeps an id the caller already set on the control', () => {
+    render(
+      <FormField label="Email" required>
+        <input id="custom-email" />
+      </FormField>,
+    );
+    const input = screen.getByLabelText(/Email/);
+    expect(input).toHaveAttribute('id', 'custom-email');
+    expect(input).toHaveAttribute('aria-required', 'true');
   });
 
   it('merges caller style overrides', () => {

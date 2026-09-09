@@ -1,0 +1,35 @@
+/* ============================================================
+   PIKA UI — type tokens
+   Three faces, three jobs. Press Start 2P and VT323 ship a single
+   400 weight — never ask for bold on them (the browser fakes it and
+   smears the pixels). Weight tokens apply to Nunito only.
+   ============================================================ */
+:root {
+  --pk-font-display: 'Press Start 2P', 'VT323', monospace;      /* H1, hero, buttons, big CTAs */
+  --pk-font-subheading: 'VT323', 'Press Start 2P', monospace;   /* H2-H4, labels, badges, counters */
+  --pk-font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --pk-font-size-root: 14px;
+  --pk-font-size-sm: 12px;
+  --pk-font-size-md: 14px;
+  --pk-font-size-lg: 16px;
+  --pk-font-size-xl: 20px;
+  --pk-font-size-2xl: 24px;
+  --pk-font-size-3xl: 28px;
+  --pk-font-size-4xl: 32px;
+
+  /* Press Start 2P renders ~1.6x larger than a sans face at the same px,
+     so buttons run a deliberately small scale. */
+  --pk-button-font-size-sm: 10px;
+  --pk-button-font-size-md: 12px;
+  --pk-button-font-size-lg: 14px;
+
+  --pk-font-weight-normal: 400;
+  --pk-font-weight-medium: 700;   /* Nunito only */
+  --pk-font-weight-bold: 800;     /* Nunito only */
+
+  --pk-line-height-heading: 1.4;
+  --pk-line-height-body: 1.6;
+  --pk-letter-spacing-button: 0.05em;
+  --pk-letter-spacing-caps: 0.06em;
+}

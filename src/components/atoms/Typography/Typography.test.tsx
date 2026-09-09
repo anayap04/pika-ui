@@ -27,6 +27,8 @@ describe('Heading', () => {
     });
     expect(screen.getByText('Sub')).toHaveStyle({
       fontFamily: "'VT323', 'Press Start 2P', monospace",
+      textTransform: 'uppercase',
+      letterSpacing: '0.06em',
     });
   });
 
@@ -52,6 +54,11 @@ describe('Heading', () => {
       expect(screen.getByText(color)).toBeInTheDocument();
     },
   );
+
+  it('uses the AAA-safe accent text token for accent headings', () => {
+    render(<Heading level={3} color="accent">VOTE TALLY</Heading>);
+    expect(screen.getByText('VOTE TALLY')).toHaveStyle({ color: 'var(--pk-accent-text, #3d1a52)' });
+  });
 
   it('merges caller style overrides', () => {
     render(
@@ -82,7 +89,7 @@ describe('Paragraph', () => {
 
   it.each([
     ['normal', '400'],
-    ['medium', '700'],
+    ['medium', '600'],
     ['bold', '800'],
   ] as const)('applies the %s weight', (weight, value) => {
     render(<Paragraph weight={weight}>{weight}</Paragraph>);
@@ -110,6 +117,9 @@ describe('Text', () => {
     render(<Text variant="subheading">crt</Text>);
     expect(screen.getByText('crt')).toHaveStyle({
       fontFamily: "'VT323', 'Press Start 2P', monospace",
+      textTransform: 'uppercase',
+      letterSpacing: '0.06em',
+      fontWeight: '400',
     });
   });
 
@@ -122,13 +132,9 @@ describe('Text', () => {
     expect(screen.getByText(size)).toHaveStyle({ fontSize });
   });
 
-  it.each([
-    ['normal', '400'],
-    ['medium', '700'],
-    ['bold', '800'],
-  ] as const)('applies the %s weight', (weight, value) => {
-    render(<Text weight={weight}>{weight}</Text>);
-    expect(screen.getByText(weight)).toHaveStyle({ fontWeight: value });
+  it('ignores weight overrides for the single-weight subheading face', () => {
+    render(<Text variant="subheading" weight="bold">LABEL</Text>);
+    expect(screen.getByText('LABEL')).toHaveStyle({ fontWeight: '400' });
   });
 
   it.each(['foreground', 'muted', 'primary', 'secondary', 'accent', 'destructive'] as const)(
