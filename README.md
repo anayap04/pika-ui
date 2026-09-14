@@ -4,6 +4,7 @@
 
 [![CI](https://github.com/anayap04/pika-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/anayap04/pika-ui/actions/workflows/ci.yml)
 ![Coverage](https://img.shields.io/badge/coverage-%E2%89%A585%25-brightgreen)
+[![SonarCloud Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=anayap04_pika-ui&metric=alert_status)](https://sonarcloud.io/project/overview?id=anayap04_pika-ui)
 
 Pika UI is the React component library behind the *Gender Reveal Voting App*. It
 takes the warmth of an old arcade cabinet — hard 4px borders, a pink-and-gold
@@ -26,6 +27,7 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
 | **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
 | **CI** | ✅ GitHub Actions | `.github/workflows/ci.yml` runs lint → types → unit tests + coverage → build, plus a Storybook browser-test job, on every push to `main` and PR |
+| **SonarCloud** | ⚠️ Gate not computed | [Project health dashboard](https://sonarcloud.io/project/overview?id=anayap04_pika-ui): 19 open issues, 7.4% duplication, security rating C, security review A, reliability A, maintainability A |
 | **Release** | ✅ v0.1.1 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
 | **Docs** | ✅ living | Storybook is the source of truth — `Overview/Introduction` homepage + autodocs on every component |
 

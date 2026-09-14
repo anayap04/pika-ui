@@ -75,12 +75,12 @@ export const colors = {
  * `[data-theme="dark"]` when the stylesheet is present. Same string shape as
  * `colors.light[key]`, so it's a drop-in replacement.
  */
-const cssVar = (key: string) => `--pk-${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}`;
+const cssVar = (key: string) => '--pk-' + key.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
 
 export const theme = Object.fromEntries(
   (Object.keys(colors.light) as (keyof typeof colors.light)[]).map((key) => [
     key,
-    `var(${cssVar(key)}, ${colors.light[key]})`,
+    'var(' + cssVar(key) + ', ' + colors.light[key] + ')',
   ]),
 ) as Record<keyof typeof colors.light, string>;
 

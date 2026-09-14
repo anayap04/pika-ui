@@ -164,16 +164,23 @@ export const FormIntegration: Story = {
         <Input placeholder="Type here..." />
       </FormField>
       <div>
-        <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', marginBottom: '8px' }}>
+        <label
+          htmlFor="input-story-email"
+          style={{ display: 'block', fontSize: '12px', fontWeight: '700', marginBottom: '8px' }}
+        >
           Email
         </label>
-        <Input size="md" type="email" placeholder="email@example.com" />
+        <Input id="input-story-email" size="md" type="email" placeholder="email@example.com" />
       </div>
       <div>
-        <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', marginBottom: '8px' }}>
+        <label
+          htmlFor="input-story-message"
+          style={{ display: 'block', fontSize: '12px', fontWeight: '700', marginBottom: '8px' }}
+        >
           Message
         </label>
         <textarea
+          id="input-story-message"
           placeholder="Your message..."
           style={{
             width: '100%',
