@@ -57,6 +57,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           opacity: disabled ? 0.6 : 1,
           accentColor: theme.primaryStrong,
           border: `2px solid ${theme.border}`,
+          backgroundColor: 'transparent',
           borderRadius: 0, // pixel art has no rounded corners (Toggle + Tag are the only exceptions)
           outline: 'none',
           transition: transitions.fast,

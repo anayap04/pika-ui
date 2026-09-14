@@ -42,12 +42,15 @@ export const FormField: React.FC<FormFieldProps> = ({
   const describedBy =
     [childProps['aria-describedby'], ownDescribedBy].filter(Boolean).join(' ') || undefined;
 
+  const ariaInvalid = error ? true : childProps['aria-invalid'];
+  const ariaRequired = required || childProps['aria-required'] ? true : undefined;
+
   const control = element
     ? React.cloneElement(element, {
         id: controlId,
         'aria-describedby': describedBy,
-        'aria-invalid': error ? true : childProps['aria-invalid'],
-        'aria-required': required || childProps['aria-required'] ? true : undefined,
+        'aria-invalid': ariaInvalid,
+        'aria-required': ariaRequired,
       })
     : children;
 

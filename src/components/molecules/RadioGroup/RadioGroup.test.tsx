@@ -45,6 +45,11 @@ describe('RadioGroup', () => {
     expect(screen.getByLabelText('Red')).toBeInTheDocument();
   });
 
+  it('uses a fieldset with a legend for accessible grouping', () => {
+    render(<RadioGroup name="color" options={options} legend="Color" />);
+    expect(screen.getByRole('group', { name: 'Color' })).toBeInTheDocument();
+  });
+
   it.each(['vertical', 'horizontal'] as const)('lays out %s', (orientation) => {
     render(<RadioGroup name="color" options={options} orientation={orientation} />);
     expect(screen.getByRole('group')).toHaveStyle({

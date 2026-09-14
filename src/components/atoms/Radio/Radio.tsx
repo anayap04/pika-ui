@@ -37,6 +37,7 @@ export const Radio: React.FC<RadioProps> = ({
 }) => {
   const generatedId = useId();
   const radioId = id || generatedId;
+  const isChecked = Boolean(props.checked);
 
   return (
     <div
@@ -47,21 +48,52 @@ export const Radio: React.FC<RadioProps> = ({
         ...style,
       }}
     >
-      <input
-        id={radioId}
-        type="radio"
-        disabled={disabled}
+      <div
         style={{
-          ...sizeStyles[size],
+          position: 'relative',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: sizeStyles[size].width,
+          height: sizeStyles[size].height,
+          minWidth: sizeStyles[size].minWidth,
+          minHeight: sizeStyles[size].minHeight,
           cursor: disabled ? 'not-allowed' : 'pointer',
           opacity: disabled ? 0.6 : 1,
-          accentColor: theme.primaryStrong,
-          border: `2px solid ${theme.border}`,
-          outline: 'none',
-          transition: transitions.fast,
         }}
-        {...props}
-      />
+      >
+        <input
+          id={radioId}
+          type="radio"
+          disabled={disabled}
+          style={{
+            ...sizeStyles[size],
+            position: 'absolute',
+            inset: 0,
+            margin: 0,
+            appearance: 'none',
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+            backgroundColor: 'transparent',
+            border: `2px solid ${theme.border}`,
+            borderRadius: '50%',
+            outline: 'none',
+            transition: transitions.fast,
+          }}
+          {...props}
+        />
+        <span
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            width: `calc(${sizeStyles[size].width} / 2)`,
+            height: `calc(${sizeStyles[size].height} / 2)`,
+            borderRadius: '50%',
+            backgroundColor: isChecked ? theme.primaryStrong : 'transparent',
+            transition: transitions.fast,
+          }}
+        />
+      </div>
       {label && (
         <label
           htmlFor={radioId}

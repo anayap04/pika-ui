@@ -14,6 +14,7 @@ export interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   onChange?: (value: string) => void;
   orientation?: 'vertical' | 'horizontal';
   size?: 'sm' | 'md' | 'lg';
+  legend?: string;
 }
 
 const sizeStyles = {
@@ -29,22 +30,38 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   onChange,
   orientation = 'vertical',
   size = 'md',
+  legend,
   style,
   ...props
 }) => {
   const generatedId = useId();
 
   return (
-    <div
-      role="group"
+    <fieldset
       style={{
         display: 'flex',
         flexDirection: orientation === 'vertical' ? 'column' : 'row',
         ...sizeStyles[size],
+        border: 'none',
+        margin: 0,
+        padding: 0,
+        minWidth: 0,
         ...style,
       }}
       {...props}
     >
+      {legend && (
+        <legend
+          style={{
+            fontFamily: fontFamilies.body,
+            fontSize: '14px',
+            color: theme.foreground,
+            marginBottom: spacing.sm,
+          }}
+        >
+          {legend}
+        </legend>
+      )}
       {options.map((option) => {
         const radioId = `${generatedId}-${option.value}`;
         return (
@@ -82,6 +99,6 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
           </label>
         );
       })}
-    </div>
+    </fieldset>
   );
 };

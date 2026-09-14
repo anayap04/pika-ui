@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { Radio } from './Radio';
 import { theme } from '../../../tokens';
 
@@ -38,6 +39,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const InteractiveRadio = (args: React.ComponentProps<typeof Radio>) => {
+  const [checked, setChecked] = useState(args.checked ?? false);
+
+  return (
+    <Radio
+      {...args}
+      checked={checked}
+      onChange={(event) => setChecked(event.target.checked)}
+    />
+  );
+};
+
 export const Default: Story = {
   args: {
     size: 'md',
@@ -45,6 +58,7 @@ export const Default: Story = {
     disabled: false,
     checked: false,
   },
+  render: (args) => <InteractiveRadio {...args} />,
 };
 
 export const Checked: Story = {

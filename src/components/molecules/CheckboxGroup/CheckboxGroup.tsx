@@ -13,6 +13,7 @@ export interface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivEle
   onChange?: (values: string[]) => void;
   orientation?: 'vertical' | 'horizontal';
   size?: 'sm' | 'md' | 'lg';
+  legend?: string;
 }
 
 const sizeStyles = {
@@ -27,6 +28,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   onChange,
   orientation = 'vertical',
   size = 'md',
+  legend,
   style,
   ...props
 }) => {
@@ -40,16 +42,31 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   };
 
   return (
-    <div
-      role="group"
+    <fieldset
       style={{
         display: 'flex',
         flexDirection: orientation === 'vertical' ? 'column' : 'row',
         ...sizeStyles[size],
+        border: 'none',
+        margin: 0,
+        padding: 0,
+        minWidth: 0,
         ...style,
       }}
       {...props}
     >
+      {legend && (
+        <legend
+          style={{
+            fontFamily: fontFamilies.body,
+            fontSize: '14px',
+            color: theme.foreground,
+            marginBottom: spacing.sm,
+          }}
+        >
+          {legend}
+        </legend>
+      )}
       {options.map((option) => {
         const checkboxId = `${generatedId}-${option.value}`;
         const isChecked = values.includes(option.value);
@@ -87,6 +104,6 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
           </label>
         );
       })}
-    </div>
+    </fieldset>
   );
 };
