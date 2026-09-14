@@ -1,5 +1,5 @@
 {
-  "name": "@anayap10/pika-ui",
+  "name": "@anayap04/pika-ui",
   "version": "0.1.2",
   "type": "module",
   "description": "A retro arcade design system — 8-bit looks, WCAG 2.2 AAA manners",
@@ -7,11 +7,11 @@
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/anayap10/pika-ui.git"
+    "url": "https://github.com/anayap04/pika-ui.git"
   },
-  "homepage": "https://github.com/anayap10/pika-ui#readme",
+  "homepage": "https://github.com/anayap04/pika-ui#readme",
   "bugs": {
-    "url": "https://github.com/anayap10/pika-ui/issues"
+    "url": "https://github.com/anayap04/pika-ui/issues"
   },
   "keywords": [
     "design-system",
