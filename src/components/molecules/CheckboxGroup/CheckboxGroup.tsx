@@ -7,7 +7,7 @@ export interface CheckboxOption {
   disabled?: boolean;
 }
 
-export interface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface CheckboxGroupProps extends Omit<React.FieldsetHTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
   options: CheckboxOption[];
   values?: string[];
   onChange?: (values: string[]) => void;

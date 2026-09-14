@@ -55,6 +55,7 @@
     "test:watch": "vitest --project unit",
     "test:coverage": "vitest run --project unit --coverage",
     "test:a11y": "vitest run --project unit src/test/a11y.test.tsx",
+    "pretest:storybook": "playwright install --with-deps chromium",
     "test:storybook": "vitest run --project storybook",
     "test:all": "vitest run",
     "preview": "vite preview",

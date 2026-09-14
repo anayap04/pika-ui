@@ -11,7 +11,7 @@ export type ChoiceGroupOrientation = 'vertical' | 'horizontal';
 export type ChoiceGroupSize = 'sm' | 'md' | 'lg';
 
 export interface ChoiceGroupProps<T extends ChoiceGroupOption>
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  extends Omit<React.FieldsetHTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
   options: T[];
   orientation?: ChoiceGroupOrientation;
   size?: ChoiceGroupSize;
