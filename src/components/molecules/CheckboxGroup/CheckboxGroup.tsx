@@ -1,5 +1,5 @@
-import { theme, spacing, fontFamilies } from '../../../tokens';
 import React, { useId } from 'react';
+import { ChoiceGroup } from '../ChoiceGroup';
 
 export interface CheckboxOption {
   value: string;
@@ -15,12 +15,6 @@ export interface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivEle
   size?: 'sm' | 'md' | 'lg';
   legend?: string;
 }
-
-const sizeStyles = {
-  sm: { gap: spacing.sm },
-  md: { gap: spacing.md },
-  lg: { gap: spacing.lg },
-};
 
 export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   options,
@@ -42,68 +36,26 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   };
 
   return (
-    <fieldset
-      style={{
-        display: 'flex',
-        flexDirection: orientation === 'vertical' ? 'column' : 'row',
-        ...sizeStyles[size],
-        border: 'none',
-        margin: 0,
-        padding: 0,
-        minWidth: 0,
-        ...style,
-      }}
+    <ChoiceGroup
+      options={options}
+      orientation={orientation}
+      size={size}
+      legend={legend}
+      style={style}
       {...props}
-    >
-      {legend && (
-        <legend
+      renderInput={(option, optionId) => (
+        <input
+          type="checkbox"
+          id={optionId || `${generatedId}-${option.value}`}
+          value={option.value}
+          checked={values.includes(option.value)}
+          onChange={(e) => handleChange(option.value, e.target.checked)}
+          disabled={option.disabled}
           style={{
-            fontFamily: fontFamilies.body,
-            fontSize: '14px',
-            color: theme.foreground,
-            marginBottom: spacing.sm,
+            cursor: option.disabled ? 'not-allowed' : 'pointer',
           }}
-        >
-          {legend}
-        </legend>
+        />
       )}
-      {options.map((option) => {
-        const checkboxId = `${generatedId}-${option.value}`;
-        const isChecked = values.includes(option.value);
-        return (
-          <label
-            key={option.value}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: spacing.sm,
-              cursor: option.disabled ? 'not-allowed' : 'pointer',
-              opacity: option.disabled ? 0.6 : 1,
-            }}
-          >
-            <input
-              type="checkbox"
-              id={checkboxId}
-              value={option.value}
-              checked={isChecked}
-              onChange={(e) => handleChange(option.value, e.target.checked)}
-              disabled={option.disabled}
-              style={{
-                cursor: option.disabled ? 'not-allowed' : 'pointer',
-              }}
-            />
-            <span
-              style={{
-                fontFamily: fontFamilies.body,
-                fontSize: '14px',
-                color: theme.foreground,
-              }}
-            >
-              {option.label}
-            </span>
-          </label>
-        );
-      })}
-    </fieldset>
+    />
   );
 };
