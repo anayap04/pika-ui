@@ -5,7 +5,7 @@
 
 set -e
 
-if [ -z "$1" ]; then
+if [[ -z "$1" ]]; then
   echo "Usage: ./scripts/release.sh <version>"
   echo "Example: ./scripts/release.sh v0.2.0"
   exit 1
@@ -40,7 +40,7 @@ echo "🔨 Building..."
 npm run build
 
 # Verify builds completed
-if [ ! -d "dist" ]; then
+if [[ ! -d "dist" ]]; then
   echo "❌ Build failed - dist directory not found"
   exit 1
 fi
