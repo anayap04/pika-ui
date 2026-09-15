@@ -1,5 +1,5 @@
-import { theme, spacing, fontFamilies } from '../../../tokens';
 import React, { useId } from 'react';
+import { ChoiceGroup } from '../ChoiceGroup';
 
 export interface RadioOption {
   value: string;
@@ -7,20 +7,15 @@ export interface RadioOption {
   disabled?: boolean;
 }
 
-export interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface RadioGroupProps extends Omit<React.FieldsetHTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
   name: string;
   options: RadioOption[];
   value?: string;
   onChange?: (value: string) => void;
   orientation?: 'vertical' | 'horizontal';
   size?: 'sm' | 'md' | 'lg';
+  legend?: string;
 }
-
-const sizeStyles = {
-  sm: { gap: spacing.sm },
-  md: { gap: spacing.md },
-  lg: { gap: spacing.lg },
-};
 
 export const RadioGroup: React.FC<RadioGroupProps> = ({
   name,
@@ -29,59 +24,34 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   onChange,
   orientation = 'vertical',
   size = 'md',
+  legend,
   style,
   ...props
 }) => {
   const generatedId = useId();
 
   return (
-    <div
-      role="group"
-      style={{
-        display: 'flex',
-        flexDirection: orientation === 'vertical' ? 'column' : 'row',
-        ...sizeStyles[size],
-        ...style,
-      }}
+    <ChoiceGroup
+      options={options}
+      orientation={orientation}
+      size={size}
+      legend={legend}
+      style={style}
       {...props}
-    >
-      {options.map((option) => {
-        const radioId = `${generatedId}-${option.value}`;
-        return (
-          <label
-            key={option.value}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: spacing.sm,
-              cursor: option.disabled ? 'not-allowed' : 'pointer',
-              opacity: option.disabled ? 0.6 : 1,
-            }}
-          >
-            <input
-              type="radio"
-              id={radioId}
-              name={name}
-              value={option.value}
-              checked={value === option.value}
-              onChange={(e) => onChange?.(e.target.value)}
-              disabled={option.disabled}
-              style={{
-                cursor: option.disabled ? 'not-allowed' : 'pointer',
-              }}
-            />
-            <span
-              style={{
-                fontFamily: fontFamilies.body,
-                fontSize: '14px',
-                color: theme.foreground,
-              }}
-            >
-              {option.label}
-            </span>
-          </label>
-        );
-      })}
-    </div>
+      renderInput={(option, optionId) => (
+        <input
+          type="radio"
+          id={optionId || `${generatedId}-${option.value}`}
+          name={name}
+          value={option.value}
+          checked={value === option.value}
+          onChange={(e) => onChange?.(e.target.value)}
+          disabled={option.disabled}
+          style={{
+            cursor: option.disabled ? 'not-allowed' : 'pointer',
+          }}
+        />
+      )}
+    />
   );
 };

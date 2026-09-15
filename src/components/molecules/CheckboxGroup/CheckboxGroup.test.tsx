@@ -15,6 +15,12 @@ describe('CheckboxGroup', () => {
     expect(screen.getAllByRole('checkbox')).toHaveLength(3);
   });
 
+  it('uses a semantic fieldset with a legend for accessible grouping', () => {
+    render(<CheckboxGroup options={options} legend="Choose your fruits" />);
+
+    expect(screen.getByRole('group', { name: 'Choose your fruits' })).toBeInTheDocument();
+  });
+
   it('reflects the controlled values as checked', () => {
     render(<CheckboxGroup options={options} values={['a']} />);
     expect(screen.getByLabelText('Apple')).toBeChecked();

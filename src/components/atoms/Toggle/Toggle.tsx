@@ -33,6 +33,9 @@ export const Toggle: React.FC<ToggleProps> = ({
   const generatedId = useId();
   const toggleId = id || generatedId;
   const sizeConfig = sizeStyles[size];
+  const normalizedLabel = typeof label === 'string' ? label.trim() : '';
+  const hasLabel = normalizedLabel.length > 0;
+  const accessibleLabel = hasLabel ? normalizedLabel : 'Toggle';
 
   return (
     <div
@@ -57,6 +60,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           disabled={disabled}
           checked={checked}
           role="switch"
+          aria-label={accessibleLabel}
           aria-checked={checked}
           style={{
             position: 'absolute',
@@ -98,7 +102,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           />
         </label>
       </div>
-      {label && (
+      {hasLabel && (
         <label
           htmlFor={toggleId}
           style={{
@@ -111,7 +115,7 @@ export const Toggle: React.FC<ToggleProps> = ({
             userSelect: 'none',
           }}
         >
-          {label}
+          {normalizedLabel}
         </label>
       )}
     </div>

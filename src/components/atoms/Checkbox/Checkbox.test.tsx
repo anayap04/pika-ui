@@ -9,6 +9,11 @@ describe('Checkbox', () => {
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
   });
 
+  it('uses a transparent background when unchecked', () => {
+    render(<Checkbox />);
+    expect(screen.getByRole('checkbox').style.backgroundColor).toBe('transparent');
+  });
+
   it('links a rendered label to the input via a generated id', () => {
     render(<Checkbox label="Accept terms" />);
     const input = screen.getByLabelText('Accept terms');
