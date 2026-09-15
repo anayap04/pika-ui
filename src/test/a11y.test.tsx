@@ -28,6 +28,13 @@ import { CheckboxGroup } from '../components/molecules/CheckboxGroup';
 import { FormField } from '../components/molecules/FormField';
 import { RadioGroup } from '../components/molecules/RadioGroup';
 
+import { ConfirmationPanel } from '../components/organisms/ConfirmationPanel';
+import { CountdownPanel } from '../components/organisms/CountdownPanel';
+import { EventHero } from '../components/organisms/EventHero';
+import { QRBlock } from '../components/organisms/QRBlock';
+import { ResultsPanel } from '../components/organisms/ResultsPanel';
+import { VotePanel } from '../components/organisms/VotePanel';
+
 /** Render `ui`, then assert the whole document has no axe violations. */
 async function expectAccessible(ui: ReactElement) {
   render(ui);
@@ -181,6 +188,84 @@ describe('molecules — accessibility', () => {
         value="pink"
         onChange={() => {}}
       />,
+    );
+  });
+});
+
+describe('organisms — accessibility', () => {
+  it('EventHero — with and without the optional level/tags/kicker', async () => {
+    await expectAccessible(
+      <>
+        <EventHero
+          title="GENDER REVEAL"
+          kicker="Insert coin"
+          tagline="Pick a team before the cabinet calls it."
+          level={1}
+          tags={['Dec 14', '4:00 PM', 'Valle Dorado']}
+        />
+        <EventHero title="Baby shower" ground="paper" />
+      </>,
+    );
+  });
+
+  it('CountdownPanel — running and expired', async () => {
+    await expectAccessible(
+      <>
+        <CountdownPanel target="2099-01-01T00:00:00Z" caption="January 1, 2099" />
+        <CountdownPanel target="2000-01-01T00:00:00Z" expiredSlot={<span>Voting is open</span>} />
+      </>,
+    );
+  });
+
+  it('VotePanel — locked, unlocked and in error', async () => {
+    const options = [
+      { id: 'girl', label: 'TEAM GIRL', variant: 'primary' as const },
+      { id: 'boy', label: 'TEAM BOY', variant: 'secondary' as const },
+    ];
+    await expectAccessible(
+      <>
+        <VotePanel options={options} onVote={() => {}} />
+        <VotePanel options={options} onVote={() => {}} name="Danna" />
+        <VotePanel options={options} onVote={() => {}} error="Something went wrong" />
+      </>,
+    );
+  });
+
+  it('ResultsPanel — empty, in progress and with a leader', async () => {
+    await expectAccessible(
+      <>
+        <ResultsPanel
+          tallies={[
+            { id: 'girl', label: 'Team girl', count: 0, variant: 'primary' },
+            { id: 'boy', label: 'Team boy', count: 0, variant: 'secondary' },
+          ]}
+        />
+        <ResultsPanel
+          tallies={[
+            { id: 'girl', label: 'Team girl', count: 28, variant: 'primary' },
+            { id: 'boy', label: 'Team boy', count: 20, variant: 'secondary' },
+          ]}
+        />
+      </>,
+    );
+  });
+
+  it('ConfirmationPanel — saved and failed', async () => {
+    await expectAccessible(
+      <>
+        <ConfirmationPanel voterName="Danna" choiceLabel="Team Girl" onReset={() => {}} />
+        <ConfirmationPanel status="failed" onRetry={() => {}} />
+      </>,
+    );
+  });
+
+  it('QRBlock — full block, compact aside and expired', async () => {
+    await expectAccessible(
+      <>
+        <QRBlock url="https://example.com/live" caption="Watching from abroad?" destination="Opens the livestream." />
+        <QRBlock url="https://example.com/live" size="sm" caption="Scan to join live" />
+        <QRBlock url="https://example.com/live" expired="The stream has ended." />
+      </>,
     );
   });
 });
