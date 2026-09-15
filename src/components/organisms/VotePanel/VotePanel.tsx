@@ -62,11 +62,13 @@ export const VotePanel: React.FC<VotePanelProps> = ({
 
   const locked = pending || (requireName && trimmedName.length === 0);
 
-  const hint = pending
-    ? 'Locked while your vote saves.'
-    : requireName && trimmedName.length === 0
-      ? 'Enter your name to unlock both halves.'
-      : 'One tap casts the vote. There is no separate submit.';
+  let hint = 'One tap casts the vote. There is no separate submit.';
+
+  if (pending) {
+    hint = 'Locked while your vote saves.';
+  } else if (requireName && trimmedName.length === 0) {
+    hint = 'Enter your name to unlock both halves.';
+  }
 
   return (
     <Card variant="elevated" padding="lg" style={{ maxWidth: '520px', ...style }}>

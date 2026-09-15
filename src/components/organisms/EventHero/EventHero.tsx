@@ -85,9 +85,9 @@ export const EventHero: React.FC<EventHeroProps> = ({
             textShadow: `4px 4px 0 ${theme.primary}`,
           }}
         >
-          {titleLines.map((line, i) => (
-            <React.Fragment key={i}>
-              {i > 0 && <br />}
+          {titleLines.map((line, index) => (
+            <React.Fragment key={`${line}-${index}`}>
+              {index > 0 && <br />}
               {line}
             </React.Fragment>
           ))}

@@ -22,63 +22,86 @@ export interface QRBlockProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
 // a real code needs `qrcode.react` (or equivalent), which would be this
 // library's first runtime dependency. Flagged for the maintainer, not
 // silently added here.
-const patternStyle = (moduleSize: number): React.CSSProperties => ({
-  backgroundColor: theme.card,
-  backgroundImage: `conic-gradient(${theme.border} 0 25%, transparent 0 50%, ${theme.border} 0 75%, transparent 0)`,
-  backgroundSize: `${moduleSize}px ${moduleSize}px`,
-});
 
-export const QRBlock: React.FC<QRBlockProps> = ({
-  url,
-  caption = 'Scan to continue',
-  destination,
-  size = 'md',
-  actionLabel = 'OPEN LINK',
-  expired = false,
+const getExpiredMessage = (expired: QRBlockProps['expired']) =>
+  typeof expired === 'string' ? expired : 'This code is no longer active.';
+
+const getLabelText = (isExpired: boolean, caption: string, expiredMessage: string) =>
+  isExpired ? expiredMessage : caption;
+
+const renderSmallQR = ({
+  accessibleLabel,
+  caption,
+  expiredMessage,
+  isExpired,
   style,
   ...props
-}) => {
-  const isExpired = Boolean(expired);
-  const expiredMessage = typeof expired === 'string' ? expired : 'This code is no longer active.';
-  const accessibleLabel = `QR code to ${destination || caption}`;
+}: {
+  accessibleLabel: string;
+  caption: string;
+  expiredMessage: string;
+  isExpired: boolean;
+  style?: React.CSSProperties;
+  props?: React.HTMLAttributes<HTMLElement>;
+}) => (
+  <figure
+    style={{ display: 'flex', alignItems: 'center', gap: spacing.md, margin: 0, ...style }}
+    {...props}
+  >
+    <img
+      alt={accessibleLabel}
+      src={`data:image/svg+xml;utf8,${encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" fill="${theme.card}"/><path d="M0 0h16v16H0zm16 0h16v16H16zm32 0h16v16H48zM0 16h16v16H0zm16 16h16v16H16zm32-16h16v16H48zm0 16h16v16H48zM0 48h16v16H0zm16 0h16v16H16z" fill="${theme.border}" fill-opacity="0.25"/></svg>`
+      )}`}
+      style={{
+        width: '64px',
+        height: '64px',
+        flex: '0 0 64px',
+        border: `4px solid ${theme.border}`,
+        opacity: isExpired ? 0.6 : 1,
+        display: 'block',
+        backgroundColor: theme.card,
+      }}
+    />
+    <figcaption
+      style={{
+        fontFamily: isExpired ? fontFamilies.body : fontFamilies.subheading,
+        fontSize: isExpired ? '15px' : '19px',
+        lineHeight: 1.3,
+        letterSpacing: isExpired ? undefined : letterSpacings.caps,
+        textTransform: isExpired ? 'none' : 'uppercase',
+        color: isExpired ? theme.destructiveStrong : theme.primaryStrong,
+      }}
+    >
+      {getLabelText(isExpired, caption, expiredMessage)}
+    </figcaption>
+  </figure>
+);
 
+const renderStandardQR = ({
+  accessibleLabel,
+  caption,
+  destination,
+  actionLabel,
+  expiredMessage,
+  isExpired,
+  style,
+  url,
+  ...props
+}: {
+  accessibleLabel: string;
+  caption: string;
+  destination?: string;
+  actionLabel: string;
+  expiredMessage: string;
+  isExpired: boolean;
+  style?: React.CSSProperties;
+  url: string;
+  props?: React.HTMLAttributes<HTMLElement>;
+}) => {
   const handleOpen = () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
-
-  if (size === 'sm') {
-    return (
-      <figure
-        style={{ display: 'flex', alignItems: 'center', gap: spacing.md, margin: 0, ...style }}
-        {...props}
-      >
-        <div
-          role="img"
-          aria-label={accessibleLabel}
-          style={{
-            ...patternStyle(16),
-            width: '64px',
-            height: '64px',
-            flex: '0 0 64px',
-            border: `4px solid ${theme.border}`,
-            opacity: isExpired ? 0.6 : 1,
-          }}
-        />
-        <figcaption
-          style={{
-            fontFamily: isExpired ? fontFamilies.body : fontFamilies.subheading,
-            fontSize: isExpired ? '15px' : '19px',
-            lineHeight: 1.3,
-            letterSpacing: isExpired ? undefined : letterSpacings.caps,
-            textTransform: isExpired ? 'none' : 'uppercase',
-            color: isExpired ? theme.destructiveStrong : theme.primaryStrong,
-          }}
-        >
-          {isExpired ? expiredMessage : caption}
-        </figcaption>
-      </figure>
-    );
-  }
 
   return (
     <Card variant="elevated" padding="lg" style={{ maxWidth: '340px', ...style }}>
@@ -105,13 +128,13 @@ export const QRBlock: React.FC<QRBlockProps> = ({
           {caption}
         </figcaption>
 
-        {/* Quiet zone: a 12px border of the code's own background, required
-            for reliable scanning — never tinted or shrunk. */}
         <div style={{ border: `4px solid ${theme.border}`, background: theme.card, padding: '12px' }}>
-          <div
-            role="img"
-            aria-label={accessibleLabel}
-            style={{ ...patternStyle(22), width: '132px', height: '132px', opacity: isExpired ? 0.6 : 1 }}
+          <img
+            alt={accessibleLabel}
+            src={`data:image/svg+xml;utf8,${encodeURIComponent(
+              `<svg xmlns="http://www.w3.org/2000/svg" width="132" height="132" viewBox="0 0 132 132"><rect width="132" height="132" fill="${theme.card}"/><path d="M0 0h33v33H0zm33 0h33v33H33zm66 0h33v33H99zM0 33h33v33H0zm33 33h33v33H33zm66-33h33v33H99zm0 33h33v33H99zM0 99h33v33H0zm33 0h33v33H33z" fill="${theme.border}" fill-opacity="0.25"/></svg>`
+            )}`}
+            style={{ width: '132px', height: '132px', opacity: isExpired ? 0.6 : 1, display: 'block' }}
           />
         </div>
 
@@ -134,4 +157,40 @@ export const QRBlock: React.FC<QRBlockProps> = ({
       </figure>
     </Card>
   );
+};
+
+export const QRBlock: React.FC<QRBlockProps> = ({
+  url,
+  caption = 'Scan to continue',
+  destination,
+  size = 'md',
+  actionLabel = 'OPEN LINK',
+  expired = false,
+  style,
+  ...props
+}) => {
+  const isExpired = Boolean(expired);
+  const expiredMessage = getExpiredMessage(expired);
+  const accessibleLabel = `QR code to ${destination || caption}`;
+
+  return size === 'sm'
+    ? renderSmallQR({
+        accessibleLabel,
+        caption,
+        expiredMessage,
+        isExpired,
+        style,
+        ...props,
+      })
+    : renderStandardQR({
+        accessibleLabel,
+        caption,
+        destination,
+        actionLabel,
+        expiredMessage,
+        isExpired,
+        style,
+        url,
+        ...props,
+      });
 };

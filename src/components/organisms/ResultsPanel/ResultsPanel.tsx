@@ -66,12 +66,12 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
   const total = tallies.reduce((sum, t) => sum + t.count, 0);
   const maxCount = Math.max(0, ...tallies.map((t) => t.count));
   const leaders = tallies.filter((t) => t.count === maxCount);
-  const leaderLine =
-    total === 0
-      ? ''
-      : leaders.length > 1
-        ? "It's a tie"
-        : `${leaders[0].label} leads`;
+  let leaderLine = '';
+
+  if (total > 0) {
+    leaderLine = leaders.length > 1 ? "It's a tie" : `${leaders[0].label} leads`;
+  }
+
   const showLeaderLine = total >= minSample && total > 0;
 
   const [announced, setAnnounced] = useState('');
@@ -139,17 +139,20 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
                     {tally.count} &middot; {pct}%
                   </Text>
                 </div>
-                <div
-                  role="progressbar"
-                  aria-valuenow={pct}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-valuetext={`${tally.count} of ${total} votes`}
+                <progress
                   aria-label={tally.label}
-                  style={{ border: `4px solid ${theme.border}`, background: theme.background, height: '28px' }}
-                >
-                  <div style={{ height: '100%', width: `${pct}%`, background: FILL[tally.variant], transition: transitions.slow }} />
-                </div>
+                  value={pct}
+                  max={100}
+                  style={{
+                    width: '100%',
+                    height: '28px',
+                    border: `4px solid ${theme.border}`,
+                    background: theme.background,
+                    accentColor: FILL[tally.variant],
+                    display: 'block',
+                    transition: transitions.slow,
+                  }}
+                />
               </div>
             );
           })

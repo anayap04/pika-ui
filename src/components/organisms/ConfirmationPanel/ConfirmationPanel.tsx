@@ -61,8 +61,18 @@ export const ConfirmationPanel: React.FC<ConfirmationPanelProps> = ({
 
   const bandBackground = failed ? theme.destructiveStrong : STRONG[variant];
   const bandForeground = failed ? theme.destructiveForeground : FOREGROUND[variant];
-  const resolvedBandLabel = bandLabel ?? (failed ? 'NOT SAVED' : 'VOTE SAVED');
-  const greeting = failed ? resolvedBandLabel : trimmedName ? `Thanks, ${trimmedName}` : 'Vote saved';
+
+  let resolvedBandLabel = bandLabel ?? 'VOTE SAVED';
+  if (failed) {
+    resolvedBandLabel = bandLabel ?? 'NOT SAVED';
+  }
+
+  let greeting = 'Vote saved';
+  if (failed) {
+    greeting = resolvedBandLabel;
+  } else if (trimmedName) {
+    greeting = `Thanks, ${trimmedName}`;
+  }
 
   return (
     <Card
