@@ -78,7 +78,8 @@ export const Radio: React.FC<RadioProps> = ({
             backgroundColor: 'transparent',
             border: `2px solid ${theme.border}`,
             borderRadius: '50%',
-            outline: 'none',
+            // No inline outline reset: it would beat the global `:focus-visible`
+            // ring (base.css) on specificity and hide keyboard focus entirely.
             transition: transitions.fast,
           }}
           {...props}

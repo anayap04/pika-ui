@@ -45,6 +45,13 @@ export const FormField: React.FC<FormFieldProps> = ({
   const ariaInvalid = error ? true : childProps['aria-invalid'];
   const ariaRequired = required || childProps['aria-required'] ? true : undefined;
 
+  // Checkbox/Radio render their own internal <label htmlFor>. If this
+  // FormField also renders one for the same id, the control ends up with two
+  // conflicting labels (screen readers announce them inconsistently). When
+  // the child already self-labels, FormField's caption becomes a plain span
+  // instead — still visible, just not a second label for the same control.
+  const childSelfLabels = typeof childProps.label === 'string' && childProps.label.trim().length > 0;
+
   const control = element
     ? React.cloneElement(element, {
         id: controlId,
@@ -65,9 +72,8 @@ export const FormField: React.FC<FormFieldProps> = ({
       }}
       {...props}
     >
-      <label
-        htmlFor={controlId}
-        style={{
+      {(() => {
+        const captionStyle: React.CSSProperties = {
           fontFamily: fontFamilies.subheading,
           fontSize: '14px',
           // VT323 ships a single 400 weight — a bold request here is faux-bold
@@ -79,18 +85,31 @@ export const FormField: React.FC<FormFieldProps> = ({
           display: 'flex',
           alignItems: 'center',
           gap: spacing.xs,
-        }}
-      >
-        {label}
-        {required && (
+        };
+        const captionContent = (
           <>
-            <span aria-hidden="true" style={{ color: theme.destructiveStrong }}>
-              {glyphs.required}
-            </span>
-            <span style={visuallyHidden}>(required)</span>
+            {label}
+            {required && (
+              <>
+                <span aria-hidden="true" style={{ color: theme.destructiveStrong }}>
+                  {glyphs.required}
+                </span>
+                <span style={visuallyHidden}>(required)</span>
+              </>
+            )}
           </>
-        )}
-      </label>
+        );
+        // A self-labeling child (Checkbox/Radio) already owns a <label
+        // htmlFor> for controlId — a second one here would give the control
+        // two conflicting labels, so the caption becomes a plain span instead.
+        return childSelfLabels ? (
+          <span style={captionStyle}>{captionContent}</span>
+        ) : (
+          <label htmlFor={controlId} style={captionStyle}>
+            {captionContent}
+          </label>
+        );
+      })()}
 
       {control}
 

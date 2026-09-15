@@ -38,11 +38,17 @@ export const Toggle: React.FC<ToggleProps> = ({
   const accessibleLabel = hasLabel ? normalizedLabel : 'Toggle';
 
   return (
-    <div
+    // A single <label> covers the track and the text so the input has exactly
+    // one associated label (two `htmlFor` labels on one field, one for the
+    // track and one for the text, made screen readers announce inconsistently
+    // or double up — axe's `form-field-multiple-labels` catches this).
+    <label
+      htmlFor={toggleId}
       style={{
         display: 'flex',
         alignItems: 'center',
         gap: spacing.md,
+        cursor: disabled ? 'not-allowed' : 'pointer',
         ...style,
       }}
     >
@@ -62,6 +68,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           role="switch"
           aria-label={accessibleLabel}
           aria-checked={checked}
+          className="pk-toggle-input"
           style={{
             position: 'absolute',
             opacity: 0,
@@ -71,8 +78,8 @@ export const Toggle: React.FC<ToggleProps> = ({
           }}
           {...props}
         />
-        <label
-          htmlFor={toggleId}
+        <span
+          className="pk-toggle-track"
           style={{
             position: 'relative',
             display: 'inline-block',
@@ -82,42 +89,40 @@ export const Toggle: React.FC<ToggleProps> = ({
             border: `2px solid ${theme.border}`,
             // Documented radius exception: a square switch reads as a checkbox.
             borderRadius: '12px',
-            cursor: disabled ? 'not-allowed' : 'pointer',
             opacity: disabled ? 0.6 : 1,
             transition: transitions.fast,
           }}
         >
-          <div
+          <span
             style={{
               position: 'absolute',
               top: '2px',
               left: checked ? `calc(${sizeConfig.width} - ${sizeConfig.toggleWidth} - 2px)` : '2px',
               width: sizeConfig.toggleWidth,
               height: sizeConfig.toggleHeight,
+              display: 'block',
               backgroundColor: theme.card,
               borderRadius: '10px', // paired exception with the 12px track
               transition: transitions.fast,
               border: `1px solid ${theme.border}`,
             }}
           />
-        </label>
+        </span>
       </div>
       {hasLabel && (
-        <label
-          htmlFor={toggleId}
+        <span
           style={{
             fontFamily: fontFamilies.body,
             fontSize: '14px',
             fontWeight: fontWeights.normal,
             color: theme.foreground,
-            cursor: disabled ? 'not-allowed' : 'pointer',
             opacity: disabled ? 0.6 : 1,
             userSelect: 'none',
           }}
         >
           {normalizedLabel}
-        </label>
+        </span>
       )}
-    </div>
+    </label>
   );
 };
