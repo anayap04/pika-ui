@@ -1,5 +1,6 @@
 import React, { useId } from 'react';
 import { ChoiceGroup } from '../ChoiceGroup';
+import { theme } from '../../../tokens';
 
 export interface CheckboxOption {
   value: string;
@@ -51,8 +52,14 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
           checked={values.includes(option.value)}
           onChange={(e) => handleChange(option.value, e.target.checked)}
           disabled={option.disabled}
+          className="pk-checkbox"
           style={{
             cursor: option.disabled ? 'not-allowed' : 'pointer',
+            appearance: 'none',
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+            backgroundColor: values.includes(option.value) ? theme.primaryStrong : 'transparent',
+            border: `2px solid ${theme.border}`,
           }}
         />
       )}

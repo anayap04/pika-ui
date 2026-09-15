@@ -97,6 +97,12 @@
   --pk-placeholder: #c4aed9;
   --pk-chart-4: #4dff9f;
   --pk-chart-5: #d1b3ff;
+  /* EventHero's pink band is the one place these tints are used as a whole
+     surface ground rather than an accent — at night it drops to the card
+     plum instead, because the pink ground turns the gold border and title
+     to 3:1 or worse. */
+  --pk-pixel-pink: #2d1b4e;
+  --pk-pixel-lilac: #2d1b4e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -128,5 +134,7 @@
     --pk-placeholder: #c4aed9;
     --pk-chart-4: #4dff9f;
     --pk-chart-5: #d1b3ff;
+    --pk-pixel-pink: #2d1b4e;
+    --pk-pixel-lilac: #2d1b4e;
   }
 }

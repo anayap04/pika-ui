@@ -71,6 +71,7 @@ export const ChoiceGroup = <T extends ChoiceGroupOption>({
               gap: spacing.sm,
               cursor: option.disabled ? 'not-allowed' : 'pointer',
               opacity: option.disabled ? 0.6 : 1,
+              userSelect: 'none',
             }}
           >
             {renderInput(option, optionId)}

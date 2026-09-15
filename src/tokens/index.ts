@@ -182,6 +182,19 @@ export const glyphs = {
   arrow: '→', // → "next", footer continuations
 } as const;
 
+/**
+ * Legacy "manual paper" surface tints (decorative fills only, never text) —
+ * see colors.css `:root` and its dark-theme override. EventHero's pink band
+ * is the one organism that uses one of these as a whole surface ground
+ * rather than an accent; at night the ground drops to the card plum there
+ * (see colors.css) because the pink turns the gold border/title to 3:1 or
+ * worse.
+ */
+export const decorativeTints = {
+  pixelPink: 'var(--pk-pixel-pink, #e8b4d9)',
+  pixelLilac: 'var(--pk-pixel-lilac, #c9b4e8)',
+};
+
 // Helper: Get color from theme (use in components with useTheme or CSS var fallback)
 export const getColorVar = (colorKey: keyof typeof colors.light, isDark = false) => {
   return isDark ? colors.dark[colorKey] : colors.light[colorKey];

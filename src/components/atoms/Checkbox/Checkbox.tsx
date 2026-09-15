@@ -32,6 +32,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   size = 'md',
   id,
   disabled,
+  className,
   style,
   ...props
 }) => {
@@ -51,11 +52,15 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         id={checkboxId}
         type="checkbox"
         disabled={disabled}
+        className={['pk-checkbox', className].filter(Boolean).join(' ')}
         style={{
           ...sizeStyles[size],
           cursor: disabled ? 'not-allowed' : 'pointer',
           opacity: disabled ? 0.6 : 1,
           accentColor: theme.primaryStrong,
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
           border: `2px solid ${theme.border}`,
           backgroundColor: 'transparent',
           borderRadius: 0, // pixel art has no rounded corners (Toggle + Tag are the only exceptions)

@@ -32,12 +32,12 @@ export const Radio: React.FC<RadioProps> = ({
   size = 'md',
   id,
   disabled,
+  className,
   style,
   ...props
 }) => {
   const generatedId = useId();
   const radioId = id || generatedId;
-  const isChecked = Boolean(props.checked);
 
   return (
     <div
@@ -66,6 +66,7 @@ export const Radio: React.FC<RadioProps> = ({
           id={radioId}
           type="radio"
           disabled={disabled}
+          className={['pk-radio', className].filter(Boolean).join(' ')}
           style={{
             ...sizeStyles[size],
             position: 'absolute',
@@ -89,7 +90,6 @@ export const Radio: React.FC<RadioProps> = ({
             width: `calc(${sizeStyles[size].width} / 2)`,
             height: `calc(${sizeStyles[size].height} / 2)`,
             borderRadius: '50%',
-            backgroundColor: isChecked ? theme.primaryStrong : 'transparent',
             transition: transitions.fast,
           }}
         />
