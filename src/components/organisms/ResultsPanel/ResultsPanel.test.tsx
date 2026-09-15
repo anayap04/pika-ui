@@ -21,11 +21,11 @@ describe('ResultsPanel', () => {
     expect(screen.getByText(/20.*42%/)).toBeInTheDocument();
   });
 
-  it('exposes each bar as a labelled progressbar', () => {
+  it('exposes each bar as a labelled native progress element', () => {
     render(<ResultsPanel tallies={tallies} />);
     const girlBar = screen.getByRole('progressbar', { name: 'Team girl' });
-    expect(girlBar).toHaveAttribute('aria-valuenow', '58');
-    expect(girlBar).toHaveAttribute('aria-valuetext', '28 of 48 votes');
+    expect(girlBar).toHaveAttribute('value', '58');
+    expect(girlBar).toHaveAttribute('max', '100');
   });
 
   it('shows the empty state and keeps both tracks visible when there are no votes', () => {
