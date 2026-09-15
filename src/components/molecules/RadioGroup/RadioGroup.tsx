@@ -1,5 +1,6 @@
 import React, { useId } from 'react';
 import { ChoiceGroup } from '../ChoiceGroup';
+import { theme } from '../../../tokens';
 
 export interface RadioOption {
   value: string;
@@ -47,8 +48,18 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
           checked={value === option.value}
           onChange={(e) => onChange?.(e.target.value)}
           disabled={option.disabled}
+          className="pk-radio"
           style={{
             cursor: option.disabled ? 'not-allowed' : 'pointer',
+            appearance: 'none',
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+            backgroundColor: 'transparent',
+            backgroundImage: value === option.value
+              ? `radial-gradient(circle, ${theme.primaryStrong} 0 35%, transparent 38%)`
+              : 'none',
+            border: `2px solid ${theme.border}`,
+            borderRadius: '50%',
           }}
         />
       )}
