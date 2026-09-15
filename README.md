@@ -5,6 +5,10 @@
 [![CI](https://github.com/anayap04/pika-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/anayap04/pika-ui/actions/workflows/ci.yml)
 ![Coverage](https://img.shields.io/badge/coverage-%E2%89%A585%25-brightgreen)
 [![SonarCloud Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=anayap04_pika-ui&metric=alert_status)](https://sonarcloud.io/project/overview?id=anayap04_pika-ui)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=anayap04_pika-ui&metric=sqale_rating)](https://sonarcloud.io/project/overview?id=anayap04_pika-ui)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=anayap04_pika-ui&metric=reliability_rating)](https://sonarcloud.io/project/overview?id=anayap04_pika-ui)
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=anayap04_pika-ui&metric=security_rating)](https://sonarcloud.io/project/overview?id=anayap04_pika-ui)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=anayap04_pika-ui&metric=code_smells)](https://sonarcloud.io/project/overview?id=anayap04_pika-ui)
 
 Pika UI is the React component library behind the *Gender Reveal Voting App*. It
 takes the warmth of an old arcade cabinet — hard 4px borders, a pink-and-gold
@@ -21,14 +25,14 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Build** | ✅ passing | `npm run build` (tsc project refs + Vite 7) and `npm run build-storybook` both clean |
 | **Types** | ✅ passing | `tsc -b`, strict, no errors |
 | **Lint** | ✅ passing | flat ESLint config (`@eslint/js`, `typescript-eslint`, React Hooks, Storybook) — 0 warnings |
-| **Tests** | ✅ passing | **unit tests** (Vitest 4 + jsdom + Testing Library) for every atom, molecule and token module, **`@sa11y/vitest` `toBeAccessible` axe checks** on every component, plus story smoke / a11y tests via `@storybook/addon-vitest` in a real browser (Playwright Chromium) |
+| **Tests** | ✅ passing | **unit tests** (Vitest 4 + jsdom + Testing Library) for every atom, molecule, organism and token module, **`@sa11y/vitest` `toBeAccessible` axe checks** on every component, plus story smoke / a11y tests via `@storybook/addon-vitest` in a real browser (Playwright Chromium) |
 | **Accessibility** | 🎯 AAA, both themes | **CI-blocking** `@sa11y/vitest` axe checks (WCAG 2.1 A/AA base ruleset) on every component in the unit suite — roles, names, label associations, ARIA. Plus `@storybook/addon-a11y` per-story with the full WCAG 2.2 rule set **and** axe `color-contrast-enhanced` (AAA 7:1); every text pairing verified ≥7:1 in light **and** dark (jsdom has no layout, so contrast is checked in the browser project, not the sa11y unit tests) |
 | **Theming** | ✅ light + dark | `src/tokens/colors.css` drives `--pk-*` custom properties; components read them via `theme` in `src/tokens`. Switches on `[data-theme]`, `.dark`, or `prefers-color-scheme`. Storybook has a **Theme** toolbar toggle |
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
 | **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
 | **CI** | ✅ GitHub Actions | `.github/workflows/ci.yml` runs lint → types → unit tests + coverage → build, plus a Storybook browser-test job, on every push to `main` and PR |
-| **SonarCloud** | ⚠️ Gate not computed | [Project health dashboard](https://sonarcloud.io/project/overview?id=anayap04_pika-ui): 19 open issues, 7.4% duplication, security rating C, security review A, reliability A, maintainability A |
-| **Release** | ✅ v0.1.1 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
+| **SonarCloud** | ✅ Quality Gate passing | [Project dashboard](https://sonarcloud.io/project/overview?id=anayap04_pika-ui) — 0 bugs, 0 vulnerabilities, 0 security hotspots, 4 code smells, 5.7% duplicated lines (526 lines / 20 blocks), reliability **A**, security **A**, security review **A**, maintainability **A**. 7,986 lines of analyzed code across 115 files |
+| **Release** | ✅ v0.1.2 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
 | **Docs** | ✅ living | Storybook is the source of truth — `Overview/Introduction` homepage + autodocs on every component |
 
 ### Component inventory
@@ -37,11 +41,19 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | --- | --- | --- |
 | **Atoms** | 8 | Button · Card · Input · Typography (Heading / Paragraph / Text) · Badge · Checkbox · Radio · Toggle · Tags |
 | **Molecules** | 5 | FormField · RadioGroup · CheckboxGroup · ButtonGroup · CardSection |
-| **Organisms** | 0 | planned (Phase 4) |
+| **Organisms** | 6 | EventHero · CountdownPanel · VotePanel · ResultsPanel · ConfirmationPanel · QRBlock |
 
 ### Known gaps / tech debt
 
-- **Phase 4 (Organisms)** — Complex composite components planned for future releases.
+- **QRBlock renders a placeholder pattern**, not a scannable code. A real code
+  needs a runtime dependency (`qrcode.react` or equivalent) — this library's
+  first — which is flagged for the maintainer rather than added silently.
+- **VotesList and LockedLevelCard** exist on the live Invitation/Reveal screens
+  but are not yet specified as organisms; both need a decision on avatars,
+  since the system has no avatar atom and no icon set.
+- **4 open SonarCloud code smells, 5.7% duplicated lines** — see the
+  [SonarCloud dashboard](https://sonarcloud.io/project/overview?id=anayap04_pika-ui)
+  for the current list.
 
 ---
 
@@ -96,7 +108,7 @@ Two Vitest **projects** run from one config ([vite.config.ts](vite.config.ts)):
 [src/test/setup.ts](src/test/setup.ts) calls `setup()` from
 [`@sa11y/vitest`](https://www.npmjs.com/package/@sa11y/vitest), which registers the
 async `toBeAccessible` matcher (axe-core, WCAG 2.1 A/AA base ruleset).
-[src/test/a11y.test.tsx](src/test/a11y.test.tsx) renders every atom and molecule in
+[src/test/a11y.test.tsx](src/test/a11y.test.tsx) renders every atom, molecule and organism in
 representative configurations and asserts:
 
 ```tsx
@@ -160,7 +172,7 @@ src/
   components/
     atoms/          Button, Card, Input, Typography, Badge, Checkbox, Radio, Toggle, Tags
     molecules/      FormField, RadioGroup, CheckboxGroup, ButtonGroup, CardSection
-    organisms/      (planned — Phase 4)
+    organisms/      EventHero, CountdownPanel, VotePanel, ResultsPanel, ConfirmationPanel, QRBlock
   stories/
     Overview.mdx    design-system homepage
   styles/
