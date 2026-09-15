@@ -119,7 +119,6 @@ export const ConfirmationPanel: React.FC<ConfirmationPanelProps> = ({
             letterSpacing: letterSpacings.caps,
             textTransform: 'uppercase',
             color: theme.foreground,
-            outline: 'none',
           }}
         >
           {greeting}
