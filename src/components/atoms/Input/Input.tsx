@@ -34,7 +34,8 @@ export const Input: React.FC<InputProps> = ({ size = 'md', disabled, style, ...p
         borderRadius: '0px',
         backgroundColor: theme.inputBackground,
         color: theme.input,
-        outline: 'none',
+        // No inline outline reset: it would beat the global `:focus-visible`
+        // ring (base.css) on specificity and hide keyboard focus entirely.
         // Focus/hover change colour only, never shape or size.
         transition: transitions.fast,
         opacity: disabled ? 0.6 : 1,

@@ -64,7 +64,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           border: `2px solid ${theme.border}`,
           backgroundColor: 'transparent',
           borderRadius: 0, // pixel art has no rounded corners (Toggle + Tag are the only exceptions)
-          outline: 'none',
+          // No inline outline reset: it would beat the global `:focus-visible`
+          // ring (base.css) on specificity and hide keyboard focus entirely.
           transition: transitions.fast,
         }}
         {...props}

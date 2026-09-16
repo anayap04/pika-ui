@@ -74,6 +74,16 @@ input::placeholder, textarea::placeholder { color: var(--pk-placeholder); opacit
   scroll-margin-block: 80px;
 }
 
+/* Toggle's real <input> is visually hidden (0x0, opacity 0) so its own
+   focus-visible ring is invisible; move it onto the visible track instead. */
+.pk-toggle-input:focus-visible {
+  outline: none;
+}
+.pk-toggle-input:focus-visible + .pk-toggle-track {
+  outline: var(--pk-focus-ring-width) solid var(--pk-ring);
+  outline-offset: var(--pk-focus-ring-offset);
+}
+
 /* SC 2.2.2 Pause, Stop, Hide. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

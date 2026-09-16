@@ -26,7 +26,7 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Types** | ✅ passing | `tsc -b`, strict, no errors |
 | **Lint** | ✅ passing | flat ESLint config (`@eslint/js`, `typescript-eslint`, React Hooks, Storybook) — 0 warnings |
 | **Tests** | ✅ passing | **unit tests** (Vitest 4 + jsdom + Testing Library) for every atom, molecule, organism and token module, **`@sa11y/vitest` `toBeAccessible` axe checks** on every component, plus story smoke / a11y tests via `@storybook/addon-vitest` in a real browser (Playwright Chromium) |
-| **Accessibility** | 🎯 AAA, both themes | **CI-blocking** `@sa11y/vitest` axe checks (WCAG 2.1 A/AA base ruleset) on every component in the unit suite — roles, names, label associations, ARIA. Plus `@storybook/addon-a11y` per-story with the full WCAG 2.2 rule set **and** axe `color-contrast-enhanced` (AAA 7:1); every text pairing verified ≥7:1 in light **and** dark (jsdom has no layout, so contrast is checked in the browser project, not the sa11y unit tests) |
+| **Accessibility** | 🎯 AAA, both themes | **CI-blocking** `@sa11y/vitest` axe checks (WCAG 2.1 A/AA base ruleset) on every component in the unit suite — roles, names, label associations, ARIA. Plus `@storybook/addon-a11y` per-story with the full WCAG 2.2 rule set **and** axe `color-contrast-enhanced` (AAA 7:1); every text pairing verified ≥7:1 in light **and** dark (jsdom has no layout, so contrast is checked in the browser project, not the sa11y unit tests). Full criterion-by-criterion status: [**Accessibility Conformance Report**](ACCESSIBILITY_CONFORMANCE_REPORT.md) |
 | **Theming** | ✅ light + dark | `src/tokens/colors.css` drives `--pk-*` custom properties; components read them via `theme` in `src/tokens`. Switches on `[data-theme]`, `.dark`, or `prefers-color-scheme`. Storybook has a **Theme** toolbar toggle |
 | **Visual regression** | ✅ wired | Chromatic project configured (`npm run chromatic`) |
 | **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
@@ -158,6 +158,10 @@ CI runs the same gate — see [`.github/workflows/ci.yml`](.github/workflows/ci.
   pulse, blink and the CRT scanline overlay.
 - **SC 1.4.11 Non-text Contrast** — borders, switch tracks and focus rings ≥ 3:1.
 
+Full criterion-by-criterion conformance (WCAG 2.2 A/AA, plus the AAA
+commitments above), evaluation methods and known gaps:
+**[Accessibility Conformance Report](ACCESSIBILITY_CONFORMANCE_REPORT.md)**.
+
 ---
 
 ## Project structure
@@ -190,6 +194,7 @@ src/
     sa11y.d.ts      `toBeAccessible` matcher type augmentation
 .nvmrc              Node version lock (22.12.0)
 design-tokens.json  stale v3 export — superseded by src/tokens/
+ACCESSIBILITY_CONFORMANCE_REPORT.md   WCAG 2.2 A/AA/AAA criterion-by-criterion status
 ```
 
 Each component folder is `Component.tsx` + `Component.stories.tsx` +

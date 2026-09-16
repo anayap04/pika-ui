@@ -85,7 +85,9 @@ export const Button: React.FC<ButtonProps> = ({
         borderRadius: 0,
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.6 : 1,
-        outline: 'none',
+        // No outline reset here: the global `:focus-visible` ring in base.css
+        // must win for keyboard focus. An inline `outline: none` would beat it
+        // on specificity and leave keyboard users with no focus indicator.
         // Hover/press change colour only — never a transform: a 4px pixel border
         // shifting by a subpixel looks broken.
         transition: transitions.fast,

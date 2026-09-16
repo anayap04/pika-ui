@@ -65,7 +65,7 @@ export const Tag: React.FC<TagProps> = ({
       }}
       {...props}
     >
-      {icon && <span>{icon}</span>}
+      {icon && <span aria-hidden="true">{icon}</span>}
       <span>{label}</span>
       {removable && (
         <button
