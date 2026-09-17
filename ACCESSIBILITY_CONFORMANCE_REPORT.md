@@ -1,9 +1,9 @@
 # Accessibility Conformance Report
 
-**Product:** Pika UI (`@anayap04/pika-ui`) — React component library
+**Product:** Pika UI (`@anayap10/pika-ui`) — React component library
 **Report date:** 2026-09-16
 **Report version:** 1.0
-**Evaluated release:** v0.1.2, commit [`a77ffdc`](https://github.com/anayap04/pika-ui/commit/a77ffdc)
+**Evaluated release:** v0.1.3, commit [`a77ffdc`](https://github.com/anayap04/pika-ui/commit/a77ffdc) and later
 **Contact:** Paola Anaya
 
 This report follows the structure of the [ITI Voluntary Product Accessibility

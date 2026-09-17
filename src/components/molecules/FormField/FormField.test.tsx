@@ -106,6 +106,24 @@ describe('FormField', () => {
     expect(input).toHaveAttribute('aria-required', 'true');
   });
 
+  it('does not duplicate the label when the child carries its own `label` prop', () => {
+    const Checkbox = ({ label, ...props }: { label: string } & Record<string, unknown>) => (
+      <span>
+        <input type="checkbox" {...props} />
+        <label htmlFor={props.id as string}>{label}</label>
+      </span>
+    );
+    const { container } = render(
+      <FormField label="Accept Terms" required>
+        <Checkbox label="I accept the terms and conditions" />
+      </FormField>,
+    );
+    const labels = container.querySelectorAll('label');
+    expect(labels).toHaveLength(1);
+    expect(labels[0]).toHaveTextContent('I accept the terms and conditions');
+    expect(screen.getByText('Accept Terms').tagName).toBe('SPAN');
+  });
+
   it('merges caller style overrides', () => {
     render(
       <FormField label="X" style={{ maxWidth: '400px' }} data-testid="field">

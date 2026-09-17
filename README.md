@@ -32,7 +32,7 @@ every one of those choices to the **AAA level of WCAG 2.2**: 7:1 text contrast,
 | **Coverage** | ✅ 100% · 85% gate | `@vitest/coverage-v8` over `src/components`, `src/tokens`, `src/utils`; **CI fails below 85%** (statements / branches / functions / lines). Run `npm run test:coverage` |
 | **CI** | ✅ GitHub Actions | `.github/workflows/ci.yml` runs lint → types → unit tests + coverage → build, plus a Storybook browser-test job, on every push to `main` and PR |
 | **SonarCloud** | ✅ Quality Gate passing | [Project dashboard](https://sonarcloud.io/project/overview?id=anayap04_pika-ui) — 0 bugs, 0 vulnerabilities, 0 security hotspots, 4 code smells, 5.7% duplicated lines (526 lines / 20 blocks), reliability **A**, security **A**, security review **A**, maintainability **A**. 7,986 lines of analyzed code across 115 files |
-| **Release** | ✅ v0.1.2 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
+| **Release** | ✅ v0.1.3 | Published to NPM as `@anayap10/pika-ui`; see [releases](https://github.com/anayap04/pika-ui/releases) |
 | **Docs** | ✅ living | Storybook is the source of truth — `Overview/Introduction` homepage + autodocs on every component |
 
 ### Component inventory
